@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $primary-font;
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+    'footer';
+
+  & a {
+    border-radius: $border-radius;
+  }
+}
+
+main {
+  // padding: 0 100px;
+  // width: 100%;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: $secondary-font;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+h2,
+h3,
+h4 {
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2.5rem;
+}
+
+h4 {
+  font-size: 2.25rem;
+}
+
+p {
+  font-family: $primary-font;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+// Glassmorphism Cards
+// .white-text {
+//   font-family: $secondary-font;
+//   font-size: 1rem;
+//   font-weight: 600;
+//   color: $white;
+// }
+
+// .white-heading {
+//   font-family: $secondary-font;
+//   font-size: 2.5rem;
+//   font-weight: 600;
+//   color: $white;
+//   box-shadow: $box-shadow;
+// }

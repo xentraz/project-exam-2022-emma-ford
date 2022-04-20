@@ -1,0 +1,57 @@
+.heroIndex {
+  height: 87.2vh;
+  width: 100%;
+  margin-left: 100px;
+  // BG Img
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../public/img/indexHero.jpg);
+  // Grid
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+
+  &-text {
+    grid-column: 1 / 1;
+    grid-row: 1 / 2;
+    width: 90%;
+    margin: auto;
+    color: $white !important;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    &-title {
+      text-shadow: $box-shadow;
+    }
+
+    &-substrate {
+      font-family: $secondary-font;
+      margin: 5px 0;
+      font-weight: 200;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      text-align: center;
+      background-color: $primary-color;
+      padding: 10px 15px;
+    }
+  }
+
+  &-content {
+    grid-column: 2 / 2;
+    grid-row: 1 / 2;
+    height: 55vh;
+    width: 75%;
+    margin: auto 25% auto 0;
+
+    // Glassmorphism (Mixin?)
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: $box-shadow;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 3px;
+  }
+}
