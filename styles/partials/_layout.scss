@@ -58,8 +58,32 @@ h4 {
 
 p {
   font-family: $primary-font;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 400;
+}
+
+.cardTitle {
+  font-family: $secondary-font;
+  font-size: 1.15rem;
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+button {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  border: none;
+  background-color: $primary-color;
+  font-family: $primary-font;
+  text-transform: uppercase;
+  color: $white;
+  font-size: 1.15rem;
+  font-weight: 400;
+  padding: 15px 40px;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+  outline: none;
 }
 
 // Glassmorphism Cards

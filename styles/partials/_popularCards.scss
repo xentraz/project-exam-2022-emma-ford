@@ -1,0 +1,86 @@
+.popularStays {
+  margin: 50px 100px 0 100px;
+
+  &-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 25px 0 50px 0;
+  }
+
+  &-card {
+    margin: 25px;
+    height: 325px;
+    width: 325px;
+    background-image: url(../../public/img/bergen_1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    &-rating {
+      position: absolute;
+      top: 10px;
+      left: -10px;
+      height: 35px;
+      width: 85px;
+      background-color: $primary-color;
+      color: $white !important;
+      box-shadow: $box-shadow;
+
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      & svg,
+      p {
+        font-size: 1.25rem;
+      }
+    }
+
+    &-info {
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      height: 85px;
+      width: 200px;
+
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: $box-shadow;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      color: $white !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-bookmark {
+        position: absolute;
+        top: -10px;
+        left: 5px;
+
+        & svg {
+          font-size: 2rem;
+          color: $primary-color;
+          cursor: pointer;
+        }
+      }
+
+      &-text {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: $white !important;
+
+        & p > span {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
