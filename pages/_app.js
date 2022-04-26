@@ -1,4 +1,9 @@
+// All Styles
 import styles from '../styles/styles.scss';
+
+// import styles bundle
+import 'swiper/css/bundle';
+
 import { ThemeProvider } from 'next-themes';
 
 function MyApp({ Component, pageProps }) {

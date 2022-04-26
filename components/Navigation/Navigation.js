@@ -11,7 +11,7 @@ function Navigation() {
       <div className="navigation">
         <div className="navigation-logo">
           <Image 
-          src="/../public/img/logo.png"
+          src="/img/logo.png"
           alt="NEEDED"
           height="100"
           width="100" 
