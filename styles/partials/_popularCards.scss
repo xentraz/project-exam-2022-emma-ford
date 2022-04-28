@@ -1,6 +1,10 @@
 .popularStays {
   margin: 50px 100px 0 100px;
 
+  & h2 {
+    margin-bottom: 25px;
+  }
+
   &-cards {
     display: flex;
     align-items: center;
@@ -46,6 +50,7 @@
       height: 85px;
       width: 200px;
 
+      // Make this a mixin?
       background: rgba(255, 255, 255, 0.15);
       box-shadow: $box-shadow;
       backdrop-filter: blur(10px);

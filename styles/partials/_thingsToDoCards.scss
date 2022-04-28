@@ -1,0 +1,44 @@
+.TTD_cards {
+  height: 350px;
+  width: 300px;
+
+  background-image: url(../../public/img/bergen_1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  &-header {
+    margin: 25px 50px;
+    height: 85px;
+    width: 200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: $box-shadow;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  &-price {
+    position: absolute;
+    bottom: 10px;
+    left: -10px;
+    height: 35px;
+    width: 85px;
+    background-color: $primary-color;
+    box-shadow: $box-shadow;
+    color: $white !important;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

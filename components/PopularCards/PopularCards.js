@@ -95,7 +95,7 @@ function PopularCards() {
             </div>
           </div>
         </div>
-        <button>Browse All</button>
+        <button>Browse All Stays</button>
       </div>
     </>
   )

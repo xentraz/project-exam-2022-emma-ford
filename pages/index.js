@@ -21,9 +21,7 @@ export default function Home() {
         <Sidebar/>
       </header>
       <main>
-        <div className="hero-container">
-          <HeroIndex />
-        </div>
+        <HeroIndex />
         <PopularCards/>
         <ThingsToDo/>
       </main>
