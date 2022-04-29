@@ -76,3 +76,15 @@ function ThingsToDo() {
 
 export default ThingsToDo
 
+// {images.map((image, index) => (
+//   <SwiperSlide key={index}>
+//     <img
+//       height="200"
+//       width="300"
+//       alt="img"
+//       className="image"
+//       src={image.url}
+//     />
+//   </SwiperSlide>
+// ))}
+

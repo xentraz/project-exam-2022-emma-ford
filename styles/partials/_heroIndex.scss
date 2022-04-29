@@ -11,6 +11,26 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
+  position: relative;
+
+  &-weather {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    top: 0;
+    left: 50px;
+
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: $box-shadow;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
   &-text {
     grid-column: 1 / 1;
@@ -54,4 +74,10 @@
     -webkit-backdrop-filter: blur(10px);
     border-radius: 3px;
   }
+}
+
+.loading {
+  height: 87.2vh;
+  width: 100%;
+  margin: 0 100px;
 }
