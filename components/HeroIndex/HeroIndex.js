@@ -1,6 +1,8 @@
 // React
 import React from 'react';
 import { useState, useEffect } from 'react';
+// Next
+import Image from 'next/image';
 // Mantine
 import { DateRangePicker } from '@mantine/dates';
 // Multi Select
@@ -10,6 +12,8 @@ import  'react-multiple-select-dropdown-lite/dist/index.css'
 import { WeatherApiURL } from '../Weather/API/WeatherAPI';
 // Axios
 import axios from 'axios';
+// // Theme Provider
+// import { ThemeProvider } from 'next-themes';
 
 function HeroIndex() {
   const [value, setValue] = useState("");
@@ -52,7 +56,47 @@ function HeroIndex() {
   // });
 
   if (!weather) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <>
+       {/* <div className="loading">
+        <Image 
+          src="/img/animation_640_l2kk0eiw.gif"
+          alt="NEEDED"
+          height="500"
+          width="500"
+        />
+       </div> */}
+       <div className="heroIndex">
+        <div className="heroIndex-weather">
+          <p>Current Weather:</p>
+          <p>...°C</p>
+        </div>
+        <div className="heroIndex-text">
+          <h1 className="heroIndex-text-title">Explore Bergen</h1>
+          <p className="heroIndex-text-substrate">From all corners of the city and the comfort of our best stays</p>
+        </div>
+        <div className="heroIndex-content">
+        <div className="heroIndex-content-guestSelect">
+          <label>Dropdown label</label>
+          {/* <MultiSelect
+            className="multi-select"
+            onChange={handleOnchange}
+            options={options}
+            customValue={true}
+          /> */}
+          <br />
+          <p>{value}</p>
+        </div>
+          <DateRangePicker
+            label="Book a place to stay"
+            placeholder="Pick dates range"
+            value={value}
+            onChange={setValue}
+          />
+        </div>
+      </div>
+      </>
+    );
   }
 
   console.log(weather);

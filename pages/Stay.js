@@ -3,6 +3,8 @@ import Head from 'next/head'
 // Components
 import Navigation from '../components/Navigation/Navigation';
 import Sidebar from '../components/Sidebar/Sidebar';
+import StaysHero from '../components/HeroStays/StaysHero';
+import StaysSidebar from '../components/StaysSidebar/StaysSidebar';
 
 function Stay() {
   return (
@@ -18,6 +20,8 @@ function Stay() {
         <Sidebar/>
       </header>
       <main>
+        <StaysHero/>
+        <StaysSidebar/>
       </main>
 
       <footer>

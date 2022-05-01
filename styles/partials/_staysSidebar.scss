@@ -1,0 +1,17 @@
+.StaysSidebar {
+  margin: 75px 0 0 125px;
+  height: 500px;
+  width: 250px;
+
+  background-color: $primary-color;
+  box-shadow: $box-shadow;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &-priceSlider {
+    color: $white;
+  }
+}

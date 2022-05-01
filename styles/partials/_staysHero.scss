@@ -1,0 +1,54 @@
+.staysHero {
+  height: 50vh;
+  width: 100%;
+  padding-left: 100px;
+  z-index: 1;
+  // BG Img
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../public/img/bergen_1.jpg);
+  // Grid
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  position: relative;
+
+  &-heading {
+    grid-column: 1/1;
+    grid-row: 1/1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & h1 {
+      text-shadow: $box-shadow;
+      color: $white !important;
+    }
+  }
+
+  &-bar {
+    grid-column: 1/1;
+    grid-row: 2/2;
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    &-content {
+    position: absolute;
+    height: 150px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    bottom: 20px;
+
+    // Glassmorphism (Mixin?)
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: $box-shadow;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 3px;
+    }
+  }
+}
