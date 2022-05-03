@@ -14,14 +14,16 @@ body {
     'main'
     'footer';
 
+  overflow: auto !important;
+
   & a {
     border-radius: $border-radius;
   }
 }
 
 main {
-  // margin: 0 100px;
-  overflow-x: hidden;
+  margin: 0 0 0 100px;
+  position: relative;
 }
 
 h1,

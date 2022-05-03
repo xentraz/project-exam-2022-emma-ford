@@ -5,6 +5,7 @@ import Navigation from '../components/Navigation/Navigation';
 import Sidebar from '../components/Sidebar/Sidebar';
 import StaysHero from '../components/HeroStays/StaysHero';
 import StaysSidebar from '../components/StaysSidebar/StaysSidebar';
+import StaysHeading from '../components/StaysHeading/StaysHeading';
 import StaysCards from '../components/StaysCards/StaysCards';
 
 function Stay() {
@@ -22,8 +23,9 @@ function Stay() {
       </header>
       <main>
         <StaysHero/>
-        <StaysCards/>
+        <StaysHeading/>
         <StaysSidebar/>
+        <StaysCards/>
       </main>
 
       <footer>
