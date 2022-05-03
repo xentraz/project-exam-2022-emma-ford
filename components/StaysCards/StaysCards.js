@@ -3,8 +3,15 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import ModalUnstyled from '@mui/material/Modal';
+// Material UI Icons
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import StarIcon from '@mui/icons-material/Star';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import KingBedIcon from '@mui/icons-material/KingBed';
+import ShowerIcon from '@mui/icons-material/Shower';
+import SignalWifiStatusbar4BarIcon from '@mui/icons-material/SignalWifiStatusbar4Bar';
 
 function StaysCards() {
   const [open, setOpen] = useState(false);
@@ -35,7 +42,15 @@ function StaysCards() {
               </div>
             </div>
             <div className="staysContainer-cards-content-info">
-              
+              <p className="flexCardtitle">Hotel Name</p>
+              <p><LocationOnIcon/> Location, Bergen</p>
+              <p><StarIcon/><span> 4.5</span>(12 reviews)</p>
+              <p><RestaurantIcon/> Breakfast Included</p>
+              <div className="staysContainer-cards-content-info-icons">
+                <KingBedIcon/> <p>1</p>
+                <ShowerIcon/> <p> 1</p>
+                <SignalWifiStatusbar4BarIcon/> <p> Free WiFi</p>
+              </div>
             </div>
           </div>
         </div>
@@ -48,9 +63,9 @@ function StaysCards() {
         className="staysContainer-modal"
         >
           <Box className="staysContainer-modal-content NEEDED">
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
+            <p className="flexCardtitle large" id="modal-modal-title">
+              Hotel Name
+            </p>
             <Typography id="modal-modal-description NEEDED" sx={{ mt: 2 }}>
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>

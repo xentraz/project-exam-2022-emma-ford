@@ -17,7 +17,7 @@
       right: 35px;
 
       & svg {
-        font-size: 2rem;
+        font-size: 2.5rem;
         color: $primary-color;
         cursor: pointer;
       }
@@ -49,16 +49,16 @@
       height: 100%;
       width: 100%;
       z-index: 1;
+      padding: 15px;
 
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.5fr 2fr;
       grid-template-rows: 1fr;
+      gap: 15px;
 
       &-imgs {
         grid-column: 1/1;
         grid-row: 1/1;
-
-        padding: 15px;
         height: 100%;
         width: 100%;
 
@@ -108,6 +108,34 @@
           position: relative;
         }
       }
+
+      &-info {
+        grid-column: 2/2;
+        grid-row: 1/1;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        & svg {
+          color: $primary-color !important;
+          margin: 2px 5px 2px 0;
+        }
+
+        &-icons {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-direction: row;
+
+          & p {
+           margin: 0 10px 0 0;
+          }
+        }
+      }
     }
   }
 
@@ -116,10 +144,11 @@
 
     &-content {
       position: absolute;
-      top: 50px;
+      top: 75px;
       right: 15px;
       height: 90%;
       width: 300px;
+      padding: 15px;
       box-shadow: $box-shadow;
       border-radius: $border-radius;
 
