@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Material UI
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ModalUnstyled from '@mui/material/Modal';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 function StaysCards() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [clicked, setClicked] = useState();
+  const toggleClickIcon = () => setClicked(!clicked)
 
   return (
     <>
       <div className="staysContainer">
-        <div 
-        className="staysContainer-cards"
-        onClick={handleOpen}>
-        
+        <div className="staysContainer-cards">
+          <div className="staysContainer-cards-price">
+            <p><span>250 kr </span>/ night</p>
+          </div>
+          <div className="staysContainer-cards-bookmark" onClick={toggleClickIcon}>
+            {clicked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
+          </div>
+          <div className="staysContainer-cards-content" onClick={handleOpen}>
+            <div className="staysContainer-cards-content-imgs">
+              <div className="staysContainer-cards-content-imgs-1"></div>
+              <div className="staysContainer-cards-content-imgs-2"></div>
+              <div className="staysContainer-cards-content-imgs-3">
+                <div className="staysContainer-cards-content-imgs-3-blur">
+                  <p>+5</p>
+                </div>
+              </div>
+            </div>
+            <div className="staysContainer-cards-content-info">
+              
+            </div>
+          </div>
         </div>
         <ModalUnstyled
         open={open}

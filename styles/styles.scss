@@ -21,6 +21,14 @@
   .sidebar {
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
+
+  .staysContainer-cards {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
+
+  .staysContainer-modal-content {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
 }
 
 // Styles

@@ -101,8 +101,9 @@ function StaysSidebar() {
     'Cleaning',
   ];
 
+  const initialSelected = ["TV", "Wifi", "Breakfast"];
   const theme = useTheme();
-  const [selectAmenities, setSelectAmenities] = useState([]);
+  const [selectAmenities, setSelectAmenities] = useState(initialSelected);
 
   const handleChange3 = (event) => {
     const {
