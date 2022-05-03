@@ -46,20 +46,22 @@ function Sidebar() {
         <div className="sidebar-themeChanger">
             {renderThemeChanger()}
         </div>
-       </Tooltip>
+        </Tooltip>
+          <Tooltip title="@holidaze" disableFocusListener placement="right">
+            <TwitterIcon className="icon" icon="fa6-brands:twitter-square" color="black" />
+        </Tooltip>
+        <Tooltip title="facebook.com/holidaze" disableFocusListener placement="right">
+            <FacebookIcon className="icon" icon="fa6-brands:twitter-square" color="black" />
+        </Tooltip>
         <Tooltip title="@holidaze" disableFocusListener placement="right">
-          <TwitterIcon className="icon" icon="fa6-brands:twitter-square" color="black" />
-       </Tooltip>
-       <Tooltip title="facebook.com/holidaze" disableFocusListener placement="right">
-          <FacebookIcon className="icon" icon="fa6-brands:twitter-square" color="black" />
-       </Tooltip>
-       <Tooltip title="@holidaze" disableFocusListener placement="right">
-          <InstagramIcon className="icon" icon="fa6-brands:twitter-square" color="black" />
-       </Tooltip>
-       <div className="sidebar-text">
-         <p>holidayze@booking.com</p>
-         <p>(+47) 12345678</p>
-       </div>
+            <InstagramIcon className="icon" icon="fa6-brands:twitter-square" color="black" />
+        </Tooltip>
+        <div className="sidebar-text">
+          <p>holidayze@booking.com</p>
+        </div>
+        <div className="sidebar-text">
+          <p>(+47) 12345678</p>
+        </div>
       </div>
     </>
   )
