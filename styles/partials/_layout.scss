@@ -63,6 +63,12 @@ p {
   font-weight: 400;
 }
 
+.link {
+  color: $primary-color;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .cardTitle {
   font-family: $secondary-font;
   font-size: 1.25rem;
@@ -96,7 +102,12 @@ p {
   }
 }
 
-button {
+.smallText {
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+button, .button {
   border-radius: $border-radius;
   box-shadow: $box-shadow;
   background-color: $primary-color;
@@ -109,6 +120,17 @@ button {
   cursor: pointer;
   transition: 0.4s ease-in-out;
   outline: none;
+
+  & span {
+    font-weight: 600;
+  }
+}
+
+.staysCards {
+  margin: 100px 0px 0px 275px;
+  height: 100%;
+  top: calc(50vh + 25px);
+  position: absolute;
 }
 
 // Glassmorphism Cards

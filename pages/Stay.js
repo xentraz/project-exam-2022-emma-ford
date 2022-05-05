@@ -7,8 +7,22 @@ import StaysHero from '../components/HeroStays/StaysHero';
 import StaysSidebar from '../components/StaysSidebar/StaysSidebar';
 import StaysHeading from '../components/StaysHeading/StaysHeading';
 import StaysCards from '../components/StaysCards/StaysCards';
+// Axios
+const axios = require('axios').default;
 
-function Stay() {
+// API
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:1337/places");
+  const data = await res.json();
+
+  return {
+    props: { places: data },
+  };
+};
+
+function Stay({places}) {
+  console.log(places);
+  
   return (
     <>
      <Head>
@@ -25,7 +39,33 @@ function Stay() {
         <StaysHero/>
         <StaysHeading/>
         <StaysSidebar/>
-        <StaysCards/>
+        <div className="staysCards">
+          {places.map((
+            {
+              id, 
+              Name, 
+              Price, 
+              About, 
+              Location, 
+              ImgArray,
+              Size
+            }
+          ) =>  {
+            return (
+            <StaysCards 
+              key={id}
+              Name={Name}
+              About={About}
+              Price={Price}
+              Location={Location}
+              ImgArray={ImgArray}
+              Size={Size}
+            />
+            );
+            }
+          )}
+        </div>
+        {/* <StaysCards/> */}
       </main>
 
       <footer>

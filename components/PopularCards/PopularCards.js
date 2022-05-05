@@ -4,6 +4,7 @@ import StarIcon from '@mui/icons-material/Star';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 function PopularCards() {
+
   return (
     <>
       <div className="popularStays">
