@@ -47,8 +47,10 @@ function Stay({places}) {
               Price, 
               About, 
               Location, 
+              Ratings,
               ImgArray,
-              Size
+              Size,
+              Amenities,
             }
           ) =>  {
             return (
@@ -58,8 +60,10 @@ function Stay({places}) {
               About={About}
               Price={Price}
               Location={Location}
+              Ratings={Ratings}
               ImgArray={ImgArray}
               Size={Size}
+              Amenities={Amenities}
             />
             );
             }

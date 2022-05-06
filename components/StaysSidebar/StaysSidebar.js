@@ -40,7 +40,6 @@ function StaysSidebar() {
       label: '8000 Kr',
     },
   ];
-  
 
   // Ratings
   const [rating, setRating] = useState(3);

@@ -1,7 +1,6 @@
 // React
 import React, { useState } from 'react';
 import Image from 'next/image';
-// Material UI
 // Modal
 import Box from '@mui/material/Box';
 import ModalUnstyled from '@mui/material/Modal';
@@ -14,6 +13,9 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import KingBedIcon from '@mui/icons-material/KingBed';
 import ShowerIcon from '@mui/icons-material/Shower';
 import SignalWifiStatusbar4BarIcon from '@mui/icons-material/SignalWifiStatusbar4Bar';
+import NoMealsIcon from '@mui/icons-material/NoMeals';
+import SignalWifiOffIcon from '@mui/icons-material/SignalWifiOff';
+import SquareFootIcon from '@mui/icons-material/SquareFoot';
 // Tabs
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
@@ -21,10 +23,6 @@ import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled'
-// API
-import { apiURL } from '../../lib/apiURL';
-import { apiCall } from '../../lib/apiCall';
-import { getPlaces } from '../../lib/apiCall';
 
 function StaysCards({
   id, 
@@ -34,7 +32,31 @@ function StaysCards({
   Location, 
   ImgArray,
   ImgArray: {ImgAlt, ImgUrl},
-  Size
+  Ratings,
+  Ratings: {Star, Date, Message},
+  Size, 
+  Amenities: {
+    Bathtub,
+    Breakfast,
+    Cleaning,
+    CoffeeMachine,
+    Dishwasher,
+    Dryer,
+    Fireplace,
+    Gym,
+    Heating,
+    Iron,
+    Laundry,
+    Lift,
+    Microwave,
+    Parking,
+    Pool,
+    Refrigerator,
+    Spa,
+    TV,
+    Washer,
+    Wifi,
+    },
 }){
   // Modal
   const [open, setOpen] = useState(false);
@@ -49,7 +71,6 @@ function StaysCards({
   const Tab = styled(TabUnstyled)`
   width: 100%;
   font-family: $primary-font;
-  color: white;
   cursor: pointer;
   font-size: 14px;
   background-color: transparent;
@@ -72,7 +93,6 @@ function StaysCards({
 
     &.${tabUnstyledClasses.selected} {
       background-color: transparent;
-      color: $white;
       border-bottom: 2px solid #547E77;
     }
 
@@ -86,7 +106,6 @@ function StaysCards({
   const TabPanel = styled(TabPanelUnstyled)`
     width: 100%;
     font-family: $secondary-font;
-    margin-bottom: 25px;
   `;
 
   // Tab List
@@ -99,8 +118,33 @@ function StaysCards({
   `;
 
 
-// Image Array
+  // Image Arrays
   const slicedImgs = ImgArray.slice(0, 5);
+  const slicedImgs2 = ImgArray.slice(0, 3);
+
+  //Reviews 
+  const slicedRatings = Ratings.slice(0, 2);
+  const starRatings = slicedRatings.Star;
+  console.log(starRatings);
+
+  function sumObjectsByKey(...slicedRatings) {
+    return slicedRatings.reduce((a, b) => {
+      for (let k in b) {
+        if (b.hasOwnProperty(k))
+          a[k] = (a[k] || 0) + b[k];
+      }
+      return a;
+    }, {});
+  }
+  
+  console.log(sumObjectsByKey(slicedRatings[0], slicedRatings[1]));
+  const newStars = sumObjectsByKey(slicedRatings[0], slicedRatings[1]);
+  const ratingAverage = (newStars.Star / 2);
+  console.log(ratingAverage);
+  // https://stackoverflow.com/questions/42488048/how-can-i-sum-properties-from-two-objects
+
+  // About
+  const slicedAbout = About.slice(0, 250);
 
   return (
     <>
@@ -113,23 +157,35 @@ function StaysCards({
         </div>
         <div className="staysContainer-cards-content" onClick={handleOpen}>
           <div className="staysContainer-cards-content-imgs">
-            <div className="staysContainer-cards-content-imgs-1"></div>
-            <div className="staysContainer-cards-content-imgs-2"></div>
-            <div className="staysContainer-cards-content-imgs-3">
-              <div className="staysContainer-cards-content-imgs-3-blur">
-                <p>+5</p>
-              </div>
-            </div>
+          {slicedImgs2.map((elm) => {     
+            return (
+              <div
+                  key={elm.id}
+                  style={{
+                    backgroundImage: `url(${elm.ImgUrl})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  alt={ImgAlt}
+                  // onClick={() => {
+                  //   imgSelect(elm.ImgUrl);
+                  // }}
+                />
+            );
+          })}
           </div>
           <div className="staysContainer-cards-content-info">
             <p className="flexCardtitle">{Name}</p>
             <p><LocationOnIcon/>{Location}</p>
-            <p><StarIcon/><span> 4.5</span>(12 reviews)</p>
-            <p><RestaurantIcon/> Breakfast Included</p>
+            <p><StarIcon/>{ratingAverage}</p>
+            <p>{Breakfast ? <span><RestaurantIcon/>Breakfast included</span> : <span><NoMealsIcon/>Breakfast not included</span>}</p>
             <div className="staysContainer-cards-content-info-icons">
               <KingBedIcon/> <p>1</p>
               <ShowerIcon/> <p> 1</p>
-              <SignalWifiStatusbar4BarIcon/> <p> Free WiFi</p>
+              <p>{Wifi ? <span><SignalWifiStatusbar4BarIcon/> WiFi</span> : <span><SignalWifiOffIcon/> No WiFi</span>}</p>
             </div>
           </div>
         </div>
@@ -148,7 +204,6 @@ function StaysCards({
           </p>
           <div className="staysContainer-modal-content-images">
           {slicedImgs.map((elm) => {     
-            console.log(slicedImgs)
             return (
               <div
                   key={elm.id}
@@ -172,18 +227,18 @@ function StaysCards({
           <div className="staysContainer-modal-content-info">
             <TabsUnstyled defaultValue={0}>
               <TabsList>
-                <Tab>Overview</Tab>
-                <Tab>Facilities</Tab>
-                <Tab>Details</Tab>
-                <Tab>Reviews</Tab>
+                <Tab className="tabTitle">Overview</Tab>
+                <Tab className="tabTitle">Facilities</Tab>
+                <Tab className="tabTitle">Details</Tab>
+                <Tab className="tabTitle">Reviews</Tab>
               </TabsList>
               <TabPanel value={0} className="tabContent-1">
                 <div className="tabContent">
-                  <p className="smallText">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum morbi at mauris vitae in. Bibendum commodo cursus libero, maecenas. At et vel ornare posuere. Tellus habitasse habitasse donec ornare enim bibendum mauris pretium. <a className="link">Read more...</a>
-                  </p>
+                  <p className="smallText">{slicedAbout}... <a className="link">Read more →</a></p>
                   <p className="flexCardtitle">Location</p>
-                  <p><LocationOnIcon/> Location, Bergen</p>
+                  <p className="smallText"><LocationOnIcon/> {Location}</p>
+                  <p className="flexCardtitle">Size</p>
+                  <p className="smallText"><SquareFootIcon/> {Size} m²</p>
                 </div>
               </TabPanel>
               <TabPanel value={1}>Second page</TabPanel>

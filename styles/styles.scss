@@ -29,6 +29,10 @@
   .staysContainer-modal-content {
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
+
+  .tabTitle {
+    @apply text-black dark:text-white;
+  }
 }
 
 // Styles
