@@ -353,7 +353,7 @@ function StaysCards(
             </TabsUnstyled>
           </div>
           <div className="staysContainer-modal-content-button">
-            <a className="button"><span>{Price} kr</span> / night</a>
+            <a className="button" href={'Stay/' + id}><span>{Price} kr</span> / night</a>
           </div>
         </Box>
       </ModalUnstyled>
