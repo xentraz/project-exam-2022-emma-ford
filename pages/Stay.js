@@ -51,6 +51,7 @@ function Stay({places}) {
               ImgArray,
               Size,
               Amenities,
+              RoomDetails,
             }
           ) =>  {
             return (
@@ -64,6 +65,7 @@ function Stay({places}) {
               ImgArray={ImgArray}
               Size={Size}
               Amenities={Amenities}
+              RoomDetails={RoomDetails}
             />
             );
             }
