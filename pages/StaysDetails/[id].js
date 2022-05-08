@@ -12,6 +12,10 @@ import { Box } from '@mui/system';
 // Date Range Picker
 // import { DateRange } from 'react-date-range';
 // import { Calendar } from 'react-date-range';
+// Chips
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
 // Icons
 import CloseIcon from '@mui/icons-material/Close';
 import ShareIcon from '@mui/icons-material/Share';
@@ -54,6 +58,7 @@ import PoolIcon from '@mui/icons-material/Pool';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import SpaIcon from '@mui/icons-material/Spa';
 import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
+import EventIcon from '@mui/icons-material/Event';
 
 export const getStaticPaths = async () => {
   const placesArray = await getPlaces(apiURL);
@@ -93,7 +98,7 @@ function StaysDetail(
     Type: {Hotel, Hostel, Cabin, Apartment},
     ImgArray: {ImgAlt, ImgUrl},
     Ratings,
-    Ratings: {Star, Date, Message},
+    Ratings: {Star, Date, RatingsName, Message},
     Size, 
     Amenities: {
       Bathtub,
@@ -175,6 +180,14 @@ function StaysDetail(
   // Room Details
   const newCheckIn = RoomDetails.CheckIn.slice(0, 5);
   const newCheckOut = RoomDetails.CheckOut.slice(0, 5);
+
+  // Chip Avatars
+  // Ratings.map((rating) => {
+  //   const newName = rating.RatingsName;
+  //   console.log(newName);
+  //   const ratingsAvatar = newName.slice(0,1);
+  //   console.log(ratingsAvatar);
+  // })
 
   return (
     <>
@@ -325,7 +338,37 @@ function StaysDetail(
               </div>
             </div>
             <div className="staysDetails-details-reviews">
-              <h2>Reviews</h2>
+              <h2>Reviews <span>({ratingAverage}/5)</span></h2>
+              {Ratings.map((elm) => {
+                const newName = elm.RatingsName;
+                console.log(newName);
+                const ratingsAvatar = newName.slice(0,1);
+                console.log(ratingsAvatar);
+                
+                    return (
+                      <div key={id} className="staysDetails-details-reviews-content">
+                        <div className="staysDetails-details-reviews-content-info">
+                          <p key={id} className="star">
+                            {
+                              elm.Star === 1 ? <span><StarIcon/></span> 
+                              : elm.Star === 2 ? <span><StarIcon/><StarIcon/></span> 
+                              : elm.Star === 3 ? <span><StarIcon/><StarIcon/><StarIcon/></span> 
+                              : elm.Star === 4 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span> 
+                              : elm.Star === 5 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span>
+                              : ''
+                            }
+                          </p>
+                          <Stack direction="row" spacing={1} className="avatarChip">
+                            <Chip avatar={<Avatar>{ratingsAvatar}</Avatar>} label={elm.RatingsName} />
+                          </Stack>
+                        </div>
+                        <div className="staysDetails-details-reviews-content-message">
+                          <p>{elm.Message}</p>
+                          <p><EventIcon/> {elm.Date}</p>
+                        </div>
+                      </div>
+                    )
+                })}
             </div>
           </div>
         </div>

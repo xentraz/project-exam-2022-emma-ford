@@ -40,7 +40,7 @@ function Navigation({id}) {
         <div className={isOpen}>
           <Link href='/'><a className={router.pathname == "/" ? "active" : ""}>Home</a></Link>
           <Link href='/Stays'><a className={router.pathname == "/Stays" ? "active" : ""}>Places to stay</a></Link>
-          <Link href='/See'><a activeClass className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
+          <Link href='/See'><a className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
           <Link href='/Contact'><a className={router.pathname == "/Contact" ? "active" : ""}>Contact</a></Link>
         </div>
         <div onClick={navToggle} className={toggleIcon}>

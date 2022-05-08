@@ -56,7 +56,7 @@ function StaysCards(
   ImgArray,
   ImgArray: {ImgAlt, ImgUrl},
   Ratings,
-  Ratings: {Star, Date, Message},
+  Ratings: {Star, Date, RatingsName, Message},
   Size, 
   Amenities: {
     Bathtub,
@@ -320,7 +320,7 @@ function StaysCards(
                     return (
                       <div key={id} className="reviewsContent-info">
                         <div className="reviewsContent-info-person">
-                          <p>{elm.Name}: </p>
+                          <p>{elm.RatingsName}: </p>
                           <p key={id} className="star">
                             {
                               elm.Star === 1 ? <span><StarIcon/></span> 
