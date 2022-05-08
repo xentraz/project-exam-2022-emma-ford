@@ -1,6 +1,5 @@
 // React
 import React, { useState } from 'react';
-import Image from 'next/image';
 // Modal
 import Box from '@mui/material/Box';
 import ModalUnstyled from '@mui/material/Modal';
@@ -37,8 +36,8 @@ import SmokingRoomsIcon from '@mui/icons-material/SmokingRooms';
 import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
 import PetsIcon from '@mui/icons-material/Pets';
 import BlockIcon from '@mui/icons-material/Block';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import AlarmOffIcon from '@mui/icons-material/AlarmOff';
 // Tabs
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
@@ -152,14 +151,12 @@ function StaysCards(
     align-content: space-between;
   `;
 
-
   // Image Arrays
   const slicedImgs = ImgArray.slice(0, 5);
   const slicedImgs2 = ImgArray.slice(0, 3);
 
   //Reviews 
   const slicedRatings = Ratings.slice(0, 2);
-  const starRatings = slicedRatings.Star;
 
   function sumObjectsByKey(...slicedRatings) {
     return slicedRatings.reduce((a, b) => {
@@ -181,9 +178,6 @@ function StaysCards(
   // Room Details
   const newCheckIn = RoomDetails.CheckIn.slice(0, 5);
   const newCheckOut = RoomDetails.CheckOut.slice(0, 5);
-  // const shortCheckIn = newCheckIn.substring(0, 4)
-
-
 
   return (
     <>
@@ -242,26 +236,23 @@ function StaysCards(
             {Name}
           </p>
           <div className="staysContainer-modal-content-images">
-          {slicedImgs.map((elm) => {     
-            return (
-              <div
-                  key={elm.id}
-                  style={{
-                    backgroundImage: `url(${elm.ImgUrl})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    width: '100%',
-                    height: '55px',
-                    borderRadius: '$border-radius'
-                  }}
-                  alt={ImgAlt}
-                  // onClick={() => {
-                  //   imgSelect(elm.ImgUrl);
-                  // }}
-                />
-            );
-          })}
+            {slicedImgs.map((elm) => {     
+              return (
+                <div
+                    key={elm.id}
+                    style={{
+                      backgroundImage: `url(${elm.ImgUrl})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      width: '100%',
+                      height: '55px',
+                      borderRadius: '$border-radius'
+                    }}
+                    alt={ImgAlt}
+                  />
+              );
+            })}
           </div>
           <div className="staysContainer-modal-content-info">
             <TabsUnstyled defaultValue={0}>
@@ -313,12 +304,12 @@ function StaysCards(
                 <div className="detailsContent">
                   <p className="flexCardtitle">Room Details</p>
                   <div className="detailsContent-info">
-                    <p><CheckIcon/>Check In: {newCheckIn}</p>
-                    <p><CloseIcon/>Check Out: {newCheckOut}</p>
+                    <p><AccessAlarmIcon/>Check In: {newCheckIn}</p>
+                    <p><AlarmOffIcon/>Check Out: {newCheckOut}</p>
                     <p>{Parties ? <span><CelebrationIcon/>Parties Allowed</span> : <span><BlockIcon/> No Parties</span>}</p>
                     <p>{Pets ? <span><PetsIcon/>Pets Allowed</span> : <span><BlockIcon/> No Pets</span>}</p>
                     <p>{Smoking ? <span><SmokingRoomsIcon/>Smoking Allowed</span> : <span><SmokeFreeIcon/> No Smoking</span>}</p>
-                    <p>Rules: {RoomDetails.Rules}</p>
+                    <p>{Rules ? <span>Rules {Rules}</span> : ''}</p>
                   </div>
                 </div>
               </TabPanel>
@@ -353,7 +344,7 @@ function StaysCards(
             </TabsUnstyled>
           </div>
           <div className="staysContainer-modal-content-button">
-            <a className="button" href={'Stay/' + id}><span>{Price} kr</span> / night</a>
+            <a className="button" href={`/StaysDetails/${id}`}><span>{Price} kr</span> / night</a>
           </div>
         </Box>
       </ModalUnstyled>

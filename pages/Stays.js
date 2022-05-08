@@ -32,7 +32,7 @@ function Stay({places}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <Navigation />
+        <Navigation/>
         <Sidebar/>
       </header>
       <main>
@@ -52,10 +52,12 @@ function Stay({places}) {
               Size,
               Amenities,
               RoomDetails,
+              Type,
             }
           ) =>  {
             return (
             <StaysCards 
+              id={id}
               key={id}
               Name={Name}
               About={About}
@@ -66,6 +68,7 @@ function Stay({places}) {
               Size={Size}
               Amenities={Amenities}
               RoomDetails={RoomDetails}
+              Type={Type}
             />
             );
             }

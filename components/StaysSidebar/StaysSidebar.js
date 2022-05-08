@@ -190,28 +190,3 @@ function StaysSidebar() {
 }
 
 export default StaysSidebar
-
-
-
- // const amenities = [
-  //   { key: 0, label: 'Refrigerator' },
-  //   { key: 1, label: 'TV' },
-  //   { key: 2, label: 'Dishwasher' },
-  //   { key: 3, label: 'Iron' },
-  //   { key: 4, label: 'Washer' },
-  //   { key: 5, label: 'Bathtub' },
-  //   { key: 6, label: 'Parking' },
-  //   { key: 7, label: 'Fireplace' },
-  //   { key: 8, label: 'Heating' },
-  //   { key: 9, label: 'Wifi' },
-  //   { key: 10, label: 'Dryer' },
-  //   { key: 11, label: 'Gym' },
-  //   { key: 12, label: 'CoffeeMachine' },
-  //   { key: 13, label: 'Pool' },
-  //   { key: 14, label: 'Microwave' },
-  //   { key: 15, label: 'Spa' },
-  //   { key: 16, label: 'Breakfast' },
-  //   { key: 17, label: 'Lift' },
-  //   { key: 18, label: 'Laundry' },
-  //   { key: 19, label: 'Cleaning' },
-  // ];
