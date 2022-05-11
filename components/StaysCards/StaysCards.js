@@ -249,7 +249,7 @@ function StaysCards(
                       height: '55px',
                       borderRadius: '$border-radius'
                     }}
-                    alt={ImgAlt}
+                    alt={elm.ImgAlt}
                   />
               );
             })}

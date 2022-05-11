@@ -1,0 +1,19 @@
+.adminTabs {
+  margin: 25px 0;
+}
+
+.tabContent-1 {
+
+  &-heading {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    & h3 {
+      height: 100%;
+      margin: 15px 0;
+    }
+  }
+}
