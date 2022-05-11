@@ -266,10 +266,11 @@
       }
 
       &-content {
+        width: 100%;
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: flex-start;
-        flex-direction: column;
+        flex-direction: row;
         margin: 10px 0;
 
         &-info {
@@ -281,26 +282,6 @@
           & svg {
             color: $primary-color;
             font-size: 2rem;
-          }
-        }
-
-        &-message {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          flex-direction: column;
-
-          & p {
-            font-size: 18px;
-          }
-
-          & svg {
-            color: $primary-color;
-            font-size: 1.5rem;
-          }
-
-          & .name {
-            font-size: 1.25rem;
           }
         }
       }

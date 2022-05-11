@@ -181,14 +181,6 @@ function StaysDetail(
   const newCheckIn = RoomDetails.CheckIn.slice(0, 5);
   const newCheckOut = RoomDetails.CheckOut.slice(0, 5);
 
-  // Chip Avatars
-  // Ratings.map((rating) => {
-  //   const newName = rating.RatingsName;
-  //   console.log(newName);
-  //   const ratingsAvatar = newName.slice(0,1);
-  //   console.log(ratingsAvatar);
-  // })
-
   return (
     <>
       <Head>
@@ -308,6 +300,7 @@ function StaysDetail(
                 <div className="staysDetails-details-container-sidebar-date">
                   <p>A date thing that works here</p>
                 </div>
+                <a href={`/StaysBooking/${id}`} className="button"></a>
               </div>
             </div>
             <div className="staysDetails-details-amenities">
@@ -339,36 +332,33 @@ function StaysDetail(
             </div>
             <div className="staysDetails-details-reviews">
               <h2>Reviews <span>({ratingAverage}/5)</span></h2>
-              {Ratings.map((elm) => {
-                const newName = elm.RatingsName;
-                console.log(newName);
-                const ratingsAvatar = newName.slice(0,1);
-                console.log(ratingsAvatar);
-                
-                    return (
-                      <div key={id} className="staysDetails-details-reviews-content">
-                        <div className="staysDetails-details-reviews-content-info">
-                          <p key={id} className="star">
-                            {
-                              elm.Star === 1 ? <span><StarIcon/></span> 
-                              : elm.Star === 2 ? <span><StarIcon/><StarIcon/></span> 
-                              : elm.Star === 3 ? <span><StarIcon/><StarIcon/><StarIcon/></span> 
-                              : elm.Star === 4 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span> 
-                              : elm.Star === 5 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span>
-                              : ''
-                            }
-                          </p>
-                          <Stack direction="row" spacing={1} className="avatarChip">
-                            <Chip avatar={<Avatar>{ratingsAvatar}</Avatar>} label={elm.RatingsName} />
-                          </Stack>
-                        </div>
-                        <div className="staysDetails-details-reviews-content-message">
-                          <p>{elm.Message}</p>
-                          <p><EventIcon/> {elm.Date}</p>
-                        </div>
+              <div className="staysDetails-details-reviews-content">
+                {Ratings.map((elm) => {
+                  const newName = elm.RatingsName;
+                  console.log(newName);
+                  const ratingsAvatar = newName.slice(0,1);
+                  console.log(ratingsAvatar);
+                      return (
+                        <div key={id} className="staysDetails-details-reviews-content-info">
+                        <p key={id} className="star">
+                          {
+                            elm.Star === 1 ? <span><StarIcon/></span> 
+                            : elm.Star === 2 ? <span><StarIcon/><StarIcon/></span> 
+                            : elm.Star === 3 ? <span><StarIcon/><StarIcon/><StarIcon/></span> 
+                            : elm.Star === 4 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span> 
+                            : elm.Star === 5 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span>
+                            : ''
+                          }
+                        </p>
+                        <Stack direction="row" spacing={1} className="avatarChip">
+                          <Chip avatar={<Avatar>{ratingsAvatar}</Avatar>} label={elm.RatingsName} />
+                        </Stack>
+                        <p>{elm.Message}</p>
+                        {/* <p><EventIcon/> {elm.Date}</p> */}
                       </div>
-                    )
-                })}
+                      )
+                  })}
+              </div>
             </div>
           </div>
         </div>

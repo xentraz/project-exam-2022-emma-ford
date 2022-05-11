@@ -1,5 +1,5 @@
 .thingsToDo {
-  margin: 50px 0 50px 0;
+  margin: 50px 0;
   
   &-header {
     margin: 25px 0;
@@ -18,7 +18,7 @@
   &-buttons {
     position: absolute;
     top: -60px;
-    right: 150px;
+    right: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,9 +41,9 @@
 .swiper {
   margin: 25px 0 !important;
   padding: 0 !important;
-  width: calc(100vw - 100px);
+  width: calc(90vw - 100px);
   height: 350px;
-  // overflow-x: hidden !important;
+  overflow: hidden !important;
 }
 
 .swiper-slide {

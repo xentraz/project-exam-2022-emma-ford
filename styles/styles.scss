@@ -52,6 +52,34 @@
   .staysDetails-details-container-sidebar {
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
+
+  .bookingBoxes-summary, .bookingBoxes-info {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
+
+  .formGroup > div {
+    @apply text-black dark:text-white;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
+
+  .paymentDetails-types-1 {
+    @apply bg-lightGrey dark:bg-darkGrey;
+  }
+
+  .paymentDetails-types-1:hover, .paymentDetails-types-2:hover, .paymentDetails-types-3:hover, .paymentDetails-types-4:hover {
+    @apply bg-lightGrey dark:bg-darkGrey;
+  }
+
+  .paymentGroup-invoice {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
+  
+  .grey {
+    @apply text-blackOpacity dark:text-whiteOpacity;
+  }
 }
 
 // Styles
@@ -77,6 +105,9 @@
 
 // Stays Details
 @import './partials/staysDetails';
+
+// Stays Booking
+@import './partials/staysBooking';
 
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
