@@ -62,11 +62,12 @@ function StaysBooking(
     Price, 
     About, 
     Location, 
+    Featured,
     Rooms,
     Beds,
-    ImgArray,
     Type,
     Type: {Hotel, Hostel, Cabin, Apartment},
+    ImgArray,
     ImgArray: {ImgAlt, ImgUrl},
     Ratings,
     Ratings: {Star, Date, RatingsName, Message},
@@ -179,7 +180,10 @@ function StaysBooking(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header id={id}>
-        <Navigation id={id} />
+        {/* <Navigation
+        id={id}
+        /> */}
+        <Navigation/>
         <Sidebar/>
       </header>
       <main>

@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 // API
 import { getUser } from '../../lib/apiURL';
 import { getPlaces } from '../../lib/apiCall';
+import { apiURL } from '../../lib/apiURL';
 // Nookies
 import nookies from 'nookies';
 // Axios
 const axios = require('axios').default;
 
-function Navigation({id}) {
+function Navigation ({places, id}) {
   // Responsive Navigation
   const router = useRouter();
   const [isOpen, setIsOpen] = useState('navigation-links');
@@ -26,18 +27,27 @@ function Navigation({id}) {
     : setToggleIcon('navigation-toggler');
   }
 
-  // Stays Details
-  const isActive = router.pathname;
-  console.log(isActive);
-
   // Check to see if user is logged in
   const [userLoggedIn, setUserLoggedIn] = useState(false);
 
+  // const {id} = places;
+  console.log(places);
+
   useEffect(() => {
-    if (router.pathname === '/Admin') {
+    if ((router.pathname === '/Admin') || (router.pathname === '/Add') || (router.pathname === `/Edit/${id}`)) {
       setUserLoggedIn(true);
-    } 
-  }, [router.pathname]);
+    }
+  }, [router.pathname, id]);
+
+   // Log Out
+   const logout = async () => {
+     try {
+       await axios.get('/api/logout');
+       router.push('/LoginPage');
+     } catch (e) {
+       console.log(e);
+     }
+   }
 
   return  (
     <>
@@ -54,16 +64,15 @@ function Navigation({id}) {
           {userLoggedIn ? (
             <>
               <Link href='/'><a className={router.pathname == "/" ? "active" : ""}>Home</a></Link>
-              <Link href='/Stays'><a className={router.pathname === "/Stays" || router.pathname === `/StaysDetails/[${id}]` || router.pathname === `/StaysBooking/[${id}]` ? "active" : ""}>Places to stay</a></Link>
-              <Link href='/See'><a className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
               <Link href='/Contact'><a className={router.pathname == "/Contact" ? "active" : ""}>Contact</a></Link>
               <Link href='/Admin'><a className={router.pathname == "/Admin" ? "active" : ""}>Admin</a></Link>
-              <Link href='/LoginPage'><a className={router.pathname == "/LoginPage" ? "active" : ""}>Login</a></Link>
+              <Link href='/Add'><a className={router.pathname == "/Add" ? "active" : ""}>Add Places</a></Link>
+              <Link href='/LoginPage'><a onClick={logout} className={router.pathname == "/LoginPage" ? "active" : ""}>Logout</a></Link>
             </>
           ) : (
             <>
               <Link href='/'><a className={router.pathname == "/" ? "active" : ""}>Home</a></Link>
-              <Link href='/Stays'><a className={router.pathname == "/Stays" ? "active" : ""}>Places to stay</a></Link>
+              <Link href='/Stays'><a className={router.pathname === "/Stays" || router.pathname === `/StaysDetails/[${id}]` || router.pathname === `/StaysBooking/[${id}]` ? "active" : ""}>Places to stay</a></Link>
               <Link href='/See'><a className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
               <Link href='/Contact'><a className={router.pathname == "/Contact" ? "active" : ""}>Contact</a></Link>
               <Link href='/LoginPage'><a className={router.pathname == "/LoginPage" ? "active" : ""}>Login</a></Link>
@@ -83,6 +92,7 @@ function Navigation({id}) {
 export const getServerSideProps = async (ctx) => {
   const cookies = nookies.get(ctx)
   let user = null;
+  let places = null;
 
   if (cookies?.jwt) {
     try {
@@ -92,17 +102,29 @@ export const getServerSideProps = async (ctx) => {
             `Bearer ${cookies.jwt}`,
           },
       });
+      const placesData = await axios.get(apiURL);
+
       user = data;
+      places = placesData.data;
+
     } catch (e) {
       console.log(e);
     }
   }
 
-  if (user) {
+  if (!user) {
     return {
-      props: { 
-        user
+      redirect: {
+        permanent: false,
+        destination: '/'
       }
+    }
+  }
+
+  return {
+    props: {
+      user,
+      places,
     }
   }
 }

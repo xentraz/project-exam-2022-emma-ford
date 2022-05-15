@@ -20,28 +20,28 @@ function HeroIndex() {
   const [weather, setWeather] = useState('');
   // const [data, setData] = useState({});
 
-  const WatherApiKey = `efcd48a6ebf30ba8437bc21079c510a6`;
-  // const WeatherApiURL = `https://api.openweathermap.org/data/2.5/weather?q=bergen&units=metric&appid=` + WatherApiKey;
-  console.log(WeatherApiURL);
-  // const cancelTokenSource = axios.CancelToken.source();
+  // const WatherApiKey = `efcd48a6ebf30ba8437bc21079c510a6`;
+  // // const WeatherApiURL = `https://api.openweathermap.org/data/2.5/weather?q=bergen&units=metric&appid=` + WatherApiKey;
+  // console.log(WeatherApiURL);
+  // // const cancelTokenSource = axios.CancelToken.source();
 
-  useEffect(() => {
-    const cancelTokenSource = axios.CancelToken.source();
-    async function fetchData() {
-      try {
-        const result = await axios(WeatherApiURL, {
-          method: 'get',
-          cancelToken: cancelTokenSource.token,
-        });
-        setWeather(result.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        cancelTokenSource.cancel();
-      }
-    }
-    fetchData();
-  })
+  // useEffect(() => {
+  //   const cancelTokenSource = axios.CancelToken.source();
+  //   async function fetchData() {
+  //     try {
+  //       const result = await axios(WeatherApiURL, {
+  //         method: 'get',
+  //         cancelToken: cancelTokenSource.token,
+  //       });
+  //       setWeather(result.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     } finally {
+  //       cancelTokenSource.cancel();
+  //     }
+  //   }
+  //   fetchData();
+  // })
 
   // useEffect(() => {
   //   axios.get(WeatherApiURL)
@@ -137,19 +137,3 @@ function HeroIndex() {
 }
 
 export default HeroIndex
-
-
-  // const handleOnchange = (val) => setValue(val);
-
-  // const options = [
-  //   { label: "1 Adult(s)", value: "1 Adult" },
-  //   { label: "2 Adult(s)", value: "2 Adults" },
-  //   { label: "3 Adult(s)", value: "3 Adults" },
-  //   { label: "4 Adult(s)", value: "4 Adults" },
-  //   { label: "1 Child(ren)", value: "1 Child" },
-  //   { label: "2 Child(ren)", value: "2 Children" },
-  //   { label: "3 Child(ren)", value: "3 Children" },
-  //   { label: "4 Child(ren)", value: "4 Children" },
-  // ];
-  // const [newCompany, setCompany] = useState("");
-  // const [newPosition, setPosition] = useState("");

@@ -7,7 +7,31 @@ import HeroIndex from '../components/HeroIndex/HeroIndex';
 import PopularCards from '../components/PopularCards/PopularCards';
 import ThingsToDo from '../components/ThingsToDo/ThingsToDo';
 
-export default function Home() {
+// API
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:1337/places");
+  const data = await res.json();
+
+  return {
+    props: { places: data },
+  };
+};
+
+export default function Home({places}) {
+  // Featured Array 
+  const featuredArray = [];
+  let count = 0;
+
+  for (let i = 0; i < places.length; i++) {
+    const element = places[i];
+
+    if (element.Featured) {
+      featuredArray.push(element);
+      count++;
+    }
+  }
+  console.log(featuredArray);
+
   return (
     <>
       <Head>
@@ -17,12 +41,46 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
+        {/* <Navigation
+        id={id}
+        /> */}
         <Navigation/>
         <Sidebar/>
       </header>
       <main>
         <HeroIndex />
-        <PopularCards/>
+          <div className="popularStays">
+          <h2>Popular Stays</h2>
+          <p>Have a loook at our most popular stays right now!</p>
+          <div className="popularStays-cards">
+          {featuredArray.map((
+              {
+                id, 
+                Name, 
+                Price, 
+                Ratings,
+                ImgArray,
+                ImgAlt, 
+                ImgUrl,
+              }
+            ) =>  {
+              return (
+              <PopularCards 
+                id={id}
+                key={id}
+                Name={Name}
+                Price={Price}
+                Ratings={Ratings}
+                ImgArray={ImgArray}
+                ImgUrl={ImgUrl}
+                ImgAlt={ImgAlt}  
+              />
+              );
+              }
+            )}
+          </div>
+          <button>Browse All Stays</button>
+        </div>
         <ThingsToDo/>
       </main>
 

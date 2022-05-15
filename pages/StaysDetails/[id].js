@@ -190,7 +190,10 @@ function StaysDetail(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header id={id}>
-        <Navigation id={id} />
+        {/* <Navigation
+        id={id}
+        /> */}
+        <Navigation/>
         <Sidebar/>
       </header>
       <main>

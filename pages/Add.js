@@ -1,93 +1,17 @@
-import React from 'react'
-import Head from 'next/head'
+import React from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 // Components
 import Navigation from '../components/Navigation/Navigation';
 import Sidebar from '../components/Sidebar/Sidebar';
-// API
-import { apiURL } from '../lib/apiURL';
+import PostCards from '../components/PostCards/PostCards';
 // Axios
 const axios = require('axios').default;
-// Formik
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from "yup";
-
 // API
-export const getStaticProps = async () => {
-  const res = await fetch(apiURL);
-  const data = await res.json();
+import { apiURL } from '../lib/apiURL';
 
-  return {
-    props: { places: data },
-  };
-};
+function Add ({places}) {
 
-function Add({places}, values) {
-  console.log(places);
-
-  // Formik Contact Form
-  const ContactSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
-    lastName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
-  });
-
-  const {
-    id, 
-    Name, 
-    Price, 
-    About, 
-    Location, 
-    // Rooms,
-    // Beds,
-    // ImgArray,
-    // Type,
-    // Type: {Hotel, Hostel, Cabin, Apartment},
-    // ImgArray: {ImgAlt, ImgUrl},
-    // Ratings,
-    // Ratings: {Star, Date, RatingsName, Message},
-    // Size, 
-    // Amenities: {
-    //   Bathtub,
-    //   Breakfast,
-    //   Cleaning,
-    //   CoffeeMachine,
-    //   Dishwasher,
-    //   Dryer,
-    //   Fireplace,
-    //   Gym,
-    //   Heating,
-    //   Iron,
-    //   Laundry,
-    //   Lift,
-    //   Microwave,
-    //   Parking,
-    //   Pool,
-    //   Refrigerator,
-    //   Spa,
-    //   TV,
-    //   Washer,
-    //   Wifi,
-    //   },
-    // RoomDetails,
-    // RoomDetails: 
-    //   {
-    //     CheckIn, 
-    //     CheckOut,
-    //     Parties, 
-    //     Pets,
-    //     Rules,
-    //     Smoking,
-    //   }
-    } = values;
-
-    const handleSubmit = (e) => {};
-    const handleInputChange = () => {};
-  
   return (
     <>
      <Head>
@@ -97,85 +21,15 @@ function Add({places}, values) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
+        {/* <Navigation
+        id={id}
+        /> */}
         <Navigation/>
         <Sidebar/>
       </header>
       <main>
-        <Formik
-              initialValues={{
-                firstName: '',
-                lastName: '',
-              }}
-              validationSchema={ContactSchema}
-              onSubmit={values => {
-                // same shape as initial values
-                console.log(values);
-                handleSubmit(values);
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <div className="addForm">
-                    <div>
-                      <label htmlFor="Name">Name</label>
-                      <Field 
-                      name="Name" 
-                      type="text"
-                      id="Name"
-                      value={Name}
-                      placeholder="Name" 
-                      onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="Price">Price</label>
-                      <Field 
-                      name="Price" 
-                      type="text"
-                      id="Price"
-                      value={Price}
-                      placeholder="Price" 
-                      onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="About">About</label>
-                      <Field 
-                      name="About" 
-                      type="text"
-                      id="About"
-                      value={About}
-                      placeholder="About" 
-                      onChange={handleInputChange}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="Location">Location</label>
-                      <Field 
-                      name="Location" 
-                      type="text"
-                      id="Location"
-                      value={Location}
-                      placeholder="Location" 
-                      onChange={handleInputChange}
-                      />
-                    </div>
-
-
-                    {/* {errors.firstName && touched.firstName ? (
-                      <p className="error">{errors.firstName}</p>
-                    ) : <p className="filler"></p>}
-
-                    <label htmlFor="lastName">Surname</label>
-                    <Field name="lastName" placeholder="Surname" />
-                    {errors.lastName && touched.lastName ? (
-                      <p className="error">{errors.lastName}</p>
-                      ) : <p className="filler"></p>} */}
-                  </div>
-                  <button className="button" type="submit">Submit</button>
-                </Form>
-              )}
-          </Formik>
+        <h1>Add a new place</h1>
+        <PostCards/>
         </main>
 
       <footer>
@@ -183,5 +37,21 @@ function Add({places}, values) {
   </>
   )
 }
+
+export const getStaticProps = async () => {
+  const response = await axios.get(apiURL, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  
+  const data = response.data;
+
+  return {
+    props: {
+      places: data,
+    },
+  };
+};
 
 export default Add;

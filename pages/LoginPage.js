@@ -24,6 +24,9 @@ function LoginPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
+        {/* <Navigation
+        id={id}
+        /> */}
         <Navigation/>
         <Sidebar/>
       </header>

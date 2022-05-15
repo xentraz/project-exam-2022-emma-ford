@@ -1,15 +1,15 @@
 import React, { useState} from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import getConfig from 'next/config';
 // Components
 import Navigation from '../components/Navigation/Navigation';
 import Sidebar from '../components/Sidebar/Sidebar';
 import OverviewTable from '../components/OverviewTable/OverviewTable';
+import EnquiriesTable from '../components/EnquiriesTable/EnquiriesTable';
 // API
 import { apiURL } from '../lib/apiURL';
 // Nookies
-import nookies from 'nookies';
+import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 // Material UI Tabs
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
@@ -23,8 +23,10 @@ import AddIcon from '@mui/icons-material/Add';
 const axios = require('axios').default;
 
 // Logout
-const Admin = (props) => {
-  const {places: {
+const Admin = ({user, places, enquiries, messages, JWT }) => {
+  console.log(enquiries);
+
+  const {
     id, 
     Name, 
     Price, 
@@ -34,23 +36,15 @@ const Admin = (props) => {
     Ratings,
     Size, 
     Amenities
-  }} = props;
+  } = places;
 
-  const newPlaces = props.places;
+    
+  const newPlaces = places;
   console.log(newPlaces);
 
-  // Log Out
-  const router = useRouter();
-  const { user: { email, username } } = props;
+  // User info
+  const { email, username } = user;
 
-  const logout = async () => {
-    try {
-      await axios.get('/api/logout');
-      router.push('/');
-    } catch (e) {
-      console.log(e);
-    }
-  }
   
   // Tabs
   const Tab = styled(TabUnstyled)`
@@ -102,7 +96,9 @@ const Admin = (props) => {
     align-content: space-between;
   `;
 
-  // Add 
+  // Enquiries 
+  console.log(enquiries);
+
 
   return (
     <>
@@ -113,6 +109,9 @@ const Admin = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
+        {/* <Navigation
+        id={id}
+        /> */}
         <Navigation/>
         <Sidebar/>
       </header>
@@ -121,7 +120,6 @@ const Admin = (props) => {
         <div>
           <div>Username: {username}</div>
           <div>Email: {email}</div>
-          <button onClick={logout}>Logout</button>
         </div>
         <div className="adminTabs">
           <TabsUnstyled defaultValue={0}>
@@ -131,13 +129,14 @@ const Admin = (props) => {
               <Tab className="tabTitle">Messages</Tab>
             </TabsList>
             <TabPanel value={0} className="tabContent-1">
-            <div className="tabContent-1-heading">
-                <h3>See, edit, add or delete places to stay</h3>
-                <div className="tabContent-1-heading-button">
-                  <a href={`/Add`} className="button"><AddIcon/> Add a new place</a>
-                </div>
+              <div className="tabContent-1-heading">
+                <h2>See, edit, add or delete places to stay</h2>
+                <a href={`/Add`} className="button"><AddIcon/> Add a new place</a>
+                {/* <div className="tabContent-1-heading-button">
+                  
+                </div> */}
               </div>
-            <div className="overviewTable">
+              <div className="overviewTable">
                 <table className="overviewTable-table">
                   <thead>
                       <tr>
@@ -147,7 +146,7 @@ const Admin = (props) => {
                         <th><p className="flexCardtitle">Price</p></th>
                         <th><p className="flexCardtitle">Location</p></th>
                         <th><p className="flexCardtitle">Amenities</p></th>
-                        <th><p className="flexCardtitle">Edit</p></th>
+                        <th><a href={`/Edit/${id}`}><p className="flexCardtitle">Edit</p></a></th>
                         <th className="flexCardtitle noRightBorder"><p>Delete</p></th>
                       </tr>
                   </thead>
@@ -184,16 +183,58 @@ const Admin = (props) => {
               </div>
             </TabPanel>
             <TabPanel value={1}>
-              <div className="tabpanel"></div>
+              <div className="tabpanel">
+                <h2>Enquries</h2>
+                <div className="overviewTable">
+                <table className="overviewTable-table">
+                  <thead>
+                      <tr>
+                        <th><p className="flexCardtitle">ID</p></th>
+                        <th><p className="flexCardtitle">Name</p></th>
+                        <th><p className="flexCardtitle">Surname</p></th>
+                        <th><p className="flexCardtitle">Message</p></th>
+                        <th><p className="flexCardtitle">Guests</p></th>
+                        <th><p className="flexCardtitle">Phone number</p></th>
+                        <th><p className="flexCardtitle">Date of Birth</p></th>
+                      </tr>
+                  </thead>
+                    {enquiries.map((
+                    {
+                      id, 
+                      firstName, 
+                      Surname, 
+                      Message, 
+                      Guests, 
+                      Number,
+                      DOB,
+                    }
+                  ) =>  {
+                    return (
+                    <EnquiriesTable 
+                      id={id}
+                      key={id}
+                      firstName={firstName}
+                      Surname={Surname}
+                      Message={Message}
+                      Guests={Guests}
+                      Number={Number}
+                      DOB={DOB}
+                    />
+                    );
+                    }
+                  )}
+                </table>
+              </div>
+              </div>
             </TabPanel>
             <TabPanel value={2}>
-              <div className="tabpanel"></div>
+              <h2>Messages</h2>
             </TabPanel>
           </TabsUnstyled>
         </div>
       </main>
-      <footer>
-      </footer>
+    <footer>
+    </footer>
   </>
   )
 }
@@ -201,6 +242,10 @@ const Admin = (props) => {
 export const getServerSideProps = async (ctx) => {
   const cookies = nookies.get(ctx)
   let user = null;
+  let places = null;
+  // let messages = null;
+  let enquiries = null;
+  const JWT = parseCookies(ctx).jwt;
 
   if (cookies?.jwt) {
     try {
@@ -210,7 +255,15 @@ export const getServerSideProps = async (ctx) => {
             `Bearer ${cookies.jwt}`,
           },
       });
+      const placesData = await axios.get(apiURL);
+      // const messagesData = await axios.get('http://localhost:1337/messages');
+      const enquiriesData = await axios.get('http://localhost:1337/enquires');
+
       user = data;
+      places = placesData.data;
+      // messages = messagesData.data;
+      enquiries = enquiriesData.data;
+
     } catch (e) {
       console.log(e);
     }
@@ -224,14 +277,13 @@ export const getServerSideProps = async (ctx) => {
       }
     }
   }
-   
-  const res = await fetch(apiURL);
-  const data2 = await res.json();
 
   return {
     props: {
       user,
-      places : data2,
+      places,
+      enquiries,
+      JWT,
     }
   }
 }

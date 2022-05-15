@@ -12,69 +12,72 @@ const LoginComponent = () => {
     password: '',
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Formik Login Form
+  const loginSchema = Yup.object().shape({
+    password: Yup.string()
+      .min(2, 'Too Short!')
+      .max(25, 'Too Long!')
+      .required('Required'),
+    identifier: Yup.string()
+      .email('Invalid email')
+      .required('Required')
+  });
+
+  const [error, setError] = useState();
+
+  const handleSubmit = async (values) => {
     try {
-      await axios.post('/api/login', { ...userData });
+      await axios.post('/api/login', { ...values});
       router.push('/Admin');
+      setError(false);
     } catch (err) {
       console.log(err.response.data);
+      setError(true);
     }
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({...userData, [name]: value })
-  }
-
   return (
-    <div>
-      <Formik>
-        {({errors, touched}) => (
-          <Form 
-          onSubmit={handleSubmit}>
+    <>
+      <Formik
+        initialValues={{
+          identifier: '',
+          password: '',
+        }}
+        validationSchema={loginSchema}
+        onSubmit={(values) => {
+          handleSubmit(values);
+          console.log(values);
+        }}
+      >
+        {({ errors, touched }) => (
+          <Form>
             <label htmlFor="identifier">Email:</label>
-              <Field type="text" name="identifier" onChange={e => handleChange(e)} />
+              <Field type="text" name="identifier" />
+              {errors.identifier && touched.identifier ? (
+              <p className="error">{errors.identifier}</p>
+              ) : <p className="filler"></p>}
             <br />
             <label htmlFor="password">Password</label>
-              <Field type="password" name="password" onChange={e => handleChange(e)} />
+              <Field type="password" name="password"/>
+              {errors.password && touched.password ? (
+              <p className="error">{errors.password}</p>
+              ) : <p className="filler"></p>}
             <br />
-            <button>Login</button>
+            {error ? (
+              <p className="warning">
+                Invalid Email or Password
+              </p>
+            ) : (
+              ''
+            )}
+            <button className='button' type='submit'>
+              Login
+            </button>
           </Form>
         )}
-      </Formik>
-    </div>
+     </Formik>
+    </>
   )
 }
 
 export default LoginComponent;
-
-//  // Formik Contact Form
-//  const loginSchema = Yup.object().shape({
-//   password: Yup.string()
-//     .min(2, 'Too Short!')
-//     .max(25, 'Too Long!')
-//     .required('Required'),
-//   identifier: Yup.string()
-//     .min(2, 'Too Short!')
-//     .max(35, 'Too Long!')
-//     .required('Required'),
-// });
-
-// function validateEmail(value) {
-//   let error;
-//   if (!value) {
-//     error = 'Required';
-//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-//     error = 'Invalid email address';
-//   }
-//   return error;
-// }
-
-{/* {errors.identifier && touched.identifier ? (
-<p className="error">{errors.identifier}</p>
-) : <p className="filler"></p>} */}
-
- {/* {errors.password && touched.password ? (
-  <p className="error">{errors.password}</p>
-  ) : <p className="filler"></p>} */}

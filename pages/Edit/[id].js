@@ -144,7 +144,10 @@ function Edit(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header id={id}>
-        <Navigation id={id} />
+        {/* <Navigation
+        id={id}
+        /> */}
+        <Navigation/>
         <Sidebar/>
       </header>
       <main>
@@ -155,50 +158,3 @@ function Edit(
 }
 
 export default Edit;
-
-// id: id,
-// Name: Name,
-// Price: Price,
-// About: About,
-// Location: Location,
-// Rooms: Rooms,
-// Beds: Beds,
-// ImgArray: ImgArray,
-// ImgAlt: ImgAlt,
-// ImgUrl: ImgUrl,
-// Type: Type,
-// Hotel: Hotel,
-// Hostel: Hostel,
-// Cabin: Cabin,
-// Apartment: Apartment,
-// Star: Star,
-// Date: Date,
-// RatingsName: RatingsName,
-// Message: Message,
-// Size: Size,
-// Bathtub: Bathtub,
-// Breakfast: Breakfast,
-// Cleaning: Cleaning,
-// CoffeeMachine: CoffeeMachine,
-// Dishwasher: Dishwasher,
-// Dryer: Dryer,
-// Fireplace: Fireplace,
-// Gym: Gym,
-// Heating: Heating,
-// Iron: Iron,
-// Laundry: Laundry,
-// Lift: Lift,
-// Microwave: Microwave,
-// Parking: Parking,
-// Pool: Pool,
-// Refrigerator: Refrigerator,
-// Spa: Spa,
-// TV: TV,
-// Washer: Washer,
-// Wifi: Wifi,
-// CheckIn: CheckIn,
-// CheckOut: CheckOut,
-// Parties: Parties,
-// Pets: Pets,
-// Rules: Rules,
-// Smoking: Smoking,

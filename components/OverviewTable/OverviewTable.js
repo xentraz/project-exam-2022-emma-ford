@@ -62,7 +62,7 @@ function OverviewTable(
     <>
     <tbody>
       <tr>
-        <td className="noLeftBorder"><p>{id}</p></td>
+        <td><p>{id}</p></td>
         <td><p>{Name}</p></td>
         <td>
           {slicedImgs.map((elm) => {     
@@ -112,7 +112,7 @@ function OverviewTable(
            </p>
         </td>
         <td><a href={`/Edit/${id}`}><EditIcon/></a></td>
-        <td className="noRightBorder"><p><DeleteForeverIcon/></p></td>
+        <td><p><DeleteForeverIcon/></p></td>
       </tr>
     </tbody>
     </>
