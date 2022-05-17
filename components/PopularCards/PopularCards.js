@@ -6,7 +6,6 @@ import StarIcon from '@mui/icons-material/Star';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
-
 function PopularCards({
   id,
   Name,
@@ -48,10 +47,11 @@ function PopularCards({
 
   return (
     <>
-      <div className="popularStays-card" onClick={detailsLink}>
+      <div className="popularStays-card">
       {slicedImgs.map((elm) => {     
             return (
               <div
+                  onClick={detailsLink}
                   key={elm.id}
                   style={{
                     backgroundImage: `url(${elm.ImgUrl})`,

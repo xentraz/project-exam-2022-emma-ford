@@ -24,6 +24,14 @@ body {
 main {
   margin: 0 100px;
   position: relative;
+
+  @media (max-width: 525px) {
+    margin: 0 50px;
+  }
+
+  @media (max-width: 350px) {
+    margin: 0 25px;
+  }
 }
 
 h1,
@@ -107,6 +115,10 @@ textarea {
   color: $white !important;
 }
 
+.todoTitle {
+  text-shadow: $box-shadow;
+}
+
 .flexCardtitle {
   font-family: $secondary-font;
   font-size: 1.25rem;
@@ -154,12 +166,6 @@ button, .button {
   }
 }
 
-.staysCards {
-  margin: 100px 0px 0px 275px;
-  height: 100%;
-  top: calc(50vh + 25px);
-  position: absolute;
-}
 
 // Glassmorphism Cards
 // .white-text {

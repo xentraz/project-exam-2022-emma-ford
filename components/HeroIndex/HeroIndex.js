@@ -5,9 +5,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 // Mantine
 import { DateRangePicker } from '@mantine/dates';
-// Multi Select
-import MultiSelect from  'react-multiple-select-dropdown-lite'
-import  'react-multiple-select-dropdown-lite/dist/index.css'
 // Weather
 import { WeatherApiURL } from '../Weather/API/WeatherAPI';
 // Axios

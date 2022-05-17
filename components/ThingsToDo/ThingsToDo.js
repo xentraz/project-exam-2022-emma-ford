@@ -6,85 +6,50 @@ import { Pagination, Navigation } from "swiper";
 // Material UI
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-// Component: ThingsToDo
-import ThingsToDoCards from '../ThingsToDoCards/ThingsToDoCards.js';
+// API
+import { thingsToDoUrl } from '../../lib/apiURL';
+// Nookies
+import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 
-function ThingsToDo() {
-  const sliderRef = useRef(null);
-
-  const handlePrev = useCallback(() => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slidePrev();
-  }, []);
-
-  const handleNext = useCallback(() => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slideNext();
-  }, []);
-
+function ThingsToDoCards({
+  id,
+  Name,
+  Price,
+  ImgUrl,
+  ImgAlt,
+}){
+  
   return (
     <>
-    <div className="thingsToDo">
-      <div className="thingsToDo-header">
-        <h2>Things to do</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur 
-          adipiscing elit ut aliquam, purus sit 
-          amet luctus venenatis, lectus magna 
-          fringilla urna, porttitor rhoncus dolor 
-          purus non enim
-        </p>
-      </div>
-    </div>
-    <div className="thingsToDo-slider">
-      <div className="thingsToDo-slider-buttons">
-        <div className="thingsToDo-slider-buttons-prev" onClick={handlePrev}>
-          <ArrowCircleLeftIcon/>
-        </div>
-        <div className="thingsToDo-slider-buttons-next" onClick={handleNext}>
-          <ArrowCircleRightIcon/>
-        </div>
-      </div>
-      <Swiper 
-        ref={sliderRef}
-        slidesPerView={3}
-        spaceBetween={20}
-        slidesPerGroup={3}
-        loop={true}
-        loopFillGroupWithBlank={true}
-        pagination={{
-          clickable: true,
-        }}
-        updateOnWindowResize
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
+      <div 
+      className="TTD_cards"
+      style={{
+        backgroundImage: `url(${ImgUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        width: '100%',
+        height: '100%',
+      }}
+      alt={ImgAlt}
       >
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-        <SwiperSlide><ThingsToDoCards/></SwiperSlide>
-      </Swiper>
-      <button>Browse all</button>
+      <div className="TTD_cards-header">
+        <p className="cardTitle todoTitle">{Name}</p>
+      </div>
+      <div className="TTD_cards-price">
+        {
+          Price === 1 ? <p>$</p> 
+          : Price === 2 ? <p>$$</p>
+          : Price === 3 ? <p>$$$</p>
+          : Price === 4 ? <p>$$$$</p>
+          : Price === 5 ? <p>$$$$$</p>
+          : ''
+    }
+      </div>
     </div>
-    </>
-  );
+  </>
+  )
 }
 
-export default ThingsToDo
-
-// {images.map((image, index) => (
-//   <SwiperSlide key={index}>
-//     <img
-//       height="200"
-//       width="300"
-//       alt="img"
-//       className="image"
-//       src={image.url}
-//     />
-//   </SwiperSlide>
-// ))}
+export default ThingsToDoCards;
 

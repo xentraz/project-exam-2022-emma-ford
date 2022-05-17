@@ -4,13 +4,13 @@ import getConfig from 'next/config';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 // Components
-import Navigation from '../components/Navigation/Navigation';
+import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import LoginComponent from '../components/LoginComponent/LoginComponent';
 // Axios
 const axios = require('axios').default;
 // API
-import { apiURL } from '../lib/apiURL';
+import { placesUrl } from '../lib/apiURL';
 // Nookies
 import nookies from 'nookies';
 
@@ -24,10 +24,10 @@ function LoginPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Navigation
+        {/* <Nav
         id={id}
         /> */}
-        <Navigation/>
+        <Nav/>
         <Sidebar/>
       </header>
       <main>

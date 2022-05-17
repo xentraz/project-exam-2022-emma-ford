@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 // API
 import { getUser } from '../../lib/apiURL';
-import { getPlaces } from '../../lib/apiCall';
-import { apiURL } from '../../lib/apiURL';
+import { getAPI } from '../../lib/apiCall';
+import { placesUrl } from '../../lib/apiURL';
 // Nookies
 import nookies from 'nookies';
 // Axios
 const axios = require('axios').default;
 
-function Navigation ({places, id}) {
+function Nav ({places, id}) {
   // Responsive Navigation
   const router = useRouter();
   const [isOpen, setIsOpen] = useState('navigation-links');
@@ -102,7 +102,7 @@ export const getServerSideProps = async (ctx) => {
             `Bearer ${cookies.jwt}`,
           },
       });
-      const placesData = await axios.get(apiURL);
+      const placesData = await axios.get(placesUrl);
 
       user = data;
       places = placesData.data;
@@ -129,4 +129,4 @@ export const getServerSideProps = async (ctx) => {
   }
 }
 
-export default Navigation;
+export default Nav;

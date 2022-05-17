@@ -7,6 +7,14 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+
+    & h2 {
+      margin-bottom: 15px;
+    }
+    
+    & p {
+      margin-bottom: 15px;
+    }
   }
 }
 
@@ -76,7 +84,7 @@
 }
 
 .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
-  bottom: 0 !important;
+  bottom: 5px !important;
 }
 
 .swiper-pagination-bullet {

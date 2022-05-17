@@ -1,23 +1,42 @@
-// React / Headless
+// React 
+import React, { useRef, useCallback } from "react";
+// Headless
 import Head from 'next/head'
 // Components
-import Navigation from '../components/Navigation/Navigation';
+import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import HeroIndex from '../components/HeroIndex/HeroIndex';
 import PopularCards from '../components/PopularCards/PopularCards';
-import ThingsToDo from '../components/ThingsToDo/ThingsToDo';
+import ThingsToDoCards from '../components/ThingsToDo/ThingsToDo';
+// API 
+import { placesUrl, thingsToDoUrl } from '../lib/apiURL';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+// import required modules
+import { Pagination, Navigation } from "swiper";
+// Material UI
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 // API
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:1337/places");
+  const res = await fetch(placesUrl);
   const data = await res.json();
+  const places = data;
+
+  const res2 = await fetch(thingsToDoUrl);
+  const data2 = await res2.json();
+  const thingsToDo = data2;
 
   return {
-    props: { places: data },
+    props: { 
+      places,
+      thingsToDo,
+     },
   };
 };
 
-export default function Home({places}) {
+export default function Home({places, thingsToDo}) {
   // Featured Array 
   const featuredArray = [];
   let count = 0;
@@ -32,6 +51,21 @@ export default function Home({places}) {
   }
   console.log(featuredArray);
 
+  // Things to do 
+  const sliderRef = useRef(null);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
+  console.log(thingsToDo);
+
   return (
     <>
       <Head>
@@ -41,17 +75,17 @@ export default function Home({places}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Navigation
+        {/* <Nav
         id={id}
         /> */}
-        <Navigation/>
+        <Nav/>
         <Sidebar/>
       </header>
       <main>
         <HeroIndex />
           <div className="popularStays">
           <h2>Popular Stays</h2>
-          <p>Have a loook at our most popular stays right now!</p>
+          <p className="flexCardtitle">Have a loook at our most popular stays right now!</p>
           <div className="popularStays-cards">
           {featuredArray.map((
               {
@@ -81,7 +115,61 @@ export default function Home({places}) {
           </div>
           <button>Browse All Stays</button>
         </div>
-        <ThingsToDo/>
+        <div className="thingsToDo">
+          <div className="thingsToDo-header">
+            <h2>Things to do</h2>
+            <p className="flexCardtitle">Explore the different activities and events happening in and around Bergen for your stay!</p>
+          </div>
+        </div>
+        <div className="thingsToDo-slider">
+          <div className="thingsToDo-slider-buttons">
+            <div className="thingsToDo-slider-buttons-prev" onClick={handlePrev}>
+              <ArrowCircleLeftIcon/>
+            </div>
+            <div className="thingsToDo-slider-buttons-next" onClick={handleNext}>
+              <ArrowCircleRightIcon/>
+            </div>
+          </div>
+          <Swiper 
+            ref={sliderRef}
+            slidesPerView={3}
+            spaceBetween={20}
+            slidesPerGroup={3}
+            loop={true}
+            loopFillGroupWithBlank={true}
+            pagination={{
+              clickable: true,
+            }}
+            updateOnWindowResize
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+            >
+              {thingsToDo.map((
+                  {
+                    id, 
+                    Name, 
+                    Price, 
+                    ImgAlt, 
+                    ImgUrl,
+                  }
+                ) =>  {
+                  return (
+                  <SwiperSlide key={id}>
+                  <ThingsToDoCards 
+                    id={id}
+                    key={id}
+                    Name={Name}
+                    Price={Price}
+                    ImgUrl={ImgUrl}
+                    ImgAlt={ImgAlt}  
+                  />
+                  </SwiperSlide>
+                  );
+                  }
+                )}  
+            </Swiper>
+          <button>Browse all</button>
+        </div>
       </main>
 
       <footer>

@@ -2,13 +2,13 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 // Components
-import Navigation from '../components/Navigation/Navigation';
+import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import PostCards from '../components/PostCards/PostCards';
 // Axios
 const axios = require('axios').default;
 // API
-import { apiURL } from '../lib/apiURL';
+import { placesUrl } from '../lib/apiURL';
 
 function Add ({places}) {
 
@@ -21,10 +21,10 @@ function Add ({places}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Navigation
+        {/* <Nav
         id={id}
         /> */}
-        <Navigation/>
+        <Nav/>
         <Sidebar/>
       </header>
       <main>
@@ -39,7 +39,7 @@ function Add ({places}) {
 }
 
 export const getStaticProps = async () => {
-  const response = await axios.get(apiURL, {
+  const response = await axios.get(placesUrl, {
     headers: {
       Accept: "application/json",
     },

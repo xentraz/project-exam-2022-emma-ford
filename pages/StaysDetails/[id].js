@@ -1,10 +1,10 @@
 import React, { useState, useReducer } from 'react'
 import Head from 'next/head'
 // Api
-import { apiURL } from '../../lib/apiURL';
-import { getPlaces } from '../../lib/apiCall';
+import { placesUrl } from '../../lib/apiURL';
+import { getAPI } from '../../lib/apiCall';
 // Components
-import Navigation from '../../components/Navigation/Navigation';
+import Nav from '../../components/Nav/Nav';
 import Sidebar from '../../components/Sidebar/Sidebar';
 // Modal
 import ModalUnstyled from '@mui/base/ModalUnstyled';
@@ -61,7 +61,7 @@ import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
 import EventIcon from '@mui/icons-material/Event';
 
 export const getStaticPaths = async () => {
-  const placesArray = await getPlaces(apiURL);
+  const placesArray = await getAPI(placesUrl);
 
   const paths = placesArray.map((places) => {
     return {
@@ -77,7 +77,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const places = await getPlaces(apiURL + '/' + id);
+  const places = await getAPI(placesUrl + '/' + id);
 
   return {
     props: { places: places },
@@ -190,10 +190,10 @@ function StaysDetail(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header id={id}>
-        {/* <Navigation
+        {/* <Nav
         id={id}
         /> */}
-        <Navigation/>
+        <Nav/>
         <Sidebar/>
       </header>
       <main>

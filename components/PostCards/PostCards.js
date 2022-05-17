@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // Api
-import { apiURL } from '../../lib/apiURL';
-import { getPlaces } from '../../lib/apiCall';
+import { placesUrl } from '../../lib/apiURL';
+import { getAPI } from '../../lib/apiCall';
 // Axios
 const axios = require('axios').default;
 // Formik
@@ -86,7 +86,7 @@ function PostCards({places, headers}) {
     }
 
     try {
-      const response = await axios.post(apiURL, values, headers);
+      const response = await axios.post(placesUrl, values, headers);
       console.log(response);
     } catch (error) {
       setErrors(error);
@@ -280,7 +280,7 @@ export const getServerSideProps = async (ctx) => {
     }
   }
    
-  const res = await fetch(apiURL);
+  const res = await getAPI(placesUrl);
   const data2 = await res.json();
 
   return {

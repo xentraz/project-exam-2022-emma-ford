@@ -19,7 +19,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 
-function StaysSidebar() {
+function StaysSidebar(
+  {places}
+) {
   // Price Slider
   function valuetext(value) {
     return `$ ${value}`;
@@ -104,7 +106,15 @@ function StaysSidebar() {
   const theme = useTheme();
   const [selectAmenities, setSelectAmenities] = useState(initialSelected);
 
-  const handleChange3 = (event) => {
+  // Filter
+  function filterPlaces(places) {
+    return places.filter(
+      (place) =>
+        place.Name.toLowerCase().indexOf(query.toLocaleLowerCase()) > -1
+    );
+  }
+
+  const handleSelectChange = (event) => {
     const {
       target: { value },
     } = event;
@@ -112,10 +122,15 @@ function StaysSidebar() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+
+    console.log(selectAmenities);
   };
 
   return (
     <>
+    <div className="staysHeading">
+      <h2>Places to stay</h2>
+    </div>
       <div className="staysSidebar">
         <div className="staysSidebar-price">
           <p className="sidebarTitle">Price</p>
@@ -156,13 +171,13 @@ function StaysSidebar() {
         </div>
         <div className="staysSidebar-amenities">
           <p className="sidebarTitle">Amenities</p>
-        <FormControl sx={{ m: 1, width: 300 }}>
+          <FormControl sx={{ m: 1, width: 300 }}>
             <Select
               labelId="demo-multiple-chip-label"
               id="demo-multiple-chip"
               multiple
               value={selectAmenities}
-              onChange={handleChange3}
+              onChange={handleSelectChange}
               input={<Input id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => (
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>

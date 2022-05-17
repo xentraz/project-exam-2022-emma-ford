@@ -8,7 +8,7 @@ import { ThemeProvider } from 'next-themes';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 // Api
-import { apiURL } from '../lib/apiURL';
+import { placesUrl } from '../lib/apiURL';
 
 function MyApp({ Component, pageProps }) {
   return (

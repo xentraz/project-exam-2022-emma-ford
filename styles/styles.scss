@@ -22,11 +22,11 @@
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
-  .staysContainer-cards {
+  .staysCard-cards {
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
 
-  .staysContainer-modal-content {
+  .staysCard-modal-content {
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
 
@@ -108,7 +108,7 @@
 // Stays
 @import './partials/staysHero';
 @import './partials/staysSidebar';
-@import './partials/staysHeading';
+@import './partials/staysHeader';
 @import './partials/staysCards';
 
 // Stays Details

@@ -2,14 +2,14 @@ import React from 'react';
 // Axios
 const axios = require('axios').default;
 // API
-import { apiURL } from '../../lib/apiURL';
+import { placesUrl } from '../../lib/apiURL';
 // Material UI Icons
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
 // API
 export const getStaticProps = async () => {
-  const res = await fetch(apiURL);
+  const res = await getAPI(placesUrl);
   const data = await res.json();
 
   return {

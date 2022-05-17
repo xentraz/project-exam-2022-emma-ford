@@ -23,4 +23,21 @@
     letter-spacing: 3px;
     cursor: pointer;
   }
+
+  @media (max-width: 525px) {
+    width: 50px;
+  }
+
+  @media (max-width: 350px) {
+    width: 25px;
+
+    & p {
+      font-size: 0.8rem;
+    }
+    
+    & svg {
+      font-size: 1rem;
+    }
+  }
 }
+

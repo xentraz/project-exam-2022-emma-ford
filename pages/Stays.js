@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 // Components
-import Navigation from '../components/Navigation/Navigation';
+import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import StaysHero from '../components/HeroStays/StaysHero';
-import StaysSidebar from '../components/StaysSidebar/StaysSidebar';
-import StaysHeading from '../components/StaysHeading/StaysHeading';
-import StaysCards from '../components/StaysCards/StaysCards';
+import Search from '../components/Search/Search';
 // Axios
 const axios = require('axios').default;
+// API
+import { placesUrl } from '../lib/apiURL';
+import { getPlaces } from '../lib/apiCall';
+// Query String
+import { stringify } from 'query-string';
 
 // API
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:1337/places");
+  const res = await fetch(placesUrl);
   const data = await res.json();
 
   return {
@@ -21,8 +24,25 @@ export const getStaticProps = async () => {
 };
 
 function Stay({places}) {
-  console.log(places);
-  
+  // Search 
+  const [searchValue, setSearchValue] = useState(null);
+  const [filteredPlaces, setFilteredPlaces] = useState(places);
+
+  function handleOnSearch(elm) {
+    console.log('clicked', elm);
+
+    let queryString = stringify(elm);
+
+    console.log(queryString);
+
+    getSortedPlaces(queryString);
+  }
+
+  async function getSortedPlaces(params) {
+    const resultPlaces = await fetch(placesUrl + '?' + params);
+    setFilteredPlaces(resultPlaces);
+  }
+
   return (
     <>
      <Head>
@@ -32,52 +52,21 @@ function Stay({places}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Navigation
+        {/* <Nav
         id={id}
         /> */}
-        <Navigation/>
+        <Nav/>
         <Sidebar/>
       </header>
       <main>
         <StaysHero/>
-        <StaysHeading/>
-        <StaysSidebar/>
-        <div className="staysCards">
-          {places.map((
-            {
-              id, 
-              Name, 
-              Price, 
-              About, 
-              Location, 
-              Ratings,
-              ImgArray,
-              Size,
-              Amenities,
-              RoomDetails,
-              Type,
-            }
-          ) =>  {
-            return (
-            <StaysCards 
-              id={id}
-              key={id}
-              Name={Name}
-              About={About}
-              Price={Price}
-              Location={Location}
-              Ratings={Ratings}
-              ImgArray={ImgArray}
-              Size={Size}
-              Amenities={Amenities}
-              RoomDetails={RoomDetails}
-              Type={Type}
-            />
-            );
-            }
-          )}
-        </div>
-        {/* <StaysCards/> */}
+        <Search
+         places={filteredPlaces}
+         searchValue={searchValue}
+         onChange={(val) => setSearchValue(val)}
+         prompt='Select a place to stay...'
+         handleOnSearch={handleOnSearch}
+        />
       </main>
 
       <footer>

@@ -1,0 +1,10 @@
+.staysHeader {
+  grid-column: 1/3;
+  grid-row: 1/1;
+
+  // Responsive
+  @media (max-width: 1061px) {
+    grid-column: 1/3;
+    grid-row: 1/1;
+  }
+}

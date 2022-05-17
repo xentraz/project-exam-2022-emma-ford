@@ -4,7 +4,7 @@ const axios = require('axios').default;
 
 // API
 export const getStaticProps = async () => {
-  const res = await fetch('http://localhost:1337/enquires');
+  const res = await getAPI('http://localhost:1337/enquires');
   const data = await res.json();
 
   return {

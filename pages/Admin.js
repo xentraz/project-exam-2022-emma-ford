@@ -2,12 +2,12 @@ import React, { useState} from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 // Components
-import Navigation from '../components/Navigation/Navigation';
+import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import OverviewTable from '../components/OverviewTable/OverviewTable';
 import EnquiriesTable from '../components/EnquiriesTable/EnquiriesTable';
 // API
-import { apiURL } from '../lib/apiURL';
+import { placesUrl } from '../lib/apiURL';
 // Nookies
 import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 // Material UI Tabs
@@ -109,10 +109,10 @@ const Admin = ({user, places, enquiries, messages, JWT }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Navigation
+        {/* <Nav
         id={id}
         /> */}
-        <Navigation/>
+        <Nav/>
         <Sidebar/>
       </header>
       <main>
@@ -255,7 +255,7 @@ export const getServerSideProps = async (ctx) => {
             `Bearer ${cookies.jwt}`,
           },
       });
-      const placesData = await axios.get(apiURL);
+      const placesData = await axios.get(placesUrl);
       // const messagesData = await axios.get('http://localhost:1337/messages');
       const enquiriesData = await axios.get('http://localhost:1337/enquires');
 

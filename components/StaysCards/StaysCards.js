@@ -181,15 +181,15 @@ function StaysCards(
 
   return (
     <>
-      <div className="staysContainer-cards">
-        <div className="staysContainer-cards-price">
+      <div className="staysCard-cards">
+        <div className="staysCard-cards-price">
           <p><span>{Price} kr </span>/ night</p>
         </div>
-        <div className="staysContainer-cards-bookmark" onClick={toggleClickIcon}>
+        <div className="staysCard-cards-bookmark" onClick={toggleClickIcon}>
           {clicked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
         </div>
-        <div className="staysContainer-cards-content" onClick={handleOpen}>
-          <div className="staysContainer-cards-content-imgs">
+        <div className="staysCard-cards-content" onClick={handleOpen}>
+          <div className="staysCard-cards-content-imgs">
           {slicedImgs2.map((elm) => {     
             return (
               <div
@@ -210,12 +210,12 @@ function StaysCards(
             );
           })}
           </div>
-          <div className="staysContainer-cards-content-info">
+          <div className="staysCard-cards-content-info">
             <p className="flexCardtitle">{Name}</p>
             <p><LocationOnIcon/>{Location}</p>
             <p><StarIcon/>{ratingAverage}</p>
             <p>{Breakfast ? <span><RestaurantIcon/>Breakfast included</span> : <span><NoMealsIcon/>Breakfast not included</span>}</p>
-            <div className="staysContainer-cards-content-info-icons">
+            <div className="staysCard-cards-content-info-icons">
               <KingBedIcon/> <p>1</p>
               <ShowerIcon/> <p> 1</p>
               <p>{Wifi ? <span><SignalWifiStatusbar4BarIcon/> WiFi</span> : <span><SignalWifiOffIcon/> No WiFi</span>}</p>
@@ -229,13 +229,13 @@ function StaysCards(
       aria-labelledby="modal-modal-title NEEDED"
       aria-describedby="modal-modal-description NEEDED"
       disableEnforceFocus
-      className="staysContainer-modal"
+      className="staysCard-modal"
       >
-        <Box className="staysContainer-modal-content" id="modal-modal-description NEEDED">
-          <p className="flexCardtitle large staysContainer-modal-content-header" id="modal-modal-title NEEDED">
+        <Box className="staysCard-modal-content" id="modal-modal-description NEEDED">
+          <p className="flexCardtitle large staysCard-modal-content-header" id="modal-modal-title NEEDED">
             {Name}
           </p>
-          <div className="staysContainer-modal-content-images">
+          <div className="staysCard-modal-content-images">
             {slicedImgs.map((elm) => {     
               return (
                 <div
@@ -254,7 +254,7 @@ function StaysCards(
               );
             })}
           </div>
-          <div className="staysContainer-modal-content-info">
+          <div className="staysCard-modal-content-info">
             <TabsUnstyled defaultValue={0}>
               <TabsList>
                 <Tab className="tabTitle">Overview</Tab>
@@ -343,7 +343,7 @@ function StaysCards(
               </TabPanel>
             </TabsUnstyled>
           </div>
-          <div className="staysContainer-modal-content-button">
+          <div className="staysCard-modal-content-button">
             <a className="button" href={`/StaysDetails/${id}`}><span>{Price} kr</span> / night</a>
           </div>
         </Box>
