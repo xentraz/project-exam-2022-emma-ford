@@ -4,7 +4,7 @@ import { PlayDisabledOutlined } from '@mui/icons-material';
 // Price Slider
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
-// Checkbox
+// Checkboxes
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';

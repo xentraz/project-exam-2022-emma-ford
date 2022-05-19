@@ -15,6 +15,7 @@ module.exports = {
       'blackOpacity': '#0000005a',
       'white': '#ffffff',
       'whiteOpacity': '#ffffff5a',
+      'transparent': 'transparent',
     },
   },
   plugins: [],

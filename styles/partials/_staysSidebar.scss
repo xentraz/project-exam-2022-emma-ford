@@ -133,8 +133,15 @@
 }
 
 // Type of place
-.css-ahj2mt-MuiTypography-root {
-  color: $dark-mode;
+.staysSidebar-type {
+
+  & .css-ahj2mt-MuiTypography-root {
+    color: $dark-mode;
+  }
+
+  & .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    color: $dark-mode;
+  }
 }
 
 // Rating 
@@ -146,10 +153,6 @@
     height: 2.5em;
     width: 2.5em;
   }
-}
-
-.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
-  color: $dark-mode;
 }
 
 .css-iljtu2-MuiRating-root {

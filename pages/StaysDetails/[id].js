@@ -13,6 +13,10 @@ import { Box } from '@mui/system';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
+// Checkbox
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 // Icons
 import CloseIcon from '@mui/icons-material/Close';
 import ShareIcon from '@mui/icons-material/Share';
@@ -272,11 +276,33 @@ function StaysDetail(
                 <div className="details-placeInfo-container-sidebar-date">
                   <div className="details-placeInfo-container-sidebar-date-box">
                     <CalendarTodayIcon/>
-                    
+                    {/* {DATE FROM INOUT HERE} */}
+                    <p>June 1. - April 5. 22 (4 Nights)</p>
                   </div>
                 </div>
-                <a href={`/StaysBooking/${id}`} className="button">Book now</a>
-                <p>You will not be charged yet</p>
+                <div className="details-placeInfo-container-sidebar-extras">
+                  <p className="bold">Add extras</p>
+                  <div className="details-placeInfo-container-sidebar-extras-checkboxes">
+                    <FormGroup className="details-MUIForm">
+                      <FormControlLabel control={<Checkbox className="details-MUICheckbox" />} label="Breakfast a day pp." />
+                      <FormControlLabel control={<Checkbox className="details-MUICheckbox" />} label="Parking a day" />
+                      <FormControlLabel control={<Checkbox className="details-MUICheckbox" />} label="Spa an hour per person" />
+                      <FormControlLabel control={<Checkbox className="details-MUICheckbox" />} label="Iron and ironing board" />
+                      <FormControlLabel control={<Checkbox className="details-MUICheckbox" />} label="Baby crib" />
+                    </FormGroup>
+                    <div className="formPrices">
+                      <p>300kr</p>
+                      <p>120kr</p>
+                      <p>300kr</p>
+                      <p className="grey">Free</p>
+                      <p className="grey">Free</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="details-placeInfo-container-sidebar-button">
+                  <a href={`/StaysBooking/${id}`} className="button">Book now</a>
+                  <p className="grey fine">You will not be charged yet</p>
+                </div>
               </div>
             </div>
             </div>
@@ -306,7 +332,7 @@ function StaysDetail(
                 <div>{Breakfast ? <span className="iconsBox"><RestaurantIcon/> Breakfast</span> : ''}</div>
                 <div>{Cleaning ? <span className="iconsBox"><CleaningServicesIcon/> Cleaning</span> : ''}</div>
                 <div>{CoffeeMachine ? <span className="iconsBox"><CoffeeMakerIcon/> Coffee Machine</span> : ''}</div>
-                <didv>{Dishwasher ? <span className="iconsBox"><WashIcon/> Dishwasher</span> : ''}</didv>
+                <div>{Dishwasher ? <span className="iconsBox"><WashIcon/> Dishwasher</span> : ''}</div>
                 <div>{Dryer ? <span className="iconsBox"><LocalLaundryServiceIcon/> Dryer</span> : ''}</div>
                 <div>{Fireplace ? <span className="iconsBox"><FireplaceIcon/> Fireplace</span> : ''}</div>
                 <div>{Gym ? <span className="iconsBox"><FitnessCenterIcon/> Gym</span> : ''}</div>

@@ -18,7 +18,9 @@
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
-  .sidebar {
+  .sidebar, 
+  .sidebar > .MuiSvgIcon-root,
+  .sidebar-themeChanger > .MuiSvgIcon-root {
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
@@ -34,10 +36,10 @@
     @apply text-black dark:text-white;
   }
 
-  .staysDetails-heading-icons-1 {
+  .details-heading-icons-1 {
     @apply bg-lightGrey dark:bg-darkGrey;
   }
-  .staysDetails-heading-icons-2 {
+  .details-heading-icons-2 {
     @apply bg-lightGrey dark:bg-darkGrey;
   }
 
@@ -55,6 +57,15 @@
 
   .details-placeInfo-container-sidebar-date-box {
     @apply bg-light text-black dark:bg-dark dark:text-white;
+  }
+
+
+  .details-MUICheckbox, .Mui-checked, .PrivateSwitchBase-input {
+    @apply bg-transparent text-black dark:bg-transparent dark:text-white;
+  }
+
+  .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+    @apply bg-transparent text-black dark:bg-transparent dark:text-white;
   }
 
   .bookingBoxes-summary, .bookingBoxes-info {
@@ -83,6 +94,10 @@
   
   .grey {
     @apply text-blackOpacity dark:text-whiteOpacity;
+  }
+
+  .css-ahj2mt-MuiTypography-root  {
+    @apply text-black dark:text-white;
   }
 
   .overviewTable-table {
