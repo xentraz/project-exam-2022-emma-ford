@@ -52,11 +52,20 @@
   width: calc(90vw - 100px);
   height: 350px;
   overflow: hidden !important;
+
+  @media (max-width: 525px) {
+    padding: 0 !important;
+    width: 100vw;
+    margin-right: 0 !important;
+  }
+
+  @media (max-width: 350px) {
+    margin-right: 0 !important;
+  }
 }
 
 .swiper-slide {
   height: 100%;
-  width: 310px;
   text-align: center;
   font-size: 18px;
   background: transparent;

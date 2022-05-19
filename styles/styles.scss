@@ -49,8 +49,12 @@
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
 
-  .staysDetails-details-container-sidebar {
+  .details-placeInfo-container-sidebar {
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
+
+  .details-placeInfo-container-sidebar-date-box {
+    @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
   .bookingBoxes-summary, .bookingBoxes-info {
@@ -61,7 +65,7 @@
     @apply text-black dark:text-white;
   }
 
-  input:focus, select:focus, textarea:focus {
+  .regularInput:focus, .regularInput:focus, .regularInput:focus {
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
 
@@ -86,6 +90,32 @@
   }
 
   .tabTitle {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
+
+  .BookingFormInput {
+    @apply bg-light text-black dark:bg-dark dark:text-white;
+  }
+
+  // React Select
+  .my-react-select-container,
+  .my-react-select__control,
+  .my-react-select__value-container,
+  .my-react-select__value-container--has-value,
+  .my-react-select__single-value,
+  .my-react-select__option--is-disabled,
+  .my-react-select__menu-list,
+  .my-react-select__menu-list--is-focused,
+  .my-react-select__menu-list--is-selected,
+  .my-react-select__menu {
+    @apply bg-light text-black dark:bg-dark dark:text-white;
+  }
+
+  .my-react-select__value-container--is-focused,
+  .my-react-select__value-container--is-selected,
+  .my-react-select__option,
+  .my-react-select__option--is-selected,
+  .my-react-select__option--is-focused{
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
 }

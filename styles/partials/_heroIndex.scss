@@ -1,6 +1,5 @@
 .heroIndex {
-  height: 87.2vh;
-  width: calc(100% + 100px);
+  min-height: 87.2vh;
   // BG Img
   background-position: center;
   background-size: cover;
@@ -44,7 +43,13 @@
     align-items: center;
 
     &-title {
-      text-shadow: $box-shadow;
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
 
     &-substrate {
@@ -56,15 +61,28 @@
       text-align: center;
       background-color: $primary-color;
       padding: 10px 15px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media (max-width: 1110px) {
+        font-size: 2rem;
+      }
+
+      @media (max-width: 1110px) {
+        font-size: 1.5rem;
+      }
     }
   }
 
   &-content {
     grid-column: 2 / 2;
     grid-row: 1 / 2;
-    height: 55vh;
-    width: 75%;
+    height: fit-content;
+    width: 85%;
     margin: auto 25% auto 0;
+    padding: 25px;
 
     // Glassmorphism (Mixin?)
     background: rgba(255, 255, 255, 0.15);
@@ -72,6 +90,43 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 3px;
+
+    & .bookingForm-wrapper {
+      height: 100%;
+      width: 100%;
+
+      &-roomSelect, &-guestSelect {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      &-button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    &-text {
+      grid-column: 1/1;
+      grid-row: 1/1;
+    }
+
+    &-content {
+      padding: 10px 25px;
+      grid-column: 1/1;
+      grid-row: 2/2;
+
+      width: 80%;
+      margin: 0 auto 25px;
+    }
   }
 }
 

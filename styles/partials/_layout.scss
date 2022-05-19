@@ -45,6 +45,17 @@ h4 {
 h1 {
   font-size: 4rem;
   font-weight: 700;
+
+  @media (max-width: 1110px) {
+    font-size: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 980px) {
+    font-size: 3.3rem;
+  }
 }
 
 h2,
@@ -84,6 +95,10 @@ input, select, textarea {
   width: 100%;
   border: 1px solid $primary-color;
   padding: 5px;
+}
+
+.bookingFormInput {
+  border: none;
 }
 
 textarea {
@@ -166,19 +181,31 @@ button, .button {
   }
 }
 
+// React Select
+.my-react-select-container, 
+.my-react-select__control {
+  height: 50px;
+  border: none;
+  border-radius: 3px;
+}
 
-// Glassmorphism Cards
-// .white-text {
-//   font-family: $secondary-font;
-//   font-size: 1rem;
-//   font-weight: 600;
-//   color: $white;
-// }
+.my-react-select__value-container,
+.my-react-select__input-container, 
+.my-react-select__placeholder-container, 
+.my-react-select__indicators {
+  height: 50px;
+  border: none;
+  padding: none;
+  opacity: 1;
+  border-radius: 3px 0 0 3px;
+}
 
-// .white-heading {
-//   font-family: $secondary-font;
-//   font-size: 2.5rem;
-//   font-weight: 600;
-//   color: $white;
-//   box-shadow: $box-shadow;
-// }
+.my-react-select__indicators {
+  background-color: $primary-color !important;
+  border-radius: 0 3px 3px 0;
+  box-shadow: none;
+}
+
+.my-react-select__indicator-separator {
+  display: none;
+}

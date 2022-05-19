@@ -52,13 +52,13 @@ const LoginComponent = () => {
         {({ errors, touched }) => (
           <Form>
             <label htmlFor="identifier">Email:</label>
-              <Field type="text" name="identifier" />
+              <Field type="text" name="identifier" className="regularInput"/>
               {errors.identifier && touched.identifier ? (
               <p className="error">{errors.identifier}</p>
               ) : <p className="filler"></p>}
             <br />
             <label htmlFor="password">Password</label>
-              <Field type="password" name="password"/>
+              <Field type="password" name="password"  className="regularInput"/>
               {errors.password && touched.password ? (
               <p className="error">{errors.password}</p>
               ) : <p className="filler"></p>}

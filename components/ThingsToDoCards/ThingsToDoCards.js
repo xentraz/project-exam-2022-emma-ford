@@ -1,15 +1,4 @@
-import React, { useRef, useCallback } from "react";
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-// import required modules
-import { Pagination, Navigation } from "swiper";
-// Material UI
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-// API
-import { thingsToDoUrl } from '../../lib/apiURL';
-// Nookies
-import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
+import React from "react";
 
 function ThingsToDoCards({
   id,

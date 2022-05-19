@@ -1,5 +1,5 @@
 // React 
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState } from "react";
 // Headless
 import Head from 'next/head'
 // Components
@@ -7,7 +7,7 @@ import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import HeroIndex from '../components/HeroIndex/HeroIndex';
 import PopularCards from '../components/PopularCards/PopularCards';
-import ThingsToDoCards from '../components/ThingsToDo/ThingsToDo';
+import ThingsToDoCards from '../components/ThingsToDoCards/ThingsToDoCards';
 // API 
 import { placesUrl, thingsToDoUrl } from '../lib/apiURL';
 // Import Swiper React components
@@ -65,6 +65,21 @@ export default function Home({places, thingsToDo}) {
   }, []);
 
   console.log(thingsToDo);
+
+  // Responsive Slider
+  const [slidesPerView, setSlidesPerView] = useState('');
+
+  const handleResize = () => {
+    if (window.innerWidth > 1000) {
+      setSlidesPerView(3);
+    } else if (window.innerWidth < 1000) {
+      setSlidesPerView(2);
+    } else if (window.innerWidth < 600) {
+      setSlidesPerView(1);
+    }
+  }
+
+  console.log(slidesPerView);
 
   return (
     <>
@@ -132,16 +147,31 @@ export default function Home({places, thingsToDo}) {
           </div>
           <Swiper 
             ref={sliderRef}
-            slidesPerView={3}
-            spaceBetween={20}
-            slidesPerGroup={3}
-            loop={true}
-            loopFillGroupWithBlank={true}
+            slidesPerView={1}
+            spaceBetween={10}
             pagination={{
               clickable: true,
             }}
-            updateOnWindowResize
+            breakpoints={{
+              700: {
+                slidesPerView: 1,
+                spaceBetween: 30,
+              },
+              1000: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1100: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1400: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+            }}
             modules={[Pagination, Navigation]}
+            loop={true}
             className="mySwiper"
             >
               {thingsToDo.map((

@@ -9,9 +9,6 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 // Modal
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Box } from '@mui/system';
-// Date Range Picker
-// import { DateRange } from 'react-date-range';
-// import { Calendar } from 'react-date-range';
 // Chips
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -59,6 +56,7 @@ import KitchenIcon from '@mui/icons-material/Kitchen';
 import SpaIcon from '@mui/icons-material/Spa';
 import ConnectedTvIcon from '@mui/icons-material/ConnectedTv';
 import EventIcon from '@mui/icons-material/Event';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 
 export const getStaticPaths = async () => {
   const placesArray = await getAPI(placesUrl);
@@ -164,19 +162,7 @@ function StaysDetail(
   
   const newStars = sumObjectsByKey(slicedRatings[0], slicedRatings[1]);
   const ratingAverage = (newStars.Star / 2);
-
-  // Date Range Picker
-  // const newDate = new window.Date();
-
-  // const [state, setState] = useState([
-  //   {
-  //     startDate: newDate,
-  //     endDate: null,
-  //     key: 'selection'
-  //   }
-  // ]);
-  // https://hypeserver.github.io/react-date-range/#daterange
-
+  
   // Room Details
   const newCheckIn = RoomDetails.CheckIn.slice(0, 5);
   const newCheckOut = RoomDetails.CheckOut.slice(0, 5);
@@ -197,19 +183,19 @@ function StaysDetail(
         <Sidebar/>
       </header>
       <main>
-        <div className="staysDetails">
-          <div className="staysDetails-heading">
+        <div className="details">
+          <div className="details-heading">
             <h1>{Name}</h1>
-            <div className="staysDetails-heading-icons">
-              <div className="staysDetails-heading-icons-1">
+            <div className="details-heading-icons">
+              <div className="details-heading-icons-1">
                 <ShareIcon/>
               </div>
-              <div className="staysDetails-heading-icons-2" onClick={toggleClickIcon}>
+              <div className="details-heading-icons-2" onClick={toggleClickIcon}>
                 {clicked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
               </div>
             </div>
           </div>
-          <div className="staysDetails-images" onClick={handleOpen}>
+          <div className="details-images" onClick={handleOpen}>
             {ImgArray.map((elm) => {     
                 return (
                   <div
@@ -237,10 +223,10 @@ function StaysDetail(
             aria-labelledby="modal-modal-title NEEDED"
             aria-describedby="modal-modal-description NEEDED"
             disableEnforceFocus
-            className="staysDetails-modal"
+            className="details-modal"
           >
-            <Box className="staysDetails-modal-content" id="modal-modal-description NEEDED">
-            <CloseIcon className="staysDetails-modal-content-close" onClick={handleClose}/>
+            <Box className="details-modal-content" id="modal-modal-description NEEDED">
+            <CloseIcon className="details-modal-content-close" onClick={handleClose}/>
               <div
                 key={modalData?.id}
                 style={{
@@ -256,11 +242,11 @@ function StaysDetail(
               />
             </Box>
           </ModalUnstyled>
-          <div className="staysDetails-details">
+          <div className="details-placeInfo">
             <h2>Details</h2>
-            <div className="staysDetails-details-container">
-              <div className="staysDetails-details-container-info">
-                <div className="staysDetails-details-container-info-icons">
+            <div className="details-placeInfo-container">
+              <div className="details-placeInfo-container-info">
+                <div className="details-placeInfo-container-info-icons">
                   <p className="box">
                     {Type.Hotel ? <span><HotelIcon/> Hotel</span> : ''}
                     {Type.Hostel ? <span><DomainIcon/> Hostel</span> : ''}
@@ -272,99 +258,103 @@ function StaysDetail(
                   <p className="box"><SquareFootIcon/> {Size} m²</p>
                   <p className="box"><KingBedIcon/> {Beds} Bed(s)</p>
                 </div>
-                <div className="staysDetails-details-container-info-about">
+                <div className="details-placeInfo-container-info-about">
                   <p>{About}</p>
                 </div>
-                <div className="staysDetails-details-container-info-details">
-                  <h2>Room Details</h2>
-                  <div className="staysDetails-details-container-info-details-icons">
-                    <p><AccessAlarmIcon/>Check In: {newCheckIn}</p>
-                    <p><AlarmOffIcon/>Check Out: {newCheckOut}</p>
-                    <p>{Parties ? <span><CelebrationIcon/>Parties Allowed</span> : <span><BlockIcon/> No Parties</span>}</p>
-                    <p>{Pets ? <span><PetsIcon/>Pets Allowed</span> : <span><BlockIcon/> No Pets</span>}</p>
-                    <p>{Smoking ? <span><SmokingRoomsIcon/>Smoking Allowed</span> : <span><SmokeFreeIcon/> No Smoking</span>}</p>
-                    <p>{Rules ? <span>Rules: {Rules}</span> : ''}</p>
-                  </div>
-                  <div className="staysDetails-details-container-info-details-cancellation">
-                    <p className="flexCardtitle">Cancellation Policy</p>
-                    <p>Free cancellation up to 24h before arrival.</p>
-                    <p>If you cancel within 24 hours of your trip: Partial refund: Get back 50% of every night but the first one. No refund of the first night or the service fee.</p>
-                    <p>If you cancel within an hour of your trip, you will be charged 50% of your trip.</p>
-                  </div>
-                </div>
               </div>
-              <div className="staysDetails-details-container-sidebar">
-                <div className="staysDetails-details-container-sidebar-rating">
+              <div className="details-placeInfo-container-sidebar">
+                <div className="details-placeInfo-container-sidebar-rating">
                   <p><StarIcon/> {ratingAverage}</p>
                 </div>
-                <div className="staysDetails-details-container-sidebar-heading">
+                <div className="details-placeInfo-container-sidebar-heading">
                   <p><span>{Price}</span> / Night</p>
                 </div>
-                <div className="staysDetails-details-container-sidebar-date">
-                  <p>A date thing that works here</p>
+                <div className="details-placeInfo-container-sidebar-date">
+                  <div className="details-placeInfo-container-sidebar-date-box">
+                    <CalendarTodayIcon/>
+                    
+                  </div>
                 </div>
-                <a href={`/StaysBooking/${id}`} className="button"></a>
+                <a href={`/StaysBooking/${id}`} className="button">Book now</a>
+                <p>You will not be charged yet</p>
               </div>
             </div>
-            <div className="staysDetails-details-amenities">
-              <div className="staysDetails-details-amenities-heading">
+            </div>
+            <div className="details-details">
+              <h2>Room Details</h2>
+              <div className="details-details-icons">
+                <p><AccessAlarmIcon/>Check In: {newCheckIn}</p>
+                <p><AlarmOffIcon/>Check Out: {newCheckOut}</p>
+                <p>{Parties ? <span><CelebrationIcon/>Parties Allowed</span> : <span><BlockIcon/> No Parties</span>}</p>
+                <p>{Pets ? <span><PetsIcon/>Pets Allowed</span> : <span><BlockIcon/> No Pets</span>}</p>
+                <p>{Smoking ? <span><SmokingRoomsIcon/>Smoking Allowed</span> : <span><SmokeFreeIcon/> No Smoking</span>}</p>
+                <p>{Rules ? <span>Rules: {Rules}</span> : ''}</p>
+              </div>
+              <div className="details-details-cancellation">
+                <p className="flexCardtitle">Cancellation Policy</p>
+                <p>Free cancellation up to 24h before arrival.</p>
+                <p>If you cancel within 24 hours of your trip: Partial refund: Get back 50% of every night but the first one. No refund of the first night or the service fee.</p>
+                <p>If you cancel within an hour of your trip, you will be charged 50% of your trip.</p>
+              </div>
+            </div>
+            <div className="details-amenities">
+              <div className="details-amenities-heading">
                 <h2>Amenities</h2>
               </div>
-              <div className="staysDetails-details-amenities-icons">
-                <p>{Bathtub ? <span className="iconsBox"><BathtubIcon/> Bathtub</span> : ''}</p>
-                <p>{Breakfast ? <span className="iconsBox"><RestaurantIcon/> Breakfast</span> : ''}</p>
-                <p>{Cleaning ? <span className="iconsBox"><CleaningServicesIcon/> Cleaning</span> : ''}</p>
-                <p>{CoffeeMachine ? <span className="iconsBox"><CoffeeMakerIcon/> Coffee Machine</span> : ''}</p>
-                <p>{Dishwasher ? <span className="iconsBox"><WashIcon/> Dishwasher</span> : ''}</p>
-                <p>{Dryer ? <span className="iconsBox"><LocalLaundryServiceIcon/> Dryer</span> : ''}</p>
-                <p>{Fireplace ? <span className="iconsBox"><FireplaceIcon/> Fireplace</span> : ''}</p>
-                <p>{Gym ? <span className="iconsBox"><FitnessCenterIcon/> Gym</span> : ''}</p>
-                <p>{Heating ? <span className="iconsBox"><HvacIcon/> Heating</span> : ''}</p>
-                <p>{Iron ? <span className="iconsBox"><IronIcon/> Iron</span> : ''}</p>
-                <p>{Laundry ? <span className="iconsBox"><LocalLaundryServiceIcon/> Laundry</span> : ''}</p>
-                <p>{Lift ? <span className="iconsBox"><ElevatorIcon/> Lift</span> : ''}</p>
-                <p>{Microwave ? <span className="iconsBox"><MicrowaveIcon/> Microwave</span> : ''}</p>
-                <p>{Parking ? <span className="iconsBox"><LocalParkingIcon/> Parking</span> : ''}</p>
-                <p>{Pool ? <span className="iconsBox"><PoolIcon/> Pool</span> : ''}</p>
-                <p>{Refrigerator ? <span className="iconsBox"><KitchenIcon/> Refrigerator</span> : ''}</p>
-                <p>{Spa ? <span className="iconsBox"><SpaIcon/> Spa</span> : ''}</p>
-                <p>{TV ? <span className="iconsBox"><ConnectedTvIcon/> TV</span> : ''}</p>
-                <p>{Washer ? <span className="iconsBox"><LocalLaundryServiceIcon/> Washer</span> : ''}</p>
-                <p>{Wifi ? <span className="iconsBox"><SignalWifiStatusbar4BarIcon/> Wifi</span> : ''}</p>
+              <div className="details-amenities-icons">
+                <div>{Bathtub ? <span className="iconsBox"><BathtubIcon/> Bathtub</span> : ''}</div>
+                <div>{Breakfast ? <span className="iconsBox"><RestaurantIcon/> Breakfast</span> : ''}</div>
+                <div>{Cleaning ? <span className="iconsBox"><CleaningServicesIcon/> Cleaning</span> : ''}</div>
+                <div>{CoffeeMachine ? <span className="iconsBox"><CoffeeMakerIcon/> Coffee Machine</span> : ''}</div>
+                <didv>{Dishwasher ? <span className="iconsBox"><WashIcon/> Dishwasher</span> : ''}</didv>
+                <div>{Dryer ? <span className="iconsBox"><LocalLaundryServiceIcon/> Dryer</span> : ''}</div>
+                <div>{Fireplace ? <span className="iconsBox"><FireplaceIcon/> Fireplace</span> : ''}</div>
+                <div>{Gym ? <span className="iconsBox"><FitnessCenterIcon/> Gym</span> : ''}</div>
+                <div>{Heating ? <span className="iconsBox"><HvacIcon/> Heating</span> : ''}</div>
+                <div>{Iron ? <span className="iconsBox"><IronIcon/> Iron</span> : ''}</div>
+                <div>{Laundry ? <span className="iconsBox"><LocalLaundryServiceIcon/> Laundry</span> : ''}</div>
+                <div>{Lift ? <span className="iconsBox"><ElevatorIcon/> Lift</span> : ''}</div>
+                <div>{Microwave ? <span className="iconsBox"><MicrowaveIcon/> Microwave</span> : ''}</div>
+                <div>{Parking ? <span className="iconsBox"><LocalParkingIcon/> Parking</span> : ''}</div>
+                <div>{Pool ? <span className="iconsBox"><PoolIcon/> Pool</span> : ''}</div>
+                <div>{Refrigerator ? <span className="iconsBox"><KitchenIcon/> Refrigerator</span> : ''}</div>
+                <div>{Spa ? <span className="iconsBox"><SpaIcon/> Spa</span> : ''}</div>
+                <div>{TV ? <span className="iconsBox"><ConnectedTvIcon/> TV</span> : ''}</div>
+                <div>{Washer ? <span className="iconsBox"><LocalLaundryServiceIcon/> Washer</span> : ''}</div>
+                <div>{Wifi ? <span className="iconsBox"><SignalWifiStatusbar4BarIcon/> Wifi</span> : ''}</div>
               </div>
             </div>
-            <div className="staysDetails-details-reviews">
+            <div className="details-reviews">
               <h2>Reviews <span>({ratingAverage}/5)</span></h2>
-              <div className="staysDetails-details-reviews-content">
+              <div className="details-reviews-content">
                 {Ratings.map((elm) => {
                   const newName = elm.RatingsName;
                   console.log(newName);
                   const ratingsAvatar = newName.slice(0,1);
                   console.log(ratingsAvatar);
-                      return (
-                        <div key={id} className="staysDetails-details-reviews-content-info">
-                        <p key={id} className="star">
-                          {
-                            elm.Star === 1 ? <span><StarIcon/></span> 
-                            : elm.Star === 2 ? <span><StarIcon/><StarIcon/></span> 
-                            : elm.Star === 3 ? <span><StarIcon/><StarIcon/><StarIcon/></span> 
-                            : elm.Star === 4 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span> 
-                            : elm.Star === 5 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span>
-                            : ''
-                          }
-                        </p>
-                        <Stack direction="row" spacing={1} className="avatarChip">
-                          <Chip avatar={<Avatar>{ratingsAvatar}</Avatar>} label={elm.RatingsName} />
-                        </Stack>
-                        <p>{elm.Message}</p>
-                        {/* <p><EventIcon/> {elm.Date}</p> */}
-                      </div>
-                      )
+                    return (
+                    <div key={id} className="details-reviews-content-info">
+                      <p key={id} className="star">
+                        {
+                          elm.Star === 1 ? <span><StarIcon/></span> 
+                          : elm.Star === 2 ? <span><StarIcon/><StarIcon/></span> 
+                          : elm.Star === 3 ? <span><StarIcon/><StarIcon/><StarIcon/></span> 
+                          : elm.Star === 4 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span> 
+                          : elm.Star === 5 ? <span><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon/></span>
+                          : ''
+                        }
+                      </p>
+                      <Stack direction="row" spacing={1} className="avatarChip">
+                        <Chip avatar={<Avatar>{ratingsAvatar}</Avatar>} label={elm.RatingsName} />
+                      </Stack>
+                      <p>{elm.Message}</p>
+                      {/* <p><EventIcon/> {elm.Date}</p> */}
+                    </div>
+                    )
                   })}
               </div>
             </div>
           </div>
-        </div>
       </main> 
     </>
   )

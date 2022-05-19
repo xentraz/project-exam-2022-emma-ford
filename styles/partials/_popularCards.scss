@@ -11,6 +11,10 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 25px 0 50px 0;
+
+    @media (max-width: 955px) {
+      justify-content: center;
+    }
   }
 
   &-card {
@@ -89,6 +93,62 @@
           font-weight: 500;
         }
       }
+
+      @media (max-width: 1070px) {
+        width: 225px;
+      }
+    }
+
+    @media (max-width: 1330px) {
+      height: 300px;
+      width: 300px;
+    }
+
+    @media (max-width: 1250px) {
+      height: 275px;
+      width: 275px;
+    }
+
+    @media (max-width: 1175px) {
+      margin: 20px;
+      height: 250px;
+      width: 250px;
+    }
+
+    @media (max-width: 1070px) {
+      margin: 15px;
+      height: 225px;
+      width: 225px;
+    }
+
+    @media (max-width: 955px) {
+      margin: 25px;
+      height: 275px;
+      width: 275px;
+    }
+
+    @media (max-width: 835px) {
+      margin: 25px;
+      height: 355px;
+      width: 400px;
+    }
+
+    @media (max-width: 650px) {
+      margin: 25px;
+      height: 355px;
+      width: 355px;
+    }
+
+    @media (max-width: 550px) {
+      margin: 25px;
+      height: 300px;
+      width: 300px;
+    }
+
+    @media (max-width: 430px) {
+      margin: 25px;
+      height: 250px;
+      width: 250px;
     }
   }
 }

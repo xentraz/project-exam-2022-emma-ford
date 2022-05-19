@@ -240,32 +240,32 @@ function StaysBooking(
                 <div className="formGroup">
                   <div className="formGroup-left">
                     <label htmlFor="firstName">First Name</label>
-                    <Field name="firstName" placeholder="First name" />
+                    <Field name="firstName" placeholder="First name" className="regularInput" />
                     {errors.firstName && touched.firstName ? (
                       <p className="error">{errors.firstName}</p>
                     ) : <p className="filler"></p>}
 
                     <label htmlFor="lastName">Surname</label>
-                    <Field name="lastName" placeholder="Surname" />
+                    <Field name="lastName" placeholder="Surname"  className="regularInput" />
                     {errors.lastName && touched.lastName ? (
                       <p className="error">{errors.lastName}</p>
                     ) : <p className="filler"></p>}
 
                     <label htmlFor="dateofbirth">Date of Birth (DD-MM-YY)</label>
-                    <Field name="dateofbirth" placeholder="DD-MM-YY" />
+                    <Field name="dateofbirth" placeholder="DD-MM-YY" type="date" className="regularInput"  />
                     {errors.dateofbirth && touched.dateofbirth ? (
                       <p className="error">{errors.dateofbirth}</p>
                     ) : <p className="filler"></p>}
                   </div>
                   <div className="formGroup-right">
                     <label htmlFor="email">E-mail</label>
-                    <Field name="email" placeholder="E-mail address" validate={validateEmail} />
+                    <Field name="email" placeholder="E-mail address"  className="regularInput"  validate={validateEmail} />
                     {errors.email && touched.email ? (
                       <p className="error">{errors.email}</p>
                     ) : <p className="filler"></p>}
                     
                     <label htmlFor="phone">Phone number</label>
-                    <Field name="phone" placeholder="Phone number" />
+                    <Field name="phone" placeholder="Phone number"  className="regularInput" />
                     {errors.phone && touched.phone ? (
                       <p className="error">{errors.phone}</p>
                     ) : <p className="filler"></p>} 
@@ -286,7 +286,7 @@ function StaysBooking(
                   </div>
                   <div className="formGroup-bottom">
                   <label htmlFor="message">Enquiry message</label>
-                    <Field as="textarea" name="message" placeholder="Write us a message..." />
+                    <Field as="textarea" name="message" placeholder="Write us a message..."  className="regularInput" />
                     {errors.message && touched.message ? (
                       <p className="error">{errors.message}</p>
                     ) : <p className="filler"></p>} 
@@ -338,7 +338,7 @@ function StaysBooking(
                     <div className="paymentGroup-left">
 
                       <label htmlFor="cardNumber">Card number</label>
-                      <Field name="cardNumber" placeholder="Card number (16 digits)" />
+                      <Field name="cardNumber" placeholder="Card number (16 digits)" className="regularInput"  />
                       {errors.cardNumber && touched.cardNumber ? (
                         <p className="error">{errors.cardNumber}</p>
                       ) : <p className="filler"></p>}
@@ -348,7 +348,7 @@ function StaysBooking(
                     <div className="paymentGroup-bottomLeft">
                       <div className="paymentGroup-bottomLeft-1">
                         <label htmlFor="expiry">Expiry (MM-YY)</label>
-                        <Field name="expiry" placeholder="MM-YY" />
+                        <Field name="expiry" placeholder="MM-YY"  className="regularInput" />
                         {errors.expiry && touched.expiry ? (
                           <p className="error">{errors.expiry}</p>
                         ) : <p className="filler"></p>}
@@ -356,7 +356,7 @@ function StaysBooking(
 
                       <div className="paymentGroup-bottomLeft-2">
                         <label htmlFor="cvc">CVC / CVV</label>
-                        <Field name="cvc" placeholder="CVC" />
+                        <Field name="cvc" placeholder="CVC" className="regularInput"  />
                         {errors.cvc && touched.cvc ? (
                           <p className="error">{errors.cvc}</p>
                         ) : <p className="filler"></p>}
@@ -365,7 +365,7 @@ function StaysBooking(
 
                     <div className="paymentGroup-right">
                     <label htmlFor="nameOnCard">Name on card</label>
-                      <Field name="nameOnCard" placeholder="Name on card" />
+                      <Field name="nameOnCard" placeholder="Name on card"  className="regularInput" />
                       {errors.nameOnCard && touched.nameOnCard ? (
                         <p className="error">{errors.nameOnCard}</p>
                       ) : <p className="filler"></p>}
@@ -374,7 +374,7 @@ function StaysBooking(
 
                     <div className="paymentGroup-bottomRight">
                       <label htmlFor="country">Country</label>
-                      <Field name="country" placeholder="Country" />
+                      <Field name="country" placeholder="Country" className="regularInput"  />
                       {errors.country && touched.country ? (
                         <p className="error">{errors.country}</p>
                       ) : <p className="filler"></p>} 

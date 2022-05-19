@@ -210,6 +210,7 @@ function PostCards({places, headers}) {
           value={Name}
           placeholder="Name" 
           onChange={handleInputChange}
+          className="regularInput"
             />
         </div>
         <div>
@@ -221,6 +222,7 @@ function PostCards({places, headers}) {
           value={Price}
           placeholder="Price" 
           onChange={handleInputChange}
+          className="regularInput"
           />
         </div>
         <div>
@@ -232,6 +234,7 @@ function PostCards({places, headers}) {
           value={About}
           placeholder="About" 
           onChange={handleInputChange}
+          className="regularInput"
           />
         </div>
         <div>
@@ -243,6 +246,7 @@ function PostCards({places, headers}) {
           value={Location}
           placeholder="Location" 
           onChange={handleInputChange}
+          className="regularInput"
           />
         </div>
         {renderCheckbox(values)}
