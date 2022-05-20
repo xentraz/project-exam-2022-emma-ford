@@ -187,7 +187,7 @@ function StaysBooking(
         <Sidebar/>
       </header>
       <main>
-        <h2><a href={`/StaysDetails/${id}`}><ArrowBackIosIcon/> Confirm & Pay</a></h2>
+        <h1><a href={`/StaysDetails/${id}`}><ArrowBackIosIcon/> Confirm & Pay</a></h1>
         <div className="bookingBoxes">
           <div className="bookingBoxes-summary">
             <h2>Your Summary</h2>
@@ -385,14 +385,14 @@ function StaysBooking(
                         <p className="flexCardtitle">Invoice</p>
                         {/* NEEDED */}
                         <div className="paymentGroup-invoice-left">
-                          <p className="grey">4 Nights</p>
-                          <p className="grey">Breakfast a day</p>
-                          <p className="grey">Booking fee</p>
+                          <p>4 Nights</p>
+                          <p>Breakfast a day</p>
+                          <p>Booking fee</p>
                         </div>
                         <div className="paymentGroup-invoice-right">
                           <p>{Price} kr / night</p>
                           <p>100 kr / pp</p>
-                          <p>Free</p>
+                          <p className="grey">Free</p>
                         </div>
                         <span></span>
                       <div className="paymentGroup-invoice-total">
