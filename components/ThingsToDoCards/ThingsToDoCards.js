@@ -7,10 +7,11 @@ function ThingsToDoCards({
   ImgUrl,
   ImgAlt,
 }){
-  
+
   return (
     <>
       <div 
+      id={id}
       className="TTD_cards"
       style={{
         backgroundImage: `url(${ImgUrl})`,
@@ -26,14 +27,15 @@ function ThingsToDoCards({
         <p className="cardTitle todoTitle">{Name}</p>
       </div>
       <div className="TTD_cards-price">
-        {
-          Price === 1 ? <p>$</p> 
-          : Price === 2 ? <p>$$</p>
-          : Price === 3 ? <p>$$$</p>
-          : Price === 4 ? <p>$$$$</p>
-          : Price === 5 ? <p>$$$$$</p>
+      <p> {
+          Price === 1 ? <span>$</span>
+          : Price === 2 ? <span>$$</span>
+          : Price === 3 ? <span>$$$</span>
+          : Price === 4 ? <span>$$$$</span>
+          : Price === 5 ? <span>$$$$$</span>
           : ''
-    }
+          }
+        </p>
       </div>
     </div>
   </>

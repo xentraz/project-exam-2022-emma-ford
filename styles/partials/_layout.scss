@@ -122,12 +122,20 @@ input, select, textarea {
   border: none;
 }
 
+.contactInput {
+  border: none;
+}
+
 textarea {
   min-height: 100px;
 }
 
 .bold {
   font-weight: 600;
+}
+
+.white {
+  color: $white;
 }
 
 .fine {
@@ -197,6 +205,7 @@ button, .button {
   border-radius: $border-radius;
   box-shadow: $box-shadow;
   background-color: $primary-color;
+  border: 2px solid transparent;
   font-family: $primary-font;
   text-transform: uppercase;
   color: $white;
@@ -204,11 +213,19 @@ button, .button {
   font-weight: 400;
   padding: 15px 40px;
   cursor: pointer;
-  transition: 0.4s ease-in-out;
+  transition: 0.3s ease-in-out;
   outline: none;
 
   & span {
     font-weight: 600;
+  }
+}
+
+.button {
+  &:hover {
+    background-color: $white;
+    color: $primary-color;
+    border: 2px solid $primary-color;
   }
 }
 

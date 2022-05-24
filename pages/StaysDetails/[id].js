@@ -1,11 +1,12 @@
 import React, { useState, useReducer } from 'react'
 import Head from 'next/head'
 // Api
-import { placesUrl } from '../../lib/apiURL';
+import { placesUrl, heroImagesUrl } from '../../lib/apiURL';
 import { getAPI } from '../../lib/apiCall';
 // Components
 import Nav from '../../components/Nav/Nav';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import Footer from '../../components/Footer/Footer';
 // Modal
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { Box } from '@mui/system';
@@ -81,13 +82,21 @@ export const getStaticProps = async (context) => {
   const id = context.params.id;
   const places = await getAPI(placesUrl + '/' + id);
 
+  const res = await fetch(heroImagesUrl);
+  const data = await res.json();
+  const heroImages = data;
+
   return {
-    props: { places: places },
+    props: { 
+      places: places,
+      heroImages, 
+    },
   };
 };
 
 function StaysDetail(
-  {places: {
+  {heroImages,
+    places: {
     id, 
     Name, 
     Price, 
@@ -180,10 +189,7 @@ function StaysDetail(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header id={id}>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
       <main>
@@ -373,8 +379,7 @@ function StaysDetail(
                       <Stack direction="row" spacing={1} className="avatarChip">
                         <Chip avatar={<Avatar>{ratingsAvatar}</Avatar>} label={elm.RatingsName} />
                       </Stack>
-                      <p>{elm.Message}</p>
-                      {/* <p><EventIcon/> {elm.Date}</p> */}
+                      <p className="reviewMessage">{elm.Message}</p>
                     </div>
                     )
                   })}
@@ -382,6 +387,7 @@ function StaysDetail(
             </div>
           </div>
       </main> 
+     <Footer heroImages={heroImages} />
     </>
   )
 }

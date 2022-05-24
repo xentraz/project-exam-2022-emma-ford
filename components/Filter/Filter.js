@@ -29,7 +29,7 @@ function Filter({
 
   return (
     <>
-      {filterType ? <p>{filterType}</p> : ''}
+      <p>{filterType ? {filterType} : ''}</p>
       <Select
         defaultValue={selectedOption}
         onChange={onChange}

@@ -1,11 +1,12 @@
 import React, { useState, useReducer } from 'react'
 import Head from 'next/head'
 // Api
-import { placesUrl } from '../../lib/apiURL';
+import { placesUrl, heroImagesUrl } from '../../lib/apiURL';
 import { getAPI } from '../../lib/apiCall';
 // Components
 import Nav from '../../components/Nav/Nav';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import Footer from '../../components/Footer/Footer';
 // Icons Material UI
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
@@ -50,13 +51,22 @@ export const getStaticProps = async (context) => {
   const id = context.params.id;
   const places = await getAPI(placesUrl + '/' + id);
 
+
+  const res = await fetch(heroImagesUrl);
+  const data = await res.json();
+  const heroImages = data;
+
   return {
-    props: { places: places },
+    props: { 
+      places: places,
+      heroImages, 
+    },
   };
 };
 
 function StaysBooking(
-  {places: {
+  {heroImages,
+    places: {
     id, 
     Name, 
     Price, 
@@ -180,10 +190,7 @@ function StaysBooking(
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header id={id}>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
       <main>
@@ -335,7 +342,7 @@ function StaysBooking(
               {({ errors, touched }) => (
                 <Form>
                   <div className="paymentGroup">
-                    <div className="paymentGroup-left">
+                    <div className="paymentGroup-cardNr">
 
                       <label htmlFor="cardNumber">Card number</label>
                       <Field name="cardNumber" placeholder="Card number (16 digits)" className="regularInput"  />
@@ -345,8 +352,8 @@ function StaysBooking(
 
                     </div>
 
-                    <div className="paymentGroup-bottomLeft">
-                      <div className="paymentGroup-bottomLeft-1">
+                    <div className="paymentGroup-cardDetails">
+                      <div className="paymentGroup-cardDetails-1">
                         <label htmlFor="expiry">Expiry (MM-YY)</label>
                         <Field name="expiry" placeholder="MM-YY"  className="regularInput" />
                         {errors.expiry && touched.expiry ? (
@@ -354,7 +361,7 @@ function StaysBooking(
                         ) : <p className="filler"></p>}
                       </div>
 
-                      <div className="paymentGroup-bottomLeft-2">
+                      <div className="paymentGroup-cardDetails-2">
                         <label htmlFor="cvc">CVC / CVV</label>
                         <Field name="cvc" placeholder="CVC" className="regularInput"  />
                         {errors.cvc && touched.cvc ? (
@@ -363,7 +370,7 @@ function StaysBooking(
                       </div>
                     </div>
 
-                    <div className="paymentGroup-right">
+                    <div className="paymentGroup-name">
                     <label htmlFor="nameOnCard">Name on card</label>
                       <Field name="nameOnCard" placeholder="Name on card"  className="regularInput" />
                       {errors.nameOnCard && touched.nameOnCard ? (
@@ -372,7 +379,7 @@ function StaysBooking(
                       
                     </div>
 
-                    <div className="paymentGroup-bottomRight">
+                    <div className="paymentGroup-country">
                       <label htmlFor="country">Country</label>
                       <Field name="country" placeholder="Country" className="regularInput"  />
                       {errors.country && touched.country ? (
@@ -409,6 +416,7 @@ function StaysBooking(
           </div>
         </div>
       </main>
+      <Footer heroImages={heroImages} />
     </>
   )
 }

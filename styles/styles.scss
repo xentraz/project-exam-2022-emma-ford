@@ -8,6 +8,10 @@
   body {
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
+
+  footer {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
   ::selection {
     @apply text-white bg-light;
   }
@@ -59,7 +63,6 @@
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
-
   .details-MUICheckbox, .Mui-checked, .PrivateSwitchBase-input {
     @apply bg-transparent text-black dark:bg-transparent dark:text-white;
   }
@@ -84,7 +87,10 @@
     @apply bg-lightGrey dark:bg-darkGrey;
   }
 
-  .paymentDetails-types-1:hover, .paymentDetails-types-2:hover, .paymentDetails-types-3:hover, .paymentDetails-types-4:hover {
+  .paymentDetails-types-1:hover, 
+  .paymentDetails-types-2:hover, 
+  .paymentDetails-types-3:hover, 
+  .paymentDetails-types-4:hover {
     @apply bg-lightGrey dark:bg-darkGrey;
   }
 
@@ -123,7 +129,7 @@
   .my-react-select__menu-list--is-focused,
   .my-react-select__menu-list--is-selected,
   .my-react-select__menu {
-    @apply bg-light text-black dark:bg-dark dark:text-white;
+    @apply bg-light text-black dark:bg-formGrey dark:text-white;
   }
 
   .my-react-select__value-container--is-focused,
@@ -133,16 +139,31 @@
   .my-react-select__option--is-focused{
     @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
+
+  .avatarChip,
+  .avatarChip > .MuiChip-root,
+  .avatarChip > .MuiChip-root > .MuiAvatar-root,
+  .avatarChip > .MuiChip-root > span {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
+  }
 }
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 // Styles
 @import './partials/variables';
 @import './partials/layout';
 @import './partials/mixins';
 
-// Components
+// Navigation
 @import './partials/navigation';
+
+// Sidebar
 @import './partials/sidebar';
+
+// Footer
+@import './partials/footer';
 
 // Index
 @import './partials/heroIndex';
@@ -162,9 +183,13 @@
 // Stays Booking
 @import './partials/staysBooking';
 
+// Contact
+@import './partials/contactHero';
+
+// Login
+@import './partials/loginPage';
+
 // Admin
 @import './partials/admin';
 @import './partials/overviewTable';
 
-// Fonts
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

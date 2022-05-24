@@ -1,5 +1,5 @@
 // React 
-import React, { useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 // Headless
 import Head from 'next/head'
 // Components
@@ -8,8 +8,9 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import HeroIndex from '../components/HeroIndex/HeroIndex';
 import PopularCards from '../components/PopularCards/PopularCards';
 import ThingsToDoCards from '../components/ThingsToDoCards/ThingsToDoCards';
+import Footer from '../components/Footer/Footer';
 // API 
-import { placesUrl, thingsToDoUrl } from '../lib/apiURL';
+import { placesUrl, thingsToDoUrl, heroImagesUrl } from '../lib/apiURL';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // import required modules
@@ -28,15 +29,20 @@ export const getStaticProps = async () => {
   const data2 = await res2.json();
   const thingsToDo = data2;
 
+  const res3 = await fetch(heroImagesUrl);
+  const data3 = await res3.json();
+  const heroImages = data3;
+
   return {
     props: { 
       places,
       thingsToDo,
+      heroImages,
      },
   };
 };
 
-export default function Home({places, thingsToDo}) {
+export default function Home({places, thingsToDo, heroImages}) {
   // Featured Array 
   const featuredArray = [];
   let count = 0;
@@ -66,20 +72,12 @@ export default function Home({places, thingsToDo}) {
 
   console.log(thingsToDo);
 
-  // Responsive Slider
-  const [slidesPerView, setSlidesPerView] = useState('');
+  // Check to see if slider
+  const [isContect, setIsContent] = useState(false);
 
-  const handleResize = () => {
-    if (window.innerWidth > 1000) {
-      setSlidesPerView(3);
-    } else if (window.innerWidth < 1000) {
-      setSlidesPerView(2);
-    } else if (window.innerWidth < 600) {
-      setSlidesPerView(1);
-    }
-  }
-
-  console.log(slidesPerView);
+  useEffect(() => {
+    if (thingsToDo) setIsContent(true);
+  }, [thingsToDo]);
 
   return (
     <>
@@ -90,14 +88,13 @@ export default function Home({places, thingsToDo}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
       <main>
-        <HeroIndex />
+        <HeroIndex
+          heroImages={heroImages}
+        />
           <div className="popularStays">
           <h2>Popular Stays</h2>
           <p className="flexCardtitle">Have a loook at our most popular stays right now!</p>
@@ -145,6 +142,7 @@ export default function Home({places, thingsToDo}) {
               <ArrowCircleRightIcon/>
             </div>
           </div>
+          {isContect ? (
           <Swiper 
             ref={sliderRef}
             slidesPerView={1}
@@ -198,12 +196,11 @@ export default function Home({places, thingsToDo}) {
                   }
                 )}  
             </Swiper>
+          ) : ("")}
           <button>Browse all</button>
         </div>
       </main>
-
-      <footer>
-      </footer>
+      <Footer heroImages={heroImages} />
     </>
   )
 }

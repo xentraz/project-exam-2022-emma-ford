@@ -4,7 +4,6 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url(../../public/img/indexHero.jpg);
   // Grid
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -109,10 +108,10 @@
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 2fr 3fr;
 
     &-text {
       grid-column: 1/1;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 // API
 import { getUser } from '../../lib/apiURL';
@@ -11,7 +10,11 @@ import nookies from 'nookies';
 // Axios
 const axios = require('axios').default;
 
-function Nav ({places, id}) {
+function Nav ({places, id, heroImages}) {
+  // Hero Images
+  const logoImage = heroImages.slice(3, 4);
+  console.log(logoImage);
+
   // Responsive Navigation
   const router = useRouter();
   const [isOpen, setIsOpen] = useState('navigation-links');
@@ -52,13 +55,13 @@ function Nav ({places, id}) {
   return  (
     <>
       <div className="navigation">
-        <div className="navigation-logo">
-          <Image 
-          src="/img/logo.png"
-          alt="NEEDED"
-          height="100"
-          width="100" 
-          />
+        <div 
+        className="navigation-logo"
+        style={{
+          backgroundImage: `url(${logoImage[0].ImgUrl})`,
+        }}
+        alt={logoImage[0].ImgAlt}
+        >
         </div>
         <div className={isOpen}>
           {userLoggedIn ? (
@@ -73,7 +76,7 @@ function Nav ({places, id}) {
             <>
               <Link href='/'><a className={router.pathname == "/" ? "active" : ""}>Home</a></Link>
               <Link href='/Stays'><a className={router.pathname === "/Stays" || router.pathname === `/StaysDetails/[${id}]` || router.pathname === `/StaysBooking/[${id}]` ? "active" : ""}>Places to stay</a></Link>
-              <Link href='/See'><a className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
+              <Link href='/'><a className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
               <Link href='/Contact'><a className={router.pathname == "/Contact" ? "active" : ""}>Contact</a></Link>
               <Link href='/LoginPage'><a className={router.pathname == "/LoginPage" ? "active" : ""}>Login</a></Link>
             </>

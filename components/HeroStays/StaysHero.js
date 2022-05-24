@@ -6,7 +6,12 @@ import { Field, Form, Formik } from 'formik';
 // Components
 import Filter from '../Filter/Filter';
 
-function StaysHero() {
+function StaysHero({heroImages}) {
+  // Hero Img
+  console.log(heroImages);
+  const heroImg = heroImages.slice(2, 3);
+  console.log(heroImg);
+
   // Date picker
   const [bookingInfo, setBookingInfo] = useState({});
   const datePickerSchema = Yup.object().shape({
@@ -19,7 +24,6 @@ function StaysHero() {
   }
 
   // Multiple Select
-
   // Accessibility
   const [ariaFocusMessage, setAriaFocusMessage] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +51,13 @@ function StaysHero() {
 
   return (
     <>
-      <div className="staysHero">
+      <div 
+        style={{
+          backgroundImage: `url(${heroImg[0].ImgUrl})`,
+        }}
+        alt={heroImg[0].ImgAlt}
+        className="staysHero"
+        >
         <div className="staysHero-heading">
           <h1>Welcome to Bergen</h1>
         </div>

@@ -609,14 +609,31 @@
    }
 }
 
-// Chip Name
-.css-6od3lo-MuiChip-label {
-  font-size: 1.25rem;
+// stars
+.star {
+  margin-bottom: 10px;
+}
+
+// Chip
+.MuiChip-root, .MuiChip-filled, .MuiChip-sizeMedium, .MuiChip-colorDefault {
+  height: fit-content;
+  width: fit-content;
 }
 
 // Chip Icon
-.css-gac2fo-MuiChip-root .MuiChip-avatar {
-  color: $white !important;
+.MuiChip-avatar, .MuiChip-root {
   background-color: transparent !important;
-  border: 1px solid $primary-color;
+  border: 1px solid $primary-color !important;
+  border-radius: 3px;
+}
+
+// Chip Name
+.css-6od3lo-MuiChip-label {
+  font-size: 1.25rem;
+  margin: 5px;
+}
+
+// Review 
+.reviewMessage {
+  margin-top: 10px;
 }

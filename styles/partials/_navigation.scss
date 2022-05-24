@@ -11,7 +11,10 @@
   &-logo {
     height: 100px;
     width: 100px;
-    z-index: 999;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 9999;
   }
 
   &-links {

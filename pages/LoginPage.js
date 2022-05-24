@@ -7,14 +7,15 @@ import { useRouter } from 'next/router';
 import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import LoginComponent from '../components/LoginComponent/LoginComponent';
+import Footer from '../components/Footer/Footer';
 // Axios
 const axios = require('axios').default;
 // API
-import { placesUrl } from '../lib/apiURL';
+import { placesUrl, heroImagesUrl } from '../lib/apiURL';
 // Nookies
 import nookies from 'nookies';
 
-function LoginPage() {
+function LoginPage({heroImages}) {
   return (
     <>
      <Head>
@@ -24,19 +25,15 @@ function LoginPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
-      <main>
+      <main className="loginMain">
         <h1>Login</h1>
+        <p className="flexCardtitle">Login to see, add, edit or delete all places to stay. Manage enquiries and messages.</p>
         <LoginComponent/>
       </main>
-
-      <footer>
-      </footer>
+    <Footer heroImages={heroImages} />
   </>
   )
 }
@@ -68,8 +65,14 @@ export const getServerSideProps = async (ctx) => {
     }
   }
 
+  const res2 = await fetch(heroImagesUrl);
+  const data2 = await res2.json();
+  const heroImages = data2;
+
   return {
-    props: {}
+    props: {
+      heroImages
+    }
   }
 }
 

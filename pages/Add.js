@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import PostCards from '../components/PostCards/PostCards';
+import Footer from '../components/Footer/Footer';
 // Axios
 const axios = require('axios').default;
 // API
-import { placesUrl } from '../lib/apiURL';
+import { placesUrl, heroImagesUrl } from '../lib/apiURL';
 
-function Add ({places}) {
+function Add ({heroImages}) {
 
   return (
     <>
@@ -21,19 +22,14 @@ function Add ({places}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
       <main>
         <h1>Add a new place</h1>
         <PostCards/>
-        </main>
-
-      <footer>
-      </footer>
+      </main>
+    <Footer heroImages={heroImages} />
   </>
   )
 }
@@ -44,12 +40,16 @@ export const getStaticProps = async () => {
       Accept: "application/json",
     },
   });
-  
   const data = response.data;
+  
+  const res3 = await fetch(heroImagesUrl);
+  const data3 = await res3.json();
+  const heroImages = data3;
 
   return {
     props: {
       places: data,
+      heroImages,
     },
   };
 };

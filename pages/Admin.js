@@ -6,8 +6,9 @@ import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import OverviewTable from '../components/OverviewTable/OverviewTable';
 import EnquiriesTable from '../components/EnquiriesTable/EnquiriesTable';
+import Footer from '../components/Footer/Footer';
 // API
-import { placesUrl } from '../lib/apiURL';
+import { placesUrl, heroImagesUrl } from '../lib/apiURL';
 // Nookies
 import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 // Material UI Tabs
@@ -23,7 +24,7 @@ import AddIcon from '@mui/icons-material/Add';
 const axios = require('axios').default;
 
 // Logout
-const Admin = ({user, places, enquiries, messages, JWT }) => {
+const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
   console.log(enquiries);
 
   const {
@@ -99,7 +100,6 @@ const Admin = ({user, places, enquiries, messages, JWT }) => {
   // Enquiries 
   console.log(enquiries);
 
-
   return (
     <>
      <Head>
@@ -109,10 +109,7 @@ const Admin = ({user, places, enquiries, messages, JWT }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
       <main>
@@ -233,8 +230,7 @@ const Admin = ({user, places, enquiries, messages, JWT }) => {
           </TabsUnstyled>
         </div>
       </main>
-    <footer>
-    </footer>
+    <Footer heroImages={heroImages} />
   </>
   )
 }
@@ -245,6 +241,7 @@ export const getServerSideProps = async (ctx) => {
   let places = null;
   // let messages = null;
   let enquiries = null;
+  let heroImages = null;
   const JWT = parseCookies(ctx).jwt;
 
   if (cookies?.jwt) {
@@ -256,6 +253,7 @@ export const getServerSideProps = async (ctx) => {
           },
       });
       const placesData = await axios.get(placesUrl);
+      const heroImagesData = await axios.get(heroImagesUrl);
       // const messagesData = await axios.get('http://localhost:1337/messages');
       const enquiriesData = await axios.get('http://localhost:1337/enquires');
 
@@ -263,6 +261,7 @@ export const getServerSideProps = async (ctx) => {
       places = placesData.data;
       // messages = messagesData.data;
       enquiries = enquiriesData.data;
+      heroImages = heroImagesData.data;
 
     } catch (e) {
       console.log(e);
@@ -284,6 +283,7 @@ export const getServerSideProps = async (ctx) => {
       places,
       enquiries,
       JWT,
+      heroImages,
     }
   }
 }

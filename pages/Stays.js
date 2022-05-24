@@ -5,10 +5,11 @@ import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import StaysHero from '../components/HeroStays/StaysHero';
 import Search from '../components/Search/Search';
+import Footer from '../components/Footer/Footer';
 // Axios
 const axios = require('axios').default;
 // API
-import { placesUrl } from '../lib/apiURL';
+import { placesUrl, heroImagesUrl } from '../lib/apiURL';
 import { getPlaces } from '../lib/apiCall';
 // Query String
 import { stringify } from 'query-string';
@@ -18,12 +19,18 @@ export const getStaticProps = async () => {
   const res = await fetch(placesUrl);
   const data = await res.json();
 
+  const res2 = await fetch(heroImagesUrl);
+  const data2 = await res2.json();
+
   return {
-    props: { places: data },
+    props: { 
+      places: data,
+      heroImages: data2, 
+    },
   };
 };
 
-function Stay({places}) {
+function Stay({places, heroImages}) {
   // Search 
   const [searchValue, setSearchValue] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState(places);
@@ -52,14 +59,13 @@ function Stay({places}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        {/* <Nav
-        id={id}
-        /> */}
-        <Nav/>
+        <Nav heroImages={heroImages} />
         <Sidebar/>
       </header>
       <main>
-        <StaysHero/>
+        <StaysHero
+        heroImages={heroImages}
+        />
         <Search
          places={filteredPlaces}
          searchValue={searchValue}
@@ -68,9 +74,7 @@ function Stay({places}) {
          handleOnSearch={handleOnSearch}
         />
       </main>
-
-      <footer>
-      </footer>
+    <Footer heroImages={heroImages} />
   </>
   )
 }
