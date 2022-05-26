@@ -6,9 +6,10 @@ import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
 import OverviewTable from '../components/OverviewTable/OverviewTable';
 import EnquiriesTable from '../components/EnquiriesTable/EnquiriesTable';
+import MessagesTable from '../components/MessagesTable/MessagesTable';
 import Footer from '../components/Footer/Footer';
 // API
-import { placesUrl, heroImagesUrl } from '../lib/apiURL';
+import { placesUrl, heroImagesUrl, enquiresUrl, messagesUrl } from '../lib/apiURL';
 // Nookies
 import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 // Material UI Tabs
@@ -99,6 +100,7 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
 
   // Enquiries 
   console.log(enquiries);
+  console.log(messages);
 
   return (
     <>
@@ -129,9 +131,6 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
               <div className="tabContent-1-heading">
                 <h2>See, edit, add or delete places to stay</h2>
                 <a href={`/Add`} className="button"><AddIcon/> Add a new place</a>
-                {/* <div className="tabContent-1-heading-button">
-                  
-                </div> */}
               </div>
               <div className="overviewTable">
                 <table className="overviewTable-table">
@@ -183,49 +182,86 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
               <div className="tabpanel">
                 <h2>Enquries</h2>
                 <div className="overviewTable">
-                <table className="overviewTable-table">
-                  <thead>
-                      <tr>
-                        <th><p className="flexCardtitle">ID</p></th>
-                        <th><p className="flexCardtitle">Name</p></th>
-                        <th><p className="flexCardtitle">Surname</p></th>
-                        <th><p className="flexCardtitle">Message</p></th>
-                        <th><p className="flexCardtitle">Guests</p></th>
-                        <th><p className="flexCardtitle">Phone number</p></th>
-                        <th><p className="flexCardtitle">Date of Birth</p></th>
-                      </tr>
-                  </thead>
-                    {enquiries.map((
-                    {
-                      id, 
-                      firstName, 
-                      Surname, 
-                      Message, 
-                      Guests, 
-                      Number,
-                      DOB,
-                    }
-                  ) =>  {
-                    return (
-                    <EnquiriesTable 
-                      id={id}
-                      key={id}
-                      firstName={firstName}
-                      Surname={Surname}
-                      Message={Message}
-                      Guests={Guests}
-                      Number={Number}
-                      DOB={DOB}
-                    />
-                    );
-                    }
-                  )}
-                </table>
-              </div>
+                  <table className="overviewTable-table">
+                    <thead>
+                        <tr>
+                          <th><p className="flexCardtitle">ID</p></th>
+                          <th><p className="flexCardtitle">Name</p></th>
+                          <th><p className="flexCardtitle">Surname</p></th>
+                          <th><p className="flexCardtitle">Message</p></th>
+                          <th><p className="flexCardtitle">Guests</p></th>
+                          <th><p className="flexCardtitle">Phone number</p></th>
+                          <th><p className="flexCardtitle">Date of Birth</p></th>
+                          <th><p className="flexCardtitle">Delete</p></th>
+                          <th><p className="flexCardtitle">Complete</p></th>
+                        </tr>
+                    </thead>
+                      {enquiries.map((
+                      {
+                        id, 
+                        firstName, 
+                        Surname, 
+                        Message, 
+                        Guests, 
+                        Number,
+                        DOB,
+                      }
+                    ) =>  {
+                      return (
+                      <EnquiriesTable 
+                        id={id}
+                        key={id}
+                        firstName={firstName}
+                        Surname={Surname}
+                        Message={Message}
+                        Guests={Guests}
+                        Number={Number}
+                        DOB={DOB}
+                      />
+                      );
+                      }
+                    )}
+                  </table>
+                </div>
               </div>
             </TabPanel>
             <TabPanel value={2}>
-              <h2>Messages</h2>
+            <div className="tabpanel">
+                <h2>Messages</h2>
+                <div className="overviewTable">
+                  <table className="overviewTable-table">
+                    <thead>
+                        <tr>
+                          <th><p className="flexCardtitle">ID</p></th>
+                          <th><p className="flexCardtitle">Email</p></th>
+                          <th><p className="flexCardtitle">Subject</p></th>
+                          <th><p className="flexCardtitle">Message</p></th>
+                          <th><p className="flexCardtitle">Delete</p></th>
+                          <th><p className="flexCardtitle">Complete</p></th>
+                        </tr>
+                    </thead>
+                      {messages.map((
+                        {
+                          id,
+                          Email,
+                          Subject,
+                          Message,
+                        }
+                      ) => {
+                        return (
+                          <MessagesTable 
+                          id={id}
+                          key={id}
+                          Email={Email}
+                          Subject={Subject}
+                          Message={Message}
+                        />
+                        );
+                       }
+                      )}
+                  </table>
+                </div>
+              </div>
             </TabPanel>
           </TabsUnstyled>
         </div>
@@ -239,7 +275,7 @@ export const getServerSideProps = async (ctx) => {
   const cookies = nookies.get(ctx)
   let user = null;
   let places = null;
-  // let messages = null;
+  let messages = null;
   let enquiries = null;
   let heroImages = null;
   const JWT = parseCookies(ctx).jwt;
@@ -254,12 +290,12 @@ export const getServerSideProps = async (ctx) => {
       });
       const placesData = await axios.get(placesUrl);
       const heroImagesData = await axios.get(heroImagesUrl);
-      // const messagesData = await axios.get('http://localhost:1337/messages');
-      const enquiriesData = await axios.get('http://localhost:1337/enquires');
+      const messagesData = await axios.get(messagesUrl);
+      const enquiriesData = await axios.get(enquiresUrl);
 
       user = data;
       places = placesData.data;
-      // messages = messagesData.data;
+      messages = messagesData.data;
       enquiries = enquiriesData.data;
       heroImages = heroImagesData.data;
 
@@ -284,6 +320,7 @@ export const getServerSideProps = async (ctx) => {
       enquiries,
       JWT,
       heroImages,
+      messages,
     }
   }
 }

@@ -111,8 +111,8 @@ function OverviewTable(
             }
            </p>
         </td>
-        <td><a href={`/Edit/${id}`}><EditIcon/></a></td>
-        <td><p><DeleteForeverIcon/></p></td>
+        <td><a className="center" href={`/Edit/${id}`}><EditIcon/></a></td>
+        <td><p className="center"><DeleteForeverIcon/></p></td>
       </tr>
     </tbody>
     </>

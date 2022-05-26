@@ -41,9 +41,9 @@ function PopularCards({
     router.push('/StaysDetails/' + id);
   }
 
-    // Bookmark
-    const [clicked, setClicked] = useState();
-    const toggleClickIcon = () => setClicked(!clicked)
+  // Bookmark
+  const [clicked, setClicked] = useState();
+  const toggleClickIcon = () => setClicked(!clicked)
 
   return (
     <>

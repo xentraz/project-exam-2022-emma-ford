@@ -30,8 +30,7 @@ function LoginPage({heroImages}) {
       </header>
       <main className="loginMain">
         <h1>Login</h1>
-        <p className="flexCardtitle">Login to see, add, edit or delete all places to stay. Manage enquiries and messages.</p>
-        <LoginComponent/>
+        <LoginComponent heroImages={heroImages} />
       </main>
     <Footer heroImages={heroImages} />
   </>
