@@ -171,6 +171,7 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
                       ImgArray={ImgArray}
                       Size={Size}
                       Amenities={Amenities}
+                      JWT={JWT}
                     />
                     );
                     }
@@ -217,6 +218,7 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
                         Guests={Guests}
                         Number={Number}
                         DOB={DOB}
+                        JWT={JWT}
                       />
                       );
                       }
@@ -255,6 +257,7 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
                           Email={Email}
                           Subject={Subject}
                           Message={Message}
+                          JWT={JWT}
                         />
                         );
                        }

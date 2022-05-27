@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 // Axios
 const axios = require('axios').default;
 // API
@@ -23,10 +24,14 @@ function MessagesTable({
   Email,
   Subject,
   Message,
+  JWT,
 }) {
  // Checkmark
  const [clicked, setClicked] = useState();
- const toggleClickIcon = () => setClicked(!clicked)
+ const toggleClickIcon = () => setClicked(!clicked);
+
+   // Delete
+   const Router = useRouter();
 
   return (
     <>
@@ -36,7 +41,35 @@ function MessagesTable({
           <td><p>{Email}</p></td>
           <td><p>{Subject}</p></td>
           <td><p>{Message}</p></td>
-          <td><p className="center"><DeleteForeverIcon/></p></td>
+          <td>
+            <p className="center">
+              <DeleteForeverIcon 
+              onClick={() => {
+                let deleteWarning = confirm(
+                  `Are you sure you want to delete this Enquiry?
+                  This action cannot be undone.
+                  `
+                );
+
+                if (deleteWarning) {
+                  async function deleteThing() {
+                    let { data } = await axios.delete(
+                      `${messagesUrl}/${id}`,
+                      {
+                        headers: {
+                          'Content-Type': 'application/json',
+                          Authorization: `Bearer ${JWT}`,
+                        },
+                      }
+                    );
+                    Router.replace(Router.asPath);
+                  }
+                  deleteThing();
+                }
+              }}
+              />
+            </p>
+          </td>
           <td><p className="center" onClick={toggleClickIcon} >{clicked ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon/> }</p></td>
         </tr>
       </tbody>

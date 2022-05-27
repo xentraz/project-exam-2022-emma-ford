@@ -1,12 +1,13 @@
-import React, { useState, useReducer } from 'react'
-import Head from 'next/head'
+import React, { useState, useReducer } from 'react';
+import Head from 'next/head';
 // Api
-import { placesUrl, heroImagesUrl } from '../../lib/apiURL';
+import { placesUrl, heroImagesUrl, enquiresUrl } from '../../lib/apiURL';
 import { getAPI } from '../../lib/apiCall';
 // Components
 import Nav from '../../components/Nav/Nav';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Footer from '../../components/Footer/Footer';
+import EnquiryModal from '../../components/EnquiryModal/EnquiryModal';
 // Icons Material UI
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
@@ -30,6 +31,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 // Icons Iconify
 import { Icon } from '@iconify/react';
+// Axios
+import axios from 'axios';
 
 
 export const getStaticPaths = async () => {
@@ -123,26 +126,49 @@ function StaysBooking(
   const newCheckOut = RoomDetails.CheckOut.slice(0, 5);
 
   // Formik Contact Form
-  const ContactSchema = Yup.object().shape({
+  const BookingSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
-    lastName: Yup.string()
+    Surname: Yup.string()
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
-    dateofbirth: Yup.string()
-      .min(6, 'Too Short!')
-      .max(8, 'Too Long!')
+    Email: Yup.string()
+      .email('Invalid email')
+      .required('Required'),
+    DOB: Yup.string()
+      .min(8, 'Too Short!')
+      .max(10, 'Too Long!')
       .required('Required (DD-MM-YY)'),
-    phone: Yup.string()
+    Number: Yup.string()
       .min(8, 'Too Short!')
       .max(15, 'Too Long!')
       .required('Required'),
-    message: Yup.string()
+    Message: Yup.string()
       .min(10, 'Too Short!')
       .max(500, 'Too Long!')
+      .required('Required'),
+    cardNumber: Yup.string()
+      .min(16, 'Too Short!')
+      .max(16, 'Too Long!')
+      .required('Required'),
+    expiry: Yup.string()
+      .min(4, 'Too Short!')
+      .max(4, 'Too Long!')
+      .required('Required'),
+    cvc: Yup.string()
+      .min(3, 'Too Short!')
+      .max(3, 'Too Long!')
+      .required('Required'),
+    nameOnCard: Yup.string()
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    country: Yup.string()
+      .min(2, 'Too Short!')
+      .max(50, 'Too Long!')
       .required('Required'),
   });
 
@@ -155,31 +181,25 @@ function StaysBooking(
     }
     return error;
   }
-
-  // Formik Payment Form
-  const paymentSchema = Yup.object().shape({
-    cardNumber: Yup.number()
-      .min(16, 'Too Short!')
-      .max(16, 'Too Long!')
-      .required('Required'),
-    nameOnCard: Yup.string()
-      .min(5, 'Too Short!')
-      .max(25, 'Too Long!')
-      .required('Required'),
-    expiry: Yup.number()
-      .min(4, 'Too Short!')
-      .max(4, 'Too Long!')
-      .required('Required (MM-YY)'),
-    cvc: Yup.number()
-      .min(3, 'Too Short!')
-      .max(3, 'Too Long!')
-      .required('Required'),
-    country: Yup.string()
-      .min(2, 'Too Short!')
-      .max(25, 'Too Long!')
-      .required('Required'),
-  });
  
+  // Enquiry Form Submit
+  const [isError, setIsError] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+
+  const handleSubmit = async (values) => {
+    try {
+      let response = await axios.post(enquiresUrl, values);
+      setIsError(false);
+      setIsSent(true);
+      console.log(response);
+    } catch (err) {
+      setIsSent(false);
+      setIsError(true);
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -230,16 +250,22 @@ function StaysBooking(
           <Formik
             initialValues={{
               firstName: '',
-              lastName: '',
-              email: '',
-              dateofbirth: '',
-              phone: '',
-              message: '',
+              Surname: '',
+              Email: '',
+              DOB: '',
+              Number: '',
+              Message: '',
+              cardNumber: '',
+              nameOnCard: '',
+              expiry: '',
+              cvc: '',
+              country: '',
             }}
-            validationSchema={ContactSchema}
-            onSubmit={values => {
-              // same shape as initial values
+            validationSchema={BookingSchema}
+            onSubmit={(values) => {
+              handleSubmit(values);
               console.log(values);
+              setIsOpen(true);
             }}
           >
             {({ errors, touched }) => (
@@ -247,34 +273,56 @@ function StaysBooking(
                 <div className="formGroup">
                   <div className="formGroup-left">
                     <label htmlFor="firstName">First Name</label>
-                    <Field name="firstName" placeholder="First name" className="regularInput" />
+                    <Field 
+                    name="firstName" 
+                    placeholder="First name" 
+                    className="regularInput" 
+                    />
                     {errors.firstName && touched.firstName ? (
                       <p className="error">{errors.firstName}</p>
                     ) : <p className="filler"></p>}
 
-                    <label htmlFor="lastName">Surname</label>
-                    <Field name="lastName" placeholder="Surname"  className="regularInput" />
-                    {errors.lastName && touched.lastName ? (
-                      <p className="error">{errors.lastName}</p>
+                    <label htmlFor="Surname">Surname</label>
+                    <Field 
+                    name="Surname" 
+                    placeholder="Surname"  
+                    className="regularInput" 
+                    />
+                    {errors.Surname && touched.Surname ? (
+                      <p className="error">{errors.Surname}</p>
                     ) : <p className="filler"></p>}
 
-                    <label htmlFor="dateofbirth">Date of Birth (DD-MM-YY)</label>
-                    <Field name="dateofbirth" placeholder="DD-MM-YY" type="date" className="regularInput"  />
-                    {errors.dateofbirth && touched.dateofbirth ? (
-                      <p className="error">{errors.dateofbirth}</p>
+                    <label htmlFor="DOB">Date of Birth (DD-MM-YY)</label>
+                    <Field 
+                    name="DOB" 
+                    placeholder="DD-MM-YY" 
+                    type="date" 
+                    className="regularInput"  
+                    />
+                    {errors.DOB && touched.DOB ? (
+                      <p className="error">{errors.DOB}</p>
                     ) : <p className="filler"></p>}
                   </div>
                   <div className="formGroup-right">
-                    <label htmlFor="email">E-mail</label>
-                    <Field name="email" placeholder="E-mail address"  className="regularInput"  validate={validateEmail} />
-                    {errors.email && touched.email ? (
-                      <p className="error">{errors.email}</p>
+                    <label htmlFor="Email">E-mail</label>
+                    <Field 
+                    name="Email" 
+                    placeholder="E-mail address"  
+                    className="regularInput"  
+                    validate={validateEmail} 
+                    />
+                    {errors.Email && touched.Email ? (
+                      <p className="error">{errors.Email}</p>
                     ) : <p className="filler"></p>}
                     
-                    <label htmlFor="phone">Phone number</label>
-                    <Field name="phone" placeholder="Phone number"  className="regularInput" />
-                    {errors.phone && touched.phone ? (
-                      <p className="error">{errors.phone}</p>
+                    <label htmlFor="Number">Phone number</label>
+                    <Field 
+                    name="Number" 
+                    placeholder="Phone number"  
+                    className="regularInput" 
+                    />
+                    {errors.Number && touched.Number ? (
+                      <p className="error">{errors.Number}</p>
                     ) : <p className="filler"></p>} 
 
                     <label htmlFor="guests">Guests (amount)</label>
@@ -292,103 +340,106 @@ function StaysBooking(
                     </Field>
                   </div>
                   <div className="formGroup-bottom">
-                  <label htmlFor="message">Enquiry message</label>
-                    <Field as="textarea" name="message" placeholder="Write us a message..."  className="regularInput" />
-                    {errors.message && touched.message ? (
-                      <p className="error">{errors.message}</p>
+                  <label htmlFor="Message">Enquiry message</label>
+                    <Field 
+                    as="textarea" 
+                    name="Message" 
+                    placeholder="Write us a message..."  
+                    className="regularInput" />
+                    {errors.Message && touched.Message ? (
+                      <p className="error">{errors.Message}</p>
                     ) : <p className="filler"></p>} 
                   </div>
                 </div>
-                <button className="button" type="submit">Submit</button>
-              </Form>
-            )}
-         </Formik>
-        </div>
-        <div className="paymentDetails">
-          <h2>Payment Details</h2>
-          <div className="paymentDetails-types">
-            <div className="paymentDetails-types-1">
-              <Icon icon="bi:credit-card-2-back-fill" />
-              <p>Card</p>
-            </div>
-            <div className="paymentDetails-types-2">
-              <Icon icon="cib:cc-paypal"/>
-              <p>PayPal</p>
-            </div>
-            <div className="paymentDetails-types-3">
-              <Icon icon="cib:cc-apple-pay"/>
-              <p>Apple Pay</p>
-            </div>
-            <div className="paymentDetails-types-4">
-              <Icon icon="simple-icons:klarna"/>
-              <p>Klarna</p>
-            </div>
-          </div>
-          <div className="paymentDetails-form">
-            <h3>Card Details</h3>
-            <Formik
-              initialValues={{
-                cardNumber: '',
-                nameOnCard: '',
-                expiry: '',
-                cvc: '',
-                country: '',
-              }}
-              validationSchema={paymentSchema}
-              onSubmit={values => {
-                console.log(values);
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <div className="paymentGroup">
-                    <div className="paymentGroup-cardNr">
 
-                      <label htmlFor="cardNumber">Card number</label>
-                      <Field name="cardNumber" placeholder="Card number (16 digits)" className="regularInput"  />
-                      {errors.cardNumber && touched.cardNumber ? (
-                        <p className="error">{errors.cardNumber}</p>
-                      ) : <p className="filler"></p>}
+                <div className="paymentDetails">
+                  <h2>Payment Details</h2>
 
+                  <div className="paymentDetails-types">
+                    <div className="paymentDetails-types-1">
+                      <Icon icon="bi:credit-card-2-back-fill" />
+                      <p>Card</p>
                     </div>
+                    <div className="paymentDetails-types-2">
+                      <Icon icon="cib:cc-paypal"/>
+                      <p>PayPal</p>
+                    </div>
+                    <div className="paymentDetails-types-3">
+                      <Icon icon="cib:cc-apple-pay"/>
+                      <p>Apple Pay</p>
+                    </div>
+                    <div className="paymentDetails-types-4">
+                      <Icon icon="simple-icons:klarna"/>
+                      <p>Klarna</p>
+                    </div>
+                  </div>
 
-                    <div className="paymentGroup-cardDetails">
-                      <div className="paymentGroup-cardDetails-1">
-                        <label htmlFor="expiry">Expiry (MM-YY)</label>
-                        <Field name="expiry" placeholder="MM-YY"  className="regularInput" />
-                        {errors.expiry && touched.expiry ? (
-                          <p className="error">{errors.expiry}</p>
+                  <div className="paymentDetails-form">
+                    <h3>Card Details</h3>
+                    <div className="paymentGroup">
+                      <div className="paymentGroup-cardNr">
+                        <label htmlFor="cardNumber">Card number</label>
+                        <Field 
+                        name="cardNumber" 
+                        placeholder="Card number (16 digits)" 
+                        className="regularInput" 
+                        />
+                        {errors.cardNumber && touched.cardNumber ? (
+                          <p className="error">{errors.cardNumber}</p>
                         ) : <p className="filler"></p>}
                       </div>
 
-                      <div className="paymentGroup-cardDetails-2">
-                        <label htmlFor="cvc">CVC / CVV</label>
-                        <Field name="cvc" placeholder="CVC" className="regularInput"  />
-                        {errors.cvc && touched.cvc ? (
-                          <p className="error">{errors.cvc}</p>
+                      <div className="paymentGroup-cardDetails">
+                        <div className="paymentGroup-cardDetails-1">
+                          <label htmlFor="expiry">Expiry (MM-YY)</label>
+                          <Field 
+                          name="expiry" 
+                          placeholder="MM-YY"  
+                          className="regularInput" 
+                          />
+                          {errors.expiry && touched.expiry ? (
+                            <p className="error">{errors.expiry}</p>
+                          ) : <p className="filler"></p>}
+                        </div>
+
+                        <div className="paymentGroup-cardDetails-2">
+                          <label htmlFor="cvc">CVC / CVV</label>
+                          <Field 
+                          name="cvc" 
+                          placeholder="CVC" 
+                          className="regularInput"
+                          />
+                          {errors.cvc && touched.cvc ? (
+                            <p className="error">{errors.cvc}</p>
+                          ) : <p className="filler"></p>}
+                        </div>
+                      </div>
+
+                      <div className="paymentGroup-name">
+                       <label htmlFor="nameOnCard">Name on card</label>
+                        <Field 
+                        name="nameOnCard" 
+                        placeholder="Name on card"  
+                        className="regularInput" 
+                        />
+                        {errors.nameOnCard && touched.nameOnCard ? (
+                          <p className="error">{errors.nameOnCard}</p>
                         ) : <p className="filler"></p>}
                       </div>
-                    </div>
 
-                    <div className="paymentGroup-name">
-                    <label htmlFor="nameOnCard">Name on card</label>
-                      <Field name="nameOnCard" placeholder="Name on card"  className="regularInput" />
-                      {errors.nameOnCard && touched.nameOnCard ? (
-                        <p className="error">{errors.nameOnCard}</p>
-                      ) : <p className="filler"></p>}
-                      
-                    </div>
+                      <div className="paymentGroup-country">
+                        <label htmlFor="country">Country</label>
+                        <Field 
+                        name="country" 
+                        placeholder="Country" 
+                        className="regularInput" 
+                        />
+                        {errors.country && touched.country ? (
+                          <p className="error">{errors.country}</p>
+                        ) : <p className="filler"></p>} 
+                      </div>
 
-                    <div className="paymentGroup-country">
-                      <label htmlFor="country">Country</label>
-                      <Field name="country" placeholder="Country" className="regularInput"  />
-                      {errors.country && touched.country ? (
-                        <p className="error">{errors.country}</p>
-                      ) : <p className="filler"></p>} 
-
-                    </div>
-
-                    <div className="paymentGroup-invoice">
+                      <div className="paymentGroup-invoice">
                         <p className="flexCardtitle">Invoice</p>
                         {/* NEEDED */}
                         <div className="paymentGroup-invoice-left">
@@ -402,18 +453,26 @@ function StaysBooking(
                           <p className="grey">Free</p>
                         </div>
                         <span></span>
-                      <div className="paymentGroup-invoice-total">
-                        <p className="green">Total Price:</p>
-                        <p>**CALC PRICE**</p>
+                        <div className="paymentGroup-invoice-total">
+                          <p className="green">Total Price:</p>
+                          <p>**CALC PRICE**</p>
+                        </div>
                       </div>
                     </div>
-
                   </div>
-                  <button className="button" type="submit">Book & pay now</button>
-                </Form>
-              )}
-          </Formik>
-          </div>
+               </div>
+               {isError ? (
+                  <p>
+                    Obs! Something went wrong, please try again later.
+                  </p>
+                ) : (
+                  ''
+                )}
+                {isOpen && <EnquiryModal setIsOpen={setIsOpen} Name={Name} id={id} />}
+              <button className="button paymentButton" type="submit">Submit</button>
+            </Form>
+            )}
+         </Formik>
         </div>
       </main>
       <Footer heroImages={heroImages} />

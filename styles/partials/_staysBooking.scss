@@ -115,7 +115,7 @@
 
 .paymentDetails {
   width: 100%;
- margin-bottom: 50px;
+  margin-bottom: 50px;
 
   &-types {
     display: grid;
@@ -205,6 +205,8 @@
   grid-template-rows: 1fr 1fr;
   grid-gap: 10px;
   margin-bottom: 25px;
+
+  position: relative;
 
   &-cardNr {
     grid-column: 1/1;
@@ -357,4 +359,8 @@
       grid-row: 5/5;
     }
   }
+}
+
+.paymentButton {
+  margin: 15px 0;
 }

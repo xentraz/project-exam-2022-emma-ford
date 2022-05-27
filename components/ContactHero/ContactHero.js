@@ -11,18 +11,19 @@ import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 // API
 import { getAPI } from '../../lib/apiCall';
+import { messagesUrl } from '../../lib/apiURL';
 // Axios
 import axios from 'axios';
 
 const ContactSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  subject: Yup.string()
-    .min(2, 'Too Short!')
-    .max(15, 'Too Long!')
-    .required('Required'),
-  message: Yup.string()
+  Email: Yup.string().email('Invalid email').required('Required'),
+  Subject: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
+    .required('Required'),
+    Message: Yup.string()
+    .min(2, 'Too Short!')
+    .max(350, 'Too Long!')
     .required('Required'),
 });
 
@@ -40,15 +41,13 @@ function ContactHero({heroImages}) {
   const handleSubmit = async (values) => {
     console.log(values);
     try {
-      let response = await axios.post(
-        'http://localhost:1337/contact',
-        values
-      );
+      let response = await axios.post(messagesUrl, values);
       setIsError(false);
       setIsSent(true);
       console.log(response);
+      
     } catch (err) {
-      console.log(err.response.data.message);
+      console.log(err.response);
       setIsError(true);
       setIsSent(false);
     }
@@ -84,55 +83,55 @@ function ContactHero({heroImages}) {
           <div className="contactHero-wrapper-form">
             <Formik
             initialValues={{
-              email: '',
-              subject: '',
-              message: '',
+              Email: '',
+              Subject: '',
+              Message: '',
             }}
             validationSchema={ContactSchema}
-            onSubmit={(values) => {
-              // same shape as initial values
+            onSubmit={(values, {resetForm}) => {
               handleSubmit(values);
+              resetForm();
             }}
             >
             {({ errors, touched }) => (
               <Form>
                 <div className="contactHero-wrapper-form-email">
-                  <label htmlFor='email' className="white">Email:</label>
+                  <label htmlFor='Email' className="white">Email:</label>
                   <Field
-                    id='email'
-                    name='email'
-                    type='email'
+                    id='Email'
+                    name='Email'
+                    type='Email'
                     placeholder='Email'
                     className="contactInput"
                   />
-                  {errors.email && touched.email ? (
-                  <p className="error">{errors.email}</p>
+                  {errors.Email && touched.Email ? (
+                  <p className="error">{errors.Email}</p>
                   ) : <p className="filler"></p>}
                 </div>
                 <div className="contactHero-wrapper-form-subject">
-                  <label htmlFor='subject' className="white">Subject:</label>
+                  <label htmlFor='Subject' className="white">Subject:</label>
                   <Field
-                    id='subject'
-                    name='subject'
+                    id='Subject'
+                    name='Subject'
                     type='text'
                     placeholder='Subject'
                     className="contactInput"
                   />
-                  {errors.subject && touched.subject ? (
-                  <p className="error">{errors.subject}</p>
+                  {errors.Subject && touched.Subject ? (
+                  <p className="error">{errors.Subject}</p>
                   ) : <p className="filler"></p>}
                 </div>
                 <div className="contactHero-wrapper-form-message">
-                  <label htmlFor='message' className="white">Message:</label>
+                  <label htmlFor='Message' className="white">Message:</label>
                   <Field
-                    id='message'
-                    name='message'
+                    id='Message'
+                    name='Message'
                     component='textarea'
                     placeholder='Write us a message...'
                     className="contactInput"
                   />
-                  {errors.message && touched.message ? (
-                  <p className="error">{errors.message}</p>
+                  {errors.Message && touched.Message ? (
+                  <p className="error">{errors.Message}</p>
                   ) : <p className="filler"></p>}
                 </div>
                 <div className="contactHero-wrapper-form-response">

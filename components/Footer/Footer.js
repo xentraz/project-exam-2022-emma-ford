@@ -48,7 +48,7 @@ function Footer({heroImages}) {
       </div>
       <div className="footer-declaration">
         <p>© Holidaze 2022. All rights reserved.</p>
-        <p className="grey">For Edicational Purposes only.</p>
+        <p className="grey">For edicational purposes only.</p>
       </div>
       <div className="footer-socials">
         <Tooltip title="facebook.com/holidaze" disableFocusListener placement="left">

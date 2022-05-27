@@ -118,6 +118,10 @@
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
+  .enquiryModal {
+    @apply bg-light text-black dark:bg-dark dark:text-white;
+  }
+
   // React Select
   .my-react-select-container,
   .my-react-select__control,
@@ -182,6 +186,8 @@
 
 // Stays Booking
 @import './partials/staysBooking';
+// Enquiry Modal
+@import './partials/enquiryModal';
 
 // Contact
 @import './partials/contactHero';
