@@ -207,7 +207,9 @@ function Edit(
   const router = useRouter();
   const { id } = router.query;
 
+  const jwt2 = parseCookies().jwt;
   console.log(jwt);
+  console.log(jwt2);
 
   let initialValues = {
     Name: Name,
@@ -298,11 +300,11 @@ function Edit(
           // validationSchema={EditPlacesSchema}
           onSubmit={(newPlace) => {
             console.log(newPlace);
-            console.log(jwt);
+            console.log(jwt2);
             async function editPlace() {
               let res = await axios.put(`${placesUrl}/${id}`, newPlace, {
                 headers: {
-                  Authorization: `Bearer ${jwt}`,
+                  Authorization: `Bearer ${jwt2}`,
                 },
               });
               alert("The place has now been updated");
