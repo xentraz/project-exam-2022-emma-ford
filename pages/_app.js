@@ -17,6 +17,7 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
+// This does not get ym JWT token like I wanted to, so I'm disabling the httpOnly in my login component.
 MyApp.getInitialProps = async ({ Component, ctx, res }) => {
   let pageProps = {};
   const jwt = parseCookies(ctx).jwt;

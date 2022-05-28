@@ -22,3 +22,5 @@ export default async (req, res) => {
     res.status(400).send(e.response.data.message[0].messages[0]);
   }
 };
+
+// HttpOnly disabled because getInitialProps did not work after deploying to netlify
