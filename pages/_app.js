@@ -9,7 +9,7 @@ import { placesUrl } from '../lib/apiURL';
 // Nookies
 import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 
-function MyApp({ Component, pageProps, jwt }) {
+function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider enableSystem={true} attribute="class">
       <Component {...pageProps} />
@@ -25,28 +25,27 @@ MyApp.getInitialProps = async ({ Component, ctx, res }) => {
       pageProps = await Component.getInitialProps(ctx);
   }
 
-  if (!jwt) {
-    if (
-        ctx.pathname.includes("/Edit") ||
-        ctx.pathname.includes("/Admin")
-    ) {
-        if (ctx.req && ctx.res && ctx.res.writeHead && ctx.res.end) {
-            ctx.res.writeHead(302, {
-                Location: "/LoginPage",
-                "Content-Type": "text/html; charset=utf-8",
-            });
-            ctx.res.end();
+  // if (!jwt) {
+  //   if (
+  //       ctx.pathname.includes("/Edit") ||
+  //       ctx.pathname.includes("/Admin")
+  //   ) {
+  //       if (ctx.req && ctx.res && ctx.res.writeHead && ctx.res.end) {
+  //           ctx.res.writeHead(302, {
+  //               Location: "/LoginPage",
+  //               "Content-Type": "text/html; charset=utf-8",
+  //           });
+  //           ctx.res.end();
 
-            return {};
-        }
-    }
-  }
+  //           return {};
+  //       }
+  //   }
+  // }
 
   pageProps.jwt = jwt;
 
   return {
       pageProps,
-      jwt,
   };
 };
 
