@@ -69,6 +69,7 @@ export const getStaticProps = async (context) => {
 
 function StaysBooking(
   {heroImages,
+    jwt,
     places: {
     id, 
     Name, 

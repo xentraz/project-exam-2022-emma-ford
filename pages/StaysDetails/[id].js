@@ -96,6 +96,7 @@ export const getStaticProps = async (context) => {
 
 function StaysDetail(
   {heroImages,
+    jwt,
     places: {
     id, 
     Name, 

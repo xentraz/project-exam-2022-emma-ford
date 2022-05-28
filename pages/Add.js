@@ -129,7 +129,7 @@ const AddPlacesSchema = Yup.object().shape({
     )),
 });
 
-function Add ({heroImages, JWT, places}) {
+function Add ({heroImages, JWT, places, jwt}) {
   const Router = useRouter();
 
   let initialValues = {

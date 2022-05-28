@@ -15,7 +15,7 @@ import { placesUrl, heroImagesUrl } from '../lib/apiURL';
 // Nookies
 import nookies from 'nookies';
 
-function LoginPage({heroImages}) {
+function LoginPage({heroImages, jwt}) {
   return (
     <>
      <Head>

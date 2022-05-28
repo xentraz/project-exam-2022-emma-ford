@@ -19,7 +19,7 @@ export const getStaticProps = async () => {
   };
 };
 
-function Contact({heroImages}) {
+function Contact({heroImages, jwt}) {
   console.log(heroImages);
   
   return (

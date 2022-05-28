@@ -150,8 +150,8 @@ const EditPlacesSchema = Yup.object().shape({
 
 function Edit(
   {
-    heroImages,
     jwt,
+    heroImages,
     places: {
     Name, 
     Price, 

@@ -30,7 +30,7 @@ export const getStaticProps = async () => {
   };
 };
 
-function Stay({places, heroImages}) {
+function Stay({places, heroImages, jwt}) {
   // Search 
   const [searchValue, setSearchValue] = useState(null);
   const [filteredPlaces, setFilteredPlaces] = useState(places);

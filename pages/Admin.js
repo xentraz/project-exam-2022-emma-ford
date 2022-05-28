@@ -25,7 +25,7 @@ import AddIcon from '@mui/icons-material/Add';
 const axios = require('axios').default;
 
 // Logout
-const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
+const Admin = ({user, places, enquiries, messages, JWT, heroImages, jwt }) => {
   console.log(enquiries);
 
   const {

@@ -42,7 +42,7 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Home({places, thingsToDo, heroImages}) {
+export default function Home({places, thingsToDo, heroImages, jwt}) {
   // Featured Array 
   const featuredArray = [];
   let count = 0;
