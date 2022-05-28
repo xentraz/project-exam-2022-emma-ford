@@ -6,8 +6,6 @@ import { placesUrl } from '../../lib/apiURL';
 // Material UI Icons
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
-// Component
-import EditModal from '../EditModal/EditModal';
 
 // API
 export const getStaticProps = async () => {

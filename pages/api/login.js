@@ -5,7 +5,7 @@ export default async (req, res) => {
   const { password, identifier } = req.body;
 
   try {
-    const postRes = await axios.post('http://localhost:1337/auth/local', {
+    const postRes = await axios.post('https://project-exam-2022.herokuapp.com/auth/local', {
       identifier,
       password,
     })

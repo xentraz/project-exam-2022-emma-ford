@@ -8,7 +8,6 @@ import OverviewTable from '../components/OverviewTable/OverviewTable';
 import EnquiriesTable from '../components/EnquiriesTable/EnquiriesTable';
 import MessagesTable from '../components/MessagesTable/MessagesTable';
 import Footer from '../components/Footer/Footer';
-import EditModal from '../components/EditModal/EditModal';
 // API
 import { placesUrl, heroImagesUrl, enquiresUrl, messagesUrl } from '../lib/apiURL';
 // Nookies
