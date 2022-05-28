@@ -149,7 +149,8 @@ const EditPlacesSchema = Yup.object().shape({
 });
 
 function Edit(
-  {heroImages,
+  {
+    heroImages,
     jwt,
     places: {
     Name, 

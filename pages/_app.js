@@ -46,6 +46,7 @@ MyApp.getInitialProps = async ({ Component, ctx, res }) => {
 
   return {
       pageProps,
+      jwt,
   };
 };
 
