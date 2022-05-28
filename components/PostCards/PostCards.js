@@ -263,7 +263,7 @@ export const getServerSideProps = async (ctx) => {
 
   if (cookies?.jwt) {
     try {
-      const { data } = await axios.get('http://localhost:1337/users/me', {
+      const { data } = await axios.get('https://project-exam-2022.herokuapp.com/users/me', {
         headers: {
           Authorization:
             `Bearer ${cookies.jwt}`,
