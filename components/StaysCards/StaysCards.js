@@ -203,9 +203,6 @@ function StaysCards(
                     height: '100%',
                   }}
                   alt={ImgAlt}
-                  // onClick={() => {
-                  //   imgSelect(elm.ImgUrl);
-                  // }}
                 />
             );
           })}

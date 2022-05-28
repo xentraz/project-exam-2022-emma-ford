@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Axios
 const axios = require('axios').default;
 // API
@@ -6,6 +6,8 @@ import { placesUrl } from '../../lib/apiURL';
 // Material UI Icons
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+// Component
+import EditModal from '../EditModal/EditModal';
 
 // API
 export const getStaticProps = async () => {
@@ -55,7 +57,7 @@ function OverviewTable(
   ) {
   // Img Array 
   const slicedImgs = ImgArray.slice(0, 1);
-
+  // New about
   const newAbout = About.slice(0, 50);
 
   return (
@@ -111,8 +113,8 @@ function OverviewTable(
             }
            </p>
         </td>
-        <td><a className="center" href={`/Edit/${id}`}><EditIcon/></a></td>
-        <td><p className="center"><DeleteForeverIcon/></p></td>
+        <td><a href={`/Edit/${id}`}><EditIcon/></a></td>
+        <td><p><DeleteForeverIcon/></p></td>
       </tr>
     </tbody>
     </>

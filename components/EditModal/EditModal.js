@@ -1,30 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-// Components
-import Nav from '../components/Nav/Nav';
-import Sidebar from '../components/Sidebar/Sidebar';
-import PostCards from '../components/PostCards/PostCards';
-import Footer from '../components/Footer/Footer';
+// Api
+import { placesUrl, heroImagesUrl } from '../../lib/apiURL';
+import { getAPI } from '../../lib/apiCall';
 // Axios
 const axios = require('axios').default;
-// API
-import { placesUrl, heroImagesUrl } from '../lib/apiURL';
-// Nookies
-import nookies, { parseCookies, destroyCookie, setCookie } from 'nookies';
 // YUP
 import * as Yup from 'yup';
 // Formik
 import { Field, FieldArray, Form, Formik, getIn } from 'formik';
 
-const AddPlacesSchema = Yup.object().shape({
+
+export const getStaticPaths = async () => {
+  const placesArray = await getAPI(placesUrl);
+
+  const paths = placesArray.map((places) => {
+    return {
+      params: { id: places.id.toString() },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+  const places = await getAPI(placesUrl + '/' + id);
+
+  const res = await fetch(heroImagesUrl);
+  const data = await res.json();
+  const heroImages = data;
+
+  return {
+    props: { 
+      places: places,
+      heroImages, 
+    },
+  };
+};
+
+const EditPlacesSchema = Yup.object().shape({
   Name: Yup.string()
     .min(2, 'Name needs to be longer')
     .max(50, 'Name is too long')
     .required('You must have a name'),
   About: Yup.string()
     .min(20, 'Need a longer description!')
-    .max(1000, 'Desciption is too long')
+    .max(50000, 'Desciption is too long')
     .required('You must have a description'),
   Price: Yup.number()
     .min(1, 'Price needs to be higher than 1kr')
@@ -92,110 +118,152 @@ const AddPlacesSchema = Yup.object().shape({
       .min(2, 'Rules needs to be longer')
       .max(1000, 'Rules is too long'), 
   }),
-  ImgArray: Yup.array()
-    .of(
-      Yup.object().shape({
-        ImgUrl: Yup.string()
-          .min(25, 'Link must be longer')
-          .required('Required'),
-        ImgAlt: Yup.string()
-          .min(5, 'Description must be longer')
-          .max(10000, 'Description is too long')
-          .required('Required'),
-      })
-    )
-    .required('You must have images'),
-  Ratings: Yup.array()
-    .of(
-      Yup.object().shape(
-        {
-          Star: Yup.number()
-            .min(1, 'Rating needs to be higher than 1')
-            .max(5, 'Rating is too high')
-            .required('You must have a rating'),
-          Date: Yup.string()
-            .min(5, 'Date needs to be longer')
-            .max(11, 'Date is too long')
-            .required('You must have a date'),
-          RatingsName: Yup.string()
-            .min(2, 'Name needs to be longer')
-            .max(50, 'Name is too long')
-            .required('You must have a name'),
-          Message: Yup.string()
-            .min(2, 'Message needs to be longer')
-            .max(1000, 'Message is too long')
-            .required('You must have a message'),
-        }
-    )),
+  ImgUrl: Yup.string()
+    .min(25, 'Link must be longer')
+    .required('Required'),
+  ImgAlt: Yup.string()
+    .min(5, 'Description must be longer')
+    .max(10000, 'Description is too long')
+    .required('Required'),
+  Star: Yup.number()
+    .min(1, 'Rating needs to be higher than 1')
+    .max(5, 'Rating is too high')
+    .required('You must have a rating'),
+  Date: Yup.string()
+    .min(5, 'Date needs to be longer')
+    .max(11, 'Date is too long')
+    .required('You must have a date'),
+  RatingsName: Yup.string()
+    .min(2, 'Name needs to be longer')
+    .max(50, 'Name is too long')
+    .required('You must have a name'),
+  Message: Yup.string()
+    .min(2, 'Message needs to be longer')
+    .max(1000, 'Message is too long')
+    .required('You must have a message'),
 });
 
-function Add ({heroImages, JWT, places}) {
-  const Router = useRouter();
+function EditModal(
+  {heroImages,
+    JWT,
+    places: {
+    id, 
+    Name, 
+    Price, 
+    About, 
+    Location, 
+    Rooms,
+    Beds,
+    Featured,
+    ImgArray,
+    Type,
+    Type: {Hotel, Hostel, Cabin, Apartment, House},
+    ImgArray: {ImgAlt, ImgUrl},
+    Ratings,
+    Ratings: {Star, Date, RatingsName, Message},
+    Size, 
+    Amenities: {
+      Bathtub,
+      Breakfast,
+      Cleaning,
+      CoffeeMachine,
+      Dishwasher,
+      Dryer,
+      Fireplace,
+      Gym,
+      Heating,
+      Iron,
+      Laundry,
+      Lift,
+      Microwave,
+      Parking,
+      Pool,
+      Refrigerator,
+      Spa,
+      TV,
+      Washer,
+      Wifi,
+      },
+    RoomDetails,
+    RoomDetails: 
+      {
+        CheckIn, 
+        CheckOut,
+        Parties, 
+        Pets,
+        Rules,
+        Smoking,
+      }
+    }
+  }
+) 
+{
 
   let initialValues = {
-    Name: '',
-    About: '',
-    Price: 1,
-    Location: '',
-    Size: 1,
-    Rooms: 1,
-    Beds: 1,
-    Featured: false,
+    Name: Name,
+    About: About,
+    Price: Price,
+    Location: Location,
+    Size: Size,
+    Rooms: Rooms,
+    Beds: Beds,
+    Featured: Featured,
     Type: {
-      Hotel: false,
-      Hostel: false,
-      Cabin: false,
-      Apartment: false,
-      House: false,
+      Hotel: Hotel,
+      Hostel: Hostel,
+      Cabin: Cabin,
+      Apartment: Apartment,
+      House: House,
     },
     Amenities: {
-      Refrigerator: false,
-      TV: false,
-      Dishwasher: false,
-      Iron: false,
-      Washer: false,
-      Bathtub: false,
-      Parking: false,
-      Fireplace: false,
-      Heating: false,
-      Wifi: false,
-      Dryer: false,
-      Gym: false,
-      CoffeeMachine: false,
-      Pool: false,
-      Microwave: false,
-      Spa: false,
-      Breakfast: false,
-      Lift: false,
-      Laundry: false,
-      Cleaning: false,
+      Refrigerator: Refrigerator,
+      TV: TV,
+      Dishwasher: Dishwasher,
+      Iron: Iron,
+      Washer: Washer,
+      Bathtub: Bathtub,
+      Parking: Parking,
+      Fireplace: Fireplace,
+      Heating: Heating,
+      Wifi:  Wifi,
+      Dryer: Dryer,
+      Gym: Gym,
+      CoffeeMachine: CoffeeMachine,
+      Pool: Pool,
+      Microwave: Microwave,
+      Spa: Spa,
+      Breakfast: Breakfast,
+      Lift: Lift,
+      Laundry: Laundry,
+      Cleaning: Cleaning,
     },
     RoomDetails: {
-      CheckIn: '15:00:00.000',
-      CheckOut: '11:00:00.000',
-      Parties: false,
-      Pets: false,
-      Smoking: false,
-      Rules: '',
+      CheckIn: CheckIn,
+      CheckOut: CheckOut,
+      Parties: Parties,
+      Pets: Pets,
+      Smoking: Smoking,
+      Rules: Rules,
     },
     ImgArray: [{
-      ImgUrl: '',
-      ImgAlt: '',
+      ImgUrl: ImgUrl,
+      ImgAlt: ImgAlt,
     }],
     Ratings: [
       {
-        Star: 1,
-        Date: '2021-12-08',
-        RatingsName: '',
-        Message: '',
+        Star: Star,
+        Date: Date,
+        RatingsName: RatingsName,
+        Message: Message,
       }
     ],
   }
 
-   // Add Places Form
-   const [isError, setIsError] = useState(false);
-   const [isSent, setIsSent] = useState(false);
- 
+  // Add Places Form
+  const [isError, setIsError] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const Router = useRouter();
+
   // Image array helper
   const ErrorMessage = ({ ImgUrl }) => (
     <Field name={ImgUrl}>
@@ -210,38 +278,26 @@ function Add ({heroImages, JWT, places}) {
   );
 
   return (
-    <>
-     <Head>
-        <title>Holidaze</title>
-        NEEDED
-        <meta name="description" content="Generated by create next app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header>
-        <Nav heroImages={heroImages} />
-        <Sidebar/>
-      </header>
-      <main>
-       <h1>Add a new place to stay</h1>
+    <div className="editModal">
+      <h1>Edit {Name}</h1>
         <Formik
           initialValues={initialValues}
-          validationSchema={AddPlacesSchema}
-          onSubmit={(newPlace, {resetForm}) => {
+          // validationSchema={EditPlacesSchema}
+          onSubmit={(newPlace) => {
             console.log(newPlace);
             console.log(JWT);
             async function postNewPlace() {
-              let res = await axios.post(`${placesUrl}`, newPlace, {
+              let res = await axios.put(`${placesUrl}`, newPlace, {
                 headers: {
                   'Content-Type': 'application/json',
                   Authorization: `Bearer ${JWT}`,
                 },
               });
               alert("Congrats! You added a new place to stay!");
-              Router.replace(Router.asPath);
+              Router.replace(`/Admin`);
               console.log(res);
             }
             postNewPlace();
-            resetForm();
           }}
           >
           {({ errors, touched, values }) => (
@@ -755,132 +811,97 @@ function Add ({heroImages, JWT, places}) {
               </div>
 
               <div className="imgArray">
-                <FieldArray
-                  name='ImgArray'
-                  render={(arrayHelpers) => (
-                    <div>
-                      {values.ImgArray && values.ImgArray.length > 0 ? (
-                        values.ImgArray.map((imgObj, index) => (
-                          <div key={index}>
-                            <label htmlFor={`ImgArray.[${index}].ImgUrl`}>ImgUrl:</label>
-                            <Field
-                              name={`ImgArray.[${index}].ImgUrl`}
-                              placeholder='ImgUrl'
-                            />
-                            {/* ERROR MESSAGE BREAKS MY CODE.... */}
-                            {/* <ErrorMessage
-                              imgUrl={`ImgArray.[${index}].ImgUrl`}
-                            /> */}
+                {ImgArray.map((img, index) => {
+                  return (
+                    <div key={index}>
+                      <label htmlFor={`${img}.ImgUrl`}>{ImgUrl}</label>
+                      <Field
+                        id='ImgUrl'
+                        name={`${img}.ImgUrl`}
+                        type='text'
+                        placeholder='ImgUrl'
+                        value={img.ImgUrl}
+                      />
+                      {errors.ImgUrl && touched.ImgUrl ? (
+                      <p className="error">{errors.ImgUrl}</p>
+                      ) : <p className="filler"></p>}
 
-                            <label htmlFor={`ImgArray.[${index}].ImgAlt`}>ImgAlt:</label>
-                            <Field
-                              name={`ImgArray.[${index}].ImgAlt`}
-                              placeholder='ImgAlt'
-                            />
-                            {/* <ErrorMessage
-                              imgUrl={`ImgArray.[${index}].ImgAlt`}
-                            /> */}
-
-                            <div className=''>
-                              <button
-                                type='button'
-                                onClick={() => arrayHelpers.insert(index, '')}
-                              >
-                                + Add more
-                              </button>
-                              <button
-                                type='button'
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                - Remove
-                              </button>
-                            </div>
-                          </div>
-                          ))
-                        ) : (
-                          <button
-                            type='button'
-                            onClick={() => arrayHelpers.push('')}
-                          >
-                            Add an Image
-                          </button>
-                        )}
-                      </div>
-                    )}
-                  />
-                <FieldArray/>
+                      <label htmlFor={`${img}.ImgAlt`}>ImgAlt:</label>
+                      <Field
+                        id='ImgAlt'
+                        name={`${img}.ImgAlt`}
+                        type='text'
+                        placeholder='ImgAlt'
+                        value={img.ImgAlt}
+                      />
+                      {errors.ImgAlt && touched.ImgAlt ? (
+                      <p className="error">{errors.ImgAlt}</p>
+                      ) : <p className="filler"></p>}
+                    </div>
+                  )
+                })}
               </div>
 
               <div className="ratings">
-              <FieldArray
-                  name='Ratings'
-                  render={(arrayHelpers) => (
-                    <div>
-                      {values.Ratings && values.Ratings.length > 0 ? (
-                        values.Ratings.map((imgObj, index) => (
-                          <div key={index}>
-                            <label htmlFor={`Ratings.[${index}].Star`}>Star:</label>
-                            <Field
-                              name={`Ratings.[${index}].Star`}
-                              type="text"
-                            />
-                            {/* ERROR MESSAGE BREAKS MY CODE... */}
-                            {/* <ErrorMessage
-                              imgUrl={`Ratings.[${index}].Star`}
-                            /> */}
+              {Ratings.map((elm, index) => {
+                  return (
+                    <div key={index}>
+                      <label htmlFor={`${elm}.Star`}>Star:</label>
+                      <Field
+                        id='Star'
+                        name={`${elm}.Star`}
+                        type='text'
+                        placeholder='Star'
+                        value={elm.Star}
+                      />
+                      {errors.Star && touched.Star ? (
+                      <p className="error">{errors.Star}</p>
+                      ) : <p className="filler"></p>}
 
-                            <label htmlFor={`Ratings.[${index}].Date`}>Date:</label>
-                            <Field
-                              name={`Ratings.[${index}].Date`}
-                              type="date"
-                            />
+                      <label htmlFor={`${elm}.Date`}>Date:</label>
+                      <Field
+                        id='Date'
+                        name={`${elm}.Date`}
+                        type='Date'
+                        placeholder='Date'
+                        value={elm.Date}
+                      />
+                      {errors.Date && touched.Date ? (
+                      <p className="error">{errors.Date}</p>
+                      ) : <p className="filler"></p>}
 
-                            <label htmlFor={`Ratings.[${index}].RatingsName`}>Name:</label>
-                            <Field
-                              name={`Ratings.[${index}].RatingsName`}
-                              type="text"
-                            />
+                      <label htmlFor={`${elm}.RatingsName`}>Name:</label>
+                      <Field
+                        id='RatingsName'
+                        name={`${elm}.RatingsName`}
+                        type='text'
+                        placeholder='Name'
+                        value={elm.RatingsName}
+                      />
+                      {errors.RatingsName && touched.RatingsName ? (
+                      <p className="error">{errors.RatingsName}</p>
+                      ) : <p className="filler"></p>}
 
-                            <label htmlFor={`Ratings.[${index}].Message`}>Message:</label>
-                            <Field
-                              name={`Ratings.[${index}].Message`}
-                              type="text"
-                            />
-
-                            <div className=''>
-                              <button
-                                type='button'
-                                onClick={() => arrayHelpers.insert(index, '')}
-                              >
-                                + Add more
-                              </button>
-                              <button
-                                type='button'
-                                onClick={() => arrayHelpers.remove(index)}
-                              >
-                                - Remove
-                              </button>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <button
-                          type='button'
-                          onClick={() => arrayHelpers.push('')}
-                        >
-                          Add an Image
-                        </button>
-                      )}
+                      <label htmlFor={`${elm}.Message`}>Message:</label>
+                      <Field
+                        id='Message'
+                        name={`${elm}.Message`}
+                        type='text'
+                        placeholder='Message'
+                        value={elm.Message}
+                      />
+                      {errors.Message && touched.Message ? (
+                      <p className="error">{errors.Message}</p>
+                      ) : <p className="filler"></p>}
                     </div>
-                  )}
-                />
-              <FieldArray/>
+                  )
+                })}
               </div>
 
               <div className="addPlaces-response">
                 {isSent ? (
                   <p className="white">
-                    New place was added, to see it or edit it, go back to the admin panel.
+                    {Name} has been edited, to see it or edit it again, go back to the admin panel.
                   </p>
                 ) : null}
                 {isError ? (
@@ -891,53 +912,14 @@ function Add ({heroImages, JWT, places}) {
               </div>
               <div className="addPlaces-button">
                 <button className='button' type='submit'>
-                  Add new place
+                  Edit Place
                 </button>
               </div>
             </Form>
             )}
           </Formik>
-      </main>
-    <Footer heroImages={heroImages} />
-  </>
+    </div>
   )
 }
 
-export const getServerSideProps = async (ctx) => {
-  const cookies = nookies.get(ctx)
-  let user = null;
-  let places = null;
-  let heroImages = null;
-  const JWT = parseCookies(ctx).jwt;
-
-  if (cookies?.jwt) {
-    try {
-      const { data } = await axios.get('http://localhost:1337/users/me', {
-        headers: {
-          Authorization:
-            `Bearer ${cookies.jwt}`,
-          },
-      });
-      const placesData = await axios.get(placesUrl);
-      const heroImagesData = await axios.get(heroImagesUrl);
-
-      user = data;
-      places = placesData.data;
-      heroImages = heroImagesData.data;
-
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  return {
-    props: {
-      user,
-      places,
-      JWT,
-      heroImages,
-    }
-  }
-}
-
-export default Add;
+export default EditModal;

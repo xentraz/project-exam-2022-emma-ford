@@ -249,6 +249,28 @@ function Search({
               onTouchEnd={toggle}
               className='searchBar regularInput'
             />
+            {/* <ul
+                  className={`${
+                    open ? 'searchBar-dropdown' : 'hidden'
+                  } absolute`}
+                >
+                  {filterPlaces().map((places) => {
+                    return (
+                      <li
+                        key={cabin.id}
+                        className=' searchBar-dropdown-list'
+                        onClick={() => {
+                          selectPlace(place);
+                        }}
+                        onTouchEnd={() => {
+                          selectPlace(place);
+                        }}
+                      >
+                        {place.title}
+                      </li>
+                    );
+                  })}
+                </ul> */}
           </div>
         </div>
         {/* Sidebar */}

@@ -8,6 +8,7 @@ import OverviewTable from '../components/OverviewTable/OverviewTable';
 import EnquiriesTable from '../components/EnquiriesTable/EnquiriesTable';
 import MessagesTable from '../components/MessagesTable/MessagesTable';
 import Footer from '../components/Footer/Footer';
+import EditModal from '../components/EditModal/EditModal';
 // API
 import { placesUrl, heroImagesUrl, enquiresUrl, messagesUrl } from '../lib/apiURL';
 // Nookies
@@ -46,7 +47,6 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
 
   // User info
   const { email, username } = user;
-
   
   // Tabs
   const Tab = styled(TabUnstyled)`
@@ -102,6 +102,7 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
   console.log(enquiries);
   console.log(messages);
 
+
   return (
     <>
      <Head>
@@ -142,7 +143,7 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages }) => {
                         <th><p className="flexCardtitle">Price</p></th>
                         <th><p className="flexCardtitle">Location</p></th>
                         <th><p className="flexCardtitle">Amenities</p></th>
-                        <th><a href={`/Edit/${id}`}><p className="flexCardtitle">Edit</p></a></th>
+                        <th><p className="flexCardtitle">Edit</p></th>
                         <th className="flexCardtitle noRightBorder"><p>Delete</p></th>
                       </tr>
                   </thead>
