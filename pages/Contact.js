@@ -35,7 +35,6 @@ function Contact({heroImages, jwt}) {
         <Sidebar/>
       </header>
       <main>
-        <h1>Help and contact</h1>
         <ContactHero
         heroImages={heroImages}
         />

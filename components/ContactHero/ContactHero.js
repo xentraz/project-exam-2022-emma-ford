@@ -55,6 +55,7 @@ function ContactHero({heroImages}) {
 
   return (
     <>
+      <h1>Help and contact</h1>
       <div 
       className="contactHero"
       style={{

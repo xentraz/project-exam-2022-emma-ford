@@ -40,13 +40,12 @@
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 750px) {
       position: fixed;
       top: 100px;
       right: 0;
       width: 100%;
       height: fit-content;
-      background-color: $dark-mode;
       z-index: 100;
 
       display: flex;

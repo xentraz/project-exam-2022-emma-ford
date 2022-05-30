@@ -22,6 +22,16 @@
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
+  // Navigation
+  .navigation-links,
+  .navigation {
+    @apply bg-light text-black dark:bg-dark dark:text-white;
+  }
+
+  .navigation-isOpen {
+    @apply bg-light text-black dark:bg-dark dark:text-white;
+  }
+
   .sidebar, 
   .sidebar > .MuiSvgIcon-root,
   .sidebar-themeChanger > .MuiSvgIcon-root {
@@ -139,6 +149,12 @@
   .my-react-select__menu-list--is-selected,
   .my-react-select__menu {
     @apply bg-light text-black dark:bg-formGrey dark:text-white;
+  }
+
+  .my-react-select__input--is-focused,
+  .my-react-select__input--is-active,
+  .my-react-select__input {
+    @apply bg-lightGrey text-black dark:bg-darkGrey dark:text-white;
   }
 
   .my-react-select__value-container--is-focused,
