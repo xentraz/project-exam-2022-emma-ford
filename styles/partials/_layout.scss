@@ -236,7 +236,7 @@ button, .button {
 .my-react-select-container, 
 .my-react-select__control {
   height: 50px;
-  border: none;
+  border: none !important;
   border-radius: 3px;
 }
 
