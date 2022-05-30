@@ -39,16 +39,6 @@ function StaysHero({heroImages}) {
   const onMenuOpen = () => setIsMenuOpen(true);
   const onMenuClose = () => setIsMenuOpen(false);
 
-  // Multiple Select Filter
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  // const [ ,setState] = useState(null);
-  // const Field = React.forwardRef((props) => <Field {...props} />);
-  console.log('ref test', Field);
-  const [filters, setFilters] = useState({});
-
-
-
   return (
     <>
       <div 
@@ -139,7 +129,6 @@ function StaysHero({heroImages}) {
                         <Filter
                           className="my-react-select-container"
                           classNamePrefix="my-react-select"               
-                          // ref={ref}
                           selectOptions={[
                             {value: 1, label: '1 Room'},
                             {value: 2, label: '2 Rooms'},
@@ -155,7 +144,6 @@ function StaysHero({heroImages}) {
                           handleOnMessage={onFocus}
                           onMenuOpen={onMenuOpen}
                           onMenuClose={onMenuClose}
-                          // styles={bookingBarStyles}
                         />
                         <p className="filler"></p>
                     </div>

@@ -22,6 +22,7 @@ function Search({
   handleOnSearch,
 }) {
   console.log(places);
+
   // Price Slider
   function valuetext(value) {
     return `$ ${value}`;
@@ -68,7 +69,6 @@ function Search({
   }
 
   // Multiple Select
-
   // Accessibility
   const [ariaFocusMessage, setAriaFocusMessage] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -249,28 +249,6 @@ function Search({
               onTouchEnd={toggle}
               className='searchBar regularInput'
             />
-            {/* <ul
-                  className={`${
-                    open ? 'searchBar-dropdown' : 'hidden'
-                  } absolute`}
-                >
-                  {filterPlaces().map((places) => {
-                    return (
-                      <li
-                        key={cabin.id}
-                        className=' searchBar-dropdown-list'
-                        onClick={() => {
-                          selectPlace(place);
-                        }}
-                        onTouchEnd={() => {
-                          selectPlace(place);
-                        }}
-                      >
-                        {place.title}
-                      </li>
-                    );
-                  })}
-                </ul> */}
           </div>
         </div>
         {/* Sidebar */}
@@ -345,45 +323,11 @@ function Search({
                 placeholderText={'Select amenities'}
                 isMulti={true}
                 styles={sideBarStyles}
-                // handleOnChange={(value) => {
-                //   if(value === places.Amenities) {
-                //     setFilters({...filters, Amenities: true});
-                    
-                //   }
-                  
-                //   const Amenities = value.map((val) => {
-                //     if (filters) {
-                //       console.log('value', val.value);
-                //     }
-                //     setFilters({ ...filters, [val.value]: true });
-                //     console.log('filters', filters);
-                    
-                //   });
-                //   console.log('Amenities Array', Amenities);
-                // }}
                 handleOnMessage={onFocus}
                 onMenuOpen={onMenuOpen}
                 onMenuClose={onMenuClose}
               />
             </form>
-            {/* <button
-                className='button'
-                onClick={() => {
-                  handleOnSearch(filterPlaces);
-                }}
-              >
-                Filter
-              </button>
-              <button
-                className='button'
-                onClick={() => {
-                  setQuery('');
-                  onChange(null);
-                  displayValue();
-                }}
-              >
-                Clear
-            </button> */}
           </div>
         </div>
         {/* Results */}

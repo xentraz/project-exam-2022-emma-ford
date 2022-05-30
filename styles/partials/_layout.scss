@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+position: relative;
+}
+
 body {
   font-family: $primary-font;
   display: grid;
@@ -166,16 +170,6 @@ textarea {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.cardTitle {
-  font-family: $secondary-font;
-  font-size: 1.25rem;
-  font-style: normal;
-  letter-spacing: 1px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: $white !important;
 }
 
 .todoTitle {

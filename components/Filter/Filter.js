@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-
 import Select, { StylesConfig, AriaOnFocus } from 'react-select';
-// import chroma from 'chroma-js';
 
 function Filter({
   selectOptions,
@@ -24,7 +22,6 @@ function Filter({
 
   function onChange(val) {
     setSelectedOption(val);
-    // handleOnChange(val);
   }
 
   return (

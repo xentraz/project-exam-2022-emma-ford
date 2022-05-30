@@ -158,9 +158,6 @@ function StaysDetail(
   const handleClose = () => setOpen(false);
   const [modalData, setModalData] = useState(null);
 
-  // Icons 
-  const hotelIcon = <HotelIcon/>;
-
   //Reviews 
   const slicedRatings = Ratings.slice(0, 2);
 
@@ -230,7 +227,11 @@ function StaysDetail(
           </div>
           <ModalUnstyled
             open={open}
-            onClose={handleClose}
+            onClose={(_, reason) => {
+              if (reason !== "backdropClick") {
+                handleClose();
+              }
+            }}
             aria-labelledby="modal-modal-title NEEDED"
             aria-describedby="modal-modal-description NEEDED"
             disableEnforceFocus

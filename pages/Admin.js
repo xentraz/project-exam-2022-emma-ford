@@ -21,6 +21,7 @@ import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled'
 // Material UI Icons
 import AddIcon from '@mui/icons-material/Add';
+import LogoutIcon from '@mui/icons-material/Logout';
 // Axios
 const axios = require('axios').default;
 
@@ -115,10 +116,11 @@ const Admin = ({user, places, enquiries, messages, JWT, heroImages, jwt }) => {
         <Sidebar/>
       </header>
       <main>
-        <h1>Login</h1>
-        <div>
+        <div className="adminHeader">
+          <h1>Admin</h1>
           <div>Username: {username}</div>
           <div>Email: {email}</div>
+          <button className="button logout">Logout <LogoutIcon/></button>
         </div>
         <div className="adminTabs">
           <TabsUnstyled defaultValue={0}>

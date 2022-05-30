@@ -125,7 +125,7 @@ export default function Home({places, thingsToDo, heroImages, jwt}) {
               }
             )}
           </div>
-          <button>Browse All Stays</button>
+          <a className="button" href={`/Stays`}>Browse All Stays</a>
         </div>
         <div className="thingsToDo">
           <div className="thingsToDo-header">
@@ -197,7 +197,7 @@ export default function Home({places, thingsToDo, heroImages, jwt}) {
                 )}  
             </Swiper>
           ) : ("")}
-          <button>Browse all</button>
+          <button className="button">Browse all</button>
         </div>
       </main>
       <Footer heroImages={heroImages} />

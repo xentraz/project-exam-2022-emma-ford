@@ -9,8 +9,11 @@ import { placesUrl } from '../../lib/apiURL';
 import nookies from 'nookies';
 // Axios
 const axios = require('axios').default;
+// Material UI
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function Nav ({places, id, heroImages}) {
+function Nav ({places, id, heroImages, jwt}) {
   // Hero Images
   const logoImage = heroImages.slice(3, 4);
   console.log(logoImage);
@@ -37,7 +40,13 @@ function Nav ({places, id, heroImages}) {
   console.log(places);
 
   useEffect(() => {
-    if ((router.pathname === '/Admin') || (router.pathname === '/Add') || (router.pathname === `/Edit/${id}`)) {
+    if (jwt) {
+      setUserLoggedIn(true);
+    }
+  }, [jwt]);
+
+  useEffect(() => {
+    if ((router.pathname === '/Admin') || (router.pathname === '/Add') || (router.pathname.includes(`/Edit`))) {
       setUserLoggedIn(true);
     }
   }, [router.pathname, id]);
@@ -68,17 +77,17 @@ function Nav ({places, id, heroImages}) {
             <>
               <Link href='/'><a className={router.pathname == "/" ? "active" : ""}>Home</a></Link>
               <Link href='/Contact'><a className={router.pathname == "/Contact" ? "active" : ""}>Contact</a></Link>
-              <Link href='/Admin'><a className={router.pathname == "/Admin" ? "active" : ""}>Admin</a></Link>
+              <Link href='/Admin'><a className={router.pathname == "/Admin" || router.pathname.includes('/Edit') ? "active" : ""}>Admin</a></Link>
               <Link href='/Add'><a className={router.pathname == "/Add" ? "active" : ""}>Add Places</a></Link>
-              <Link href='/LoginPage'><a onClick={logout} className={router.pathname == "/LoginPage" ? "active" : ""}>Logout</a></Link>
+              <Link href='/LoginPage'><a onClick={logout} className={router.pathname == "/LoginPage" ? "active" : "navBtn"}>Logout <LogoutIcon/></a></Link>
             </>
           ) : (
             <>
               <Link href='/'><a className={router.pathname == "/" ? "active" : ""}>Home</a></Link>
-              <Link href='/Stays'><a className={router.pathname === "/Stays" || router.pathname === `/StaysDetails/[${id}]` || router.pathname === `/StaysBooking/[${id}]` ? "active" : ""}>Places to stay</a></Link>
+              <Link href='/Stays'><a className={router.pathname === "/Stays" || router.pathname.includes(`/StaysDetails`) || router.pathname.includes(`/StaysBooking/`) ? "active" : ""}>Places to stay</a></Link>
               <Link href='/'><a className={router.pathname == "/See" ? "active" : "" }>Places to see</a></Link>
               <Link href='/Contact'><a className={router.pathname == "/Contact" ? "active" : ""}>Contact</a></Link>
-              <Link href='/LoginPage'><a className={router.pathname == "/LoginPage" ? "active" : ""}>Login</a></Link>
+              <Link href='/LoginPage'><a className={router.pathname == "/LoginPage" ? "navBtn" : "navBtn"}>Login <AccountCircleIcon/></a></Link>
             </>
           )}
         </div>
@@ -99,7 +108,7 @@ export const getServerSideProps = async (ctx) => {
 
   if (cookies?.jwt) {
     try {
-      const { data } = await axios.get('http://localhost:1337/users/me', {
+      const { data } = await axios.get('https://project-exam-2022.herokuapp.com/users/me', {
         headers: {
           Authorization:
             `Bearer ${cookies.jwt}`,

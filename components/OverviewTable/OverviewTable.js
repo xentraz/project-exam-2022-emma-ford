@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 // Axios
 const axios = require('axios').default;
 // API
@@ -19,6 +20,7 @@ export const getStaticProps = async () => {
 
 function OverviewTable(
   {
+  JWT,
   id, 
   Name, 
   Price, 
@@ -57,6 +59,9 @@ function OverviewTable(
   const slicedImgs = ImgArray.slice(0, 1);
   // New about
   const newAbout = About.slice(0, 50);
+
+   // Delete
+   const Router = useRouter();
 
   return (
     <>
@@ -112,7 +117,33 @@ function OverviewTable(
            </p>
         </td>
         <td><a href={`/Edit/${id}`}><EditIcon/></a></td>
-        <td><p><DeleteForeverIcon/></p></td>
+        <td><p>
+          <DeleteForeverIcon
+          onClick={() => {
+            let deleteWarning = confirm(
+              `Are you sure you want to delete this Place?
+              This action cannot be undone.
+              `
+            );
+
+            if (deleteWarning) {
+              async function deleteThing() {
+                let { data } = await axios.delete(
+                  `${placesUrl}/${id}`,
+                  {
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${JWT}`,
+                    },
+                  }
+                );
+                Router.replace(Router.asPath);
+              }
+              deleteThing();
+            }
+          }}
+         />
+        </p></td>
       </tr>
     </tbody>
     </>

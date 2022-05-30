@@ -74,7 +74,7 @@ function PopularCards({
             {clicked ? <BookmarkIcon /> : <BookmarkBorderIcon /> }
           </div>
           <div className="popularStays-card-info-text">
-            <p className="cardTitle">{Name}</p>
+            <p className="flexCardtitle">{Name}</p>
             <p className="flexCardtitle"><span>{Price}kr</span> /night</p>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 // Components
 import Nav from '../components/Nav/Nav';
 import Sidebar from '../components/Sidebar/Sidebar';
-import PostCards from '../components/PostCards/PostCards';
 import Footer from '../components/Footer/Footer';
 // Axios
 const axios = require('axios').default;
@@ -247,432 +246,440 @@ function Add ({heroImages, JWT, places, jwt}) {
           {({ errors, touched, values }) => (
             <Form className="addPlaces">
 
-              <div>
-                <label htmlFor='Name'>Name:</label>
-                <Field
-                  id='Name'
-                  name='Name'
-                  type='text'
-                  placeholder='Name'
-                />
-                {errors.Name && touched.Name ? (
-                <p className="error">{errors.Name}</p>
-                ) : <p className="filler"></p>}
+              <div className="addPlaces-general">
+                <div>
+                  <label htmlFor='Name'>Name:</label>
+                  <Field
+                    id='Name'
+                    name='Name'
+                    type='text'
+                    placeholder='Name'
+                  />
+                  {errors.Name && touched.Name ? (
+                  <p className="error">{errors.Name}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div>
+                  <label htmlFor='About'>About:</label>
+                  <Field
+                    id='About'
+                    name='About'
+                    type='textarea'
+                    placeholder='About'
+                  />
+                  {errors.About && touched.About ? (
+                  <p className="error">{errors.About}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div>
+                  <label htmlFor='Price'>Price:</label>
+                  <Field
+                    id='Price'
+                    name='Price'
+                    type='text'
+                    placeholder='Price'
+                  />
+                  {errors.Price && touched.Price ? (
+                  <p className="error">{errors.Price}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div>
+                  <label htmlFor='Location'>Location:</label>
+                  <Field
+                    id='Location'
+                    name='Location'
+                    type='text'
+                    placeholder='Location'
+                  />
+                  {errors.Location && touched.Location ? (
+                  <p className="error">{errors.Location}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div>
+                  <label htmlFor='Size'>Size:</label>
+                  <Field
+                    id='Size'
+                    name='Size'
+                    type='text'
+                    placeholder='Size'
+                  />
+                  {errors.Size && touched.Size ? (
+                  <p className="error">{errors.Size}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div>
+                  <label htmlFor='Rooms'>Rooms:</label>
+                  <Field
+                    id='Rooms'
+                    name='Rooms'
+                    type='text'
+                    placeholder='Rooms'
+                  />
+                  {errors.Rooms && touched.Rooms ? (
+                  <p className="error">{errors.Rooms}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div>
+                  <label htmlFor='Beds'>Beds:</label>
+                  <Field
+                    id='Beds'
+                    name='Beds'
+                    type='text'
+                    placeholder='Beds'
+                  />
+                  {errors.Beds && touched.Beds ? (
+                  <p className="error">{errors.Beds}</p>
+                  ) : <p className="filler"></p>}
+                </div>
+
+                <div className="addPlaces-general-checkboxes">
+                  <div className="addPlaces-general-checkboxes-box">
+                    <label htmlFor='Featured'>Featured?</label>
+                    <Field
+                      id='checkbox'
+                      name='Featured'
+                      type='checkbox'
+                    />
+                    {errors.Featured && touched.Featured ? (
+                    <p className="error">{errors.Featured}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label htmlFor='About'>About:</label>
-                <Field
-                  id='About'
-                  name='About'
-                  type='textarea'
-                  placeholder='About'
-                />
-                {errors.About && touched.About ? (
-                <p className="error">{errors.About}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div>
-                <label htmlFor='Price'>Price:</label>
-                <Field
-                  id='Price'
-                  name='Price'
-                  type='text'
-                  placeholder='Price'
-                />
-                {errors.Price && touched.Price ? (
-                <p className="error">{errors.Price}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div>
-                <label htmlFor='Location'>Location:</label>
-                <Field
-                  id='Location'
-                  name='Location'
-                  type='text'
-                  placeholder='Location'
-                />
-                {errors.Location && touched.Location ? (
-                <p className="error">{errors.Location}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div>
-                <label htmlFor='Size'>Size:</label>
-                <Field
-                  id='Size'
-                  name='Size'
-                  type='text'
-                  placeholder='Size'
-                />
-                {errors.Size && touched.Size ? (
-                <p className="error">{errors.Size}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div>
-                <label htmlFor='Rooms'>Rooms:</label>
-                <Field
-                  id='Rooms'
-                  name='Rooms'
-                  type='text'
-                  placeholder='Rooms'
-                />
-                {errors.Rooms && touched.Rooms ? (
-                <p className="error">{errors.Rooms}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div>
-                <label htmlFor='Beds'>Beds:</label>
-                <Field
-                  id='Beds'
-                  name='Beds'
-                  type='text'
-                  placeholder='Beds'
-                />
-                {errors.Beds && touched.Beds ? (
-                <p className="error">{errors.Beds}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div>
-                <label htmlFor='Featured'>Featured?</label>
-                <Field
-                  id='checkbox'
-                  name='Featured'
-                  type='checkbox'
-                />
-                {errors.Featured && touched.Featured ? (
-                <p className="error">{errors.Featured}</p>
-                ) : <p className="filler"></p>}
-              </div>
-
-              <div className="type">
+              <div className="addPlaces-type">
                 <p className="flexCardtitle">What type of stay is it?</p>
                 <p className="flexCardtitle grey">Select the one that applies</p>
 
-                <div className="type-checkbox">
-                  <label htmlFor='Type.Hotel'>Hotel</label>
-                  <Field
-                    id='checkbox'
-                    name='Type.Hotel'
-                    type='checkbox'
-                  />
-                  {errors.Hotel && touched.Hotel ? (
-                  <p className="error">{errors.Hotel}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                <div className="addPlaces-type-checkboxes">
+                  <div className="addPlaces-type-checkboxes-box">
+                    <label htmlFor='Type.Hotel'>Hotel</label>
+                    <Field
+                      id='checkbox'
+                      name='Type.Hotel'
+                      type='checkbox'
+                    />
+                    {errors.Hotel && touched.Hotel ? (
+                    <p className="error">{errors.Hotel}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="type-checkbox">
-                  <label htmlFor='Type.Hostel'>Hostel</label>
-                  <Field
-                    id='checkbox'
-                    name='Type.Hostel'
-                    type='checkbox'
-                  />
-                  {errors.Hostel && touched.Hostel ? (
-                  <p className="error">{errors.Hostel}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-type-checkboxes-box">
+                    <label htmlFor='Type.Hostel'>Hostel</label>
+                    <Field
+                      id='checkbox'
+                      name='Type.Hostel'
+                      type='checkbox'
+                    />
+                    {errors.Hostel && touched.Hostel ? (
+                    <p className="error">{errors.Hostel}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="type-checkbox">
-                  <label htmlFor='Type.Cabin'>Cabin</label>
-                  <Field
-                    id='checkbox'
-                    name='Type.Cabin'
-                    type='checkbox'
-                  />
-                  {errors.Cabin && touched.Cabin ? (
-                  <p className="error">{errors.Cabin}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-type-checkboxes-box">
+                    <label htmlFor='Type.Cabin'>Cabin</label>
+                    <Field
+                      id='checkbox'
+                      name='Type.Cabin'
+                      type='checkbox'
+                    />
+                    {errors.Cabin && touched.Cabin ? (
+                    <p className="error">{errors.Cabin}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="type-checkbox">
-                  <label htmlFor='Type.Apartment'>Apartment</label>
-                  <Field
-                    id='checkbox'
-                    name='Type.Apartment'
-                    type='checkbox'
-                  />
-                  {errors.Apartment && touched.Apartment ? (
-                  <p className="error">{errors.Apartment}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-type-checkboxes-box">
+                    <label htmlFor='Type.Apartment'>Apartment</label>
+                    <Field
+                      id='checkbox'
+                      name='Type.Apartment'
+                      type='checkbox'
+                    />
+                    {errors.Apartment && touched.Apartment ? (
+                    <p className="error">{errors.Apartment}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="type-checkbox">
-                  <label htmlFor='Type.House'>House</label>
-                  <Field
-                    id='checkbox'
-                    name='Type.House'
-                    type='checkbox'
-                  />
-                  {errors.House && touched.House ? (
-                  <p className="error">{errors.House}</p>
-                  ) : <p className="filler"></p>}
+                  <div className="addPlaces-type-checkboxes-box">
+                    <label htmlFor='Type.House'>House</label>
+                    <Field
+                      id='checkbox'
+                      name='Type.House'
+                      type='checkbox'
+                    />
+                    {errors.House && touched.House ? (
+                    <p className="error">{errors.House}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
                 </div>
               </div>
 
-              <div className="amenities">
+              <div className="addPlaces-amenities">
                 <p className="flexCardtitle">What amenities does the place have?</p>
                 <p className="flexCardtitle grey">Select all that apply</p>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Refrigerator'>Refrigerator</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Refrigerator'
-                    type='checkbox'
-                  />
-                  {errors.Refrigerator && touched.Refrigerator ? (
-                  <p className="error">{errors.Refrigerator}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                <div className="addPlaces-amenities-checkboxes">
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Refrigerator'>Refrigerator</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Refrigerator'
+                      type='checkbox'
+                    />
+                    {errors.Refrigerator && touched.Refrigerator ? (
+                    <p className="error">{errors.Refrigerator}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.TV'>TV</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.TV'
-                    type='checkbox'
-                  />
-                  {errors.TV && touched.TV ? (
-                  <p className="error">{errors.TV}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.TV'>TV</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.TV'
+                      type='checkbox'
+                    />
+                    {errors.TV && touched.TV ? (
+                    <p className="error">{errors.TV}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Dishwasher'>Dishwasher</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Dishwasher'
-                    type='checkbox'
-                  />
-                  {errors.Dishwasher && touched.Dishwasher ? (
-                  <p className="error">{errors.Dishwasher}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Dishwasher'>Dishwasher</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Dishwasher'
+                      type='checkbox'
+                    />
+                    {errors.Dishwasher && touched.Dishwasher ? (
+                    <p className="error">{errors.Dishwasher}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Iron'>Iron</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Iron'
-                    type='checkbox'
-                  />
-                  {errors.Iron && touched.Iron ? (
-                  <p className="error">{errors.Iron}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Iron'>Iron</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Iron'
+                      type='checkbox'
+                    />
+                    {errors.Iron && touched.Iron ? (
+                    <p className="error">{errors.Iron}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Washer'>Washer</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Washer'
-                    type='checkbox'
-                  />
-                  {errors.Washer && touched.Washer ? (
-                  <p className="error">{errors.Washer}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Washer'>Washer</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Washer'
+                      type='checkbox'
+                    />
+                    {errors.Washer && touched.Washer ? (
+                    <p className="error">{errors.Washer}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Bathtub'>Bathtub</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Bathtub'
-                    type='checkbox'
-                  />
-                  {errors.Bathtub && touched.Bathtub ? (
-                  <p className="error">{errors.Bathtub}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Bathtub'>Bathtub</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Bathtub'
+                      type='checkbox'
+                    />
+                    {errors.Bathtub && touched.Bathtub ? (
+                    <p className="error">{errors.Bathtub}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Parking'>Parking</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Parking'
-                    type='checkbox'
-                  />
-                  {errors.Parking && touched.Parking ? (
-                  <p className="error">{errors.Parking}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Parking'>Parking</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Parking'
+                      type='checkbox'
+                    />
+                    {errors.Parking && touched.Parking ? (
+                    <p className="error">{errors.Parking}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Fireplace'>Fireplace</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Fireplace'
-                    type='checkbox'
-                  />
-                  {errors.Fireplace && touched.Fireplace ? (
-                  <p className="error">{errors.Fireplace}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Fireplace'>Fireplace</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Fireplace'
+                      type='checkbox'
+                    />
+                    {errors.Fireplace && touched.Fireplace ? (
+                    <p className="error">{errors.Fireplace}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Heating'>Heating</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Heating'
-                    type='checkbox'
-                  />
-                  {errors.Heating && touched.Heating ? (
-                  <p className="error">{errors.Heating}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Heating'>Heating</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Heating'
+                      type='checkbox'
+                    />
+                    {errors.Heating && touched.Heating ? (
+                    <p className="error">{errors.Heating}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Wifi'>Wifi</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Wifi'
-                    type='checkbox'
-                  />
-                  {errors.Wifi && touched.Wifi ? (
-                  <p className="error">{errors.Wifi}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Wifi'>Wifi</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Wifi'
+                      type='checkbox'
+                    />
+                    {errors.Wifi && touched.Wifi ? (
+                    <p className="error">{errors.Wifi}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Dryer'>Dryer</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Dryer'
-                    type='checkbox'
-                  />
-                  {errors.Dryer && touched.Dryer ? (
-                  <p className="error">{errors.Dryer}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Dryer'>Dryer</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Dryer'
+                      type='checkbox'
+                    />
+                    {errors.Dryer && touched.Dryer ? (
+                    <p className="error">{errors.Dryer}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Gym'>Gym</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Gym'
-                    type='checkbox'
-                  />
-                  {errors.Gym && touched.Gym ? (
-                  <p className="error">{errors.Gym}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Gym'>Gym</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Gym'
+                      type='checkbox'
+                    />
+                    {errors.Gym && touched.Gym ? (
+                    <p className="error">{errors.Gym}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.CoffeeMachine'>CoffeeMachine</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.CoffeeMachine'
-                    type='checkbox'
-                  />
-                  {errors.CoffeeMachine && touched.CoffeeMachine ? (
-                  <p className="error">{errors.CoffeeMachine}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.CoffeeMachine'>CoffeeMachine</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.CoffeeMachine'
+                      type='checkbox'
+                    />
+                    {errors.CoffeeMachine && touched.CoffeeMachine ? (
+                    <p className="error">{errors.CoffeeMachine}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Pool'>Pool</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Pool'
-                    type='checkbox'
-                  />
-                  {errors.Pool && touched.Pool ? (
-                  <p className="error">{errors.Pool}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Pool'>Pool</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Pool'
+                      type='checkbox'
+                    />
+                    {errors.Pool && touched.Pool ? (
+                    <p className="error">{errors.Pool}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Microwave'>Microwave</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Microwave'
-                    type='checkbox'
-                  />
-                  {errors.Microwave && touched.Microwave ? (
-                  <p className="error">{errors.Microwave}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Microwave'>Microwave</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Microwave'
+                      type='checkbox'
+                    />
+                    {errors.Microwave && touched.Microwave ? (
+                    <p className="error">{errors.Microwave}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Spa'>Spa</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Spa'
-                    type='checkbox'
-                  />
-                  {errors.Spa && touched.Spa ? (
-                  <p className="error">{errors.Spa}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Spa'>Spa</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Spa'
+                      type='checkbox'
+                    />
+                    {errors.Spa && touched.Spa ? (
+                    <p className="error">{errors.Spa}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Spa'>Spa</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Spa'
-                    type='checkbox'
-                  />
-                  {errors.Spa && touched.Spa ? (
-                  <p className="error">{errors.Spa}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Spa'>Spa</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Spa'
+                      type='checkbox'
+                    />
+                    {errors.Spa && touched.Spa ? (
+                    <p className="error">{errors.Spa}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Breakfast'>Breakfast</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Breakfast'
-                    type='checkbox'
-                  />
-                  {errors.Breakfast && touched.Breakfast ? (
-                  <p className="error">{errors.Breakfast}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Breakfast'>Breakfast</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Breakfast'
+                      type='checkbox'
+                    />
+                    {errors.Breakfast && touched.Breakfast ? (
+                    <p className="error">{errors.Breakfast}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Lift'>Lift</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Lift'
-                    type='checkbox'
-                  />
-                  {errors.Lift && touched.Lift ? (
-                  <p className="error">{errors.Lift}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Lift'>Lift</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Lift'
+                      type='checkbox'
+                    />
+                    {errors.Lift && touched.Lift ? (
+                    <p className="error">{errors.Lift}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Laundry'>Laundry</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Laundry'
-                    type='checkbox'
-                  />
-                  {errors.Laundry && touched.Laundry ? (
-                  <p className="error">{errors.Laundry}</p>
-                  ) : <p className="filler"></p>}
-                </div>
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Laundry'>Laundry</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Laundry'
+                      type='checkbox'
+                    />
+                    {errors.Laundry && touched.Laundry ? (
+                    <p className="error">{errors.Laundry}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
 
-                <div className="amenities-checkbox">
-                  <label htmlFor='Amenities.Cleaning'>Cleaning</label>
-                  <Field
-                    id='checkbox'
-                    name='Amenities.Cleaning'
-                    type='checkbox'
-                  />
-                  {errors.Cleaning && touched.Cleaning ? (
-                  <p className="error">{errors.Cleaning}</p>
-                  ) : <p className="filler"></p>}
+                  <div className="addPlaces-amenities-checkboxes-box">
+                    <label htmlFor='Amenities.Cleaning'>Cleaning</label>
+                    <Field
+                      id='checkbox'
+                      name='Amenities.Cleaning'
+                      type='checkbox'
+                    />
+                    {errors.Cleaning && touched.Cleaning ? (
+                    <p className="error">{errors.Cleaning}</p>
+                    ) : <p className="filler"></p>}
+                  </div>
                 </div>
               </div>
               
-              <div className="roomDetails">
+              <div className="addPlaces-roomDetails">
                 <div>
                   <label htmlFor='RoomDetails.CheckIn'>CheckIn:</label>
                   <Field
@@ -700,43 +707,45 @@ function Add ({heroImages, JWT, places, jwt}) {
                   ) : <p className="filler"></p>}
                 </div>
                   
-                <div className="roomDetails-rules">
+                <div className="addPlaces-roomDetails-rules">
                   <p className="flexCardtitle">Please select relevant rules</p>
                   <p className="flexCardtitle grey">Select all that apply</p>
-                  <div className="roomDetails-checkbox">
-                    <label htmlFor='RoomDetails.Parties'>Parties?</label>
-                    <Field
-                      id='checkbox'
-                      name='RoomDetails.Parties'
-                      type='checkbox'
-                    />
-                    {errors.Parties && touched.Parties ? (
-                    <p className="error">{errors.Parties}</p>
-                    ) : <p className="filler"></p>}
-                  </div>
+                  <div className="addPlaces-roomDetails-rules-checkboxes">
+                    <div className="addPlaces-roomDetails-rules-checkboxes-box">
+                      <label htmlFor='RoomDetails.Parties'>Parties?</label>
+                      <Field
+                        id='checkbox'
+                        name='RoomDetails.Parties'
+                        type='checkbox'
+                      />
+                      {errors.Parties && touched.Parties ? (
+                      <p className="error">{errors.Parties}</p>
+                      ) : <p className="filler"></p>}
+                    </div>
 
-                  <div className="roomDetails-checkbox">
-                    <label htmlFor='RoomDetails.Pets'>Pets?</label>
-                    <Field
-                      id='checkbox'
-                      name='RoomDetails.Pets'
-                      type='checkbox'
-                    />
-                    {errors.Pets && touched.Pets ? (
-                    <p className="error">{errors.Pets}</p>
-                    ) : <p className="filler"></p>}
-                  </div>
+                    <div className="addPlaces-roomDetails-rules-checkboxes-box">
+                      <label htmlFor='RoomDetails.Pets'>Pets?</label>
+                      <Field
+                        id='checkbox'
+                        name='RoomDetails.Pets'
+                        type='checkbox'
+                      />
+                      {errors.Pets && touched.Pets ? (
+                      <p className="error">{errors.Pets}</p>
+                      ) : <p className="filler"></p>}
+                    </div>
 
-                  <div className="roomDetails-checkbox">
-                    <label htmlFor='RoomDetails.Smoking'>Smoking?</label>
-                    <Field
-                      id='checkbox'
-                      name='RoomDetails.Smoking'
-                      type='checkbox'
-                    />
-                    {errors.Smoking && touched.Smoking ? (
-                    <p className="error">{errors.Smoking}</p>
-                    ) : <p className="filler"></p>}
+                    <div className="addPlaces-roomDetails-rules-checkboxes-box">
+                      <label htmlFor='RoomDetails.Smoking'>Smoking?</label>
+                      <Field
+                        id='checkbox'
+                        name='RoomDetails.Smoking'
+                        type='checkbox'
+                      />
+                      {errors.Smoking && touched.Smoking ? (
+                      <p className="error">{errors.Smoking}</p>
+                      ) : <p className="filler"></p>}
+                    </div>
                   </div>
                 </div>
 
@@ -754,7 +763,7 @@ function Add ({heroImages, JWT, places, jwt}) {
                 </div>
               </div>
 
-              <div className="imgArray">
+              <div className="addPlaces-imgArray">
                 <FieldArray
                   name='ImgArray'
                   render={(arrayHelpers) => (
@@ -781,24 +790,25 @@ function Add ({heroImages, JWT, places, jwt}) {
                               imgUrl={`ImgArray.[${index}].ImgAlt`}
                             /> */}
 
-                            <div className=''>
+                            <div className='addPlaces-imgArray-buttons'>
                               <button
                                 type='button'
                                 onClick={() => arrayHelpers.insert(index, '')}
                               >
-                                + Add more
+                                + Add another image
                               </button>
                               <button
                                 type='button'
                                 onClick={() => arrayHelpers.remove(index)}
                               >
-                                - Remove
+                                - Remove an image
                               </button>
                             </div>
                           </div>
                           ))
                         ) : (
                           <button
+                            className='addPlaces-imgArray-button'
                             type='button'
                             onClick={() => arrayHelpers.push('')}
                           >
@@ -811,7 +821,7 @@ function Add ({heroImages, JWT, places, jwt}) {
                 <FieldArray/>
               </div>
 
-              <div className="ratings">
+              <div className="addPlaces-ratings">
               <FieldArray
                   name='Ratings'
                   render={(arrayHelpers) => (
@@ -847,24 +857,25 @@ function Add ({heroImages, JWT, places, jwt}) {
                               type="text"
                             />
 
-                            <div className=''>
-                              <button
+                            <div className="addPlaces-ratings-buttons">
+                              <button 
                                 type='button'
                                 onClick={() => arrayHelpers.insert(index, '')}
                               >
-                                + Add more
+                                + Add another review
                               </button>
                               <button
                                 type='button'
                                 onClick={() => arrayHelpers.remove(index)}
                               >
-                                - Remove
+                                - Remove review
                               </button>
                             </div>
                           </div>
                         ))
                       ) : (
                         <button
+                          className='addPlaces-button'
                           type='button'
                           onClick={() => arrayHelpers.push('')}
                         >

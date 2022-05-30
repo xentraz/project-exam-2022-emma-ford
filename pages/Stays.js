@@ -10,7 +10,6 @@ import Footer from '../components/Footer/Footer';
 const axios = require('axios').default;
 // API
 import { placesUrl, heroImagesUrl } from '../lib/apiURL';
-import { getPlaces } from '../lib/apiCall';
 // Query String
 import { stringify } from 'query-string';
 

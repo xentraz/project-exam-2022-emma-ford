@@ -122,6 +122,11 @@
     @apply bg-light text-black dark:bg-dark dark:text-white;
   }
 
+  // Stays details modal close button
+  .details-modal-content-close {
+    @apply bg-white text-black dark:bg-dark dark:text-white;
+  }
+
   // React Select
   .my-react-select-container,
   .my-react-select__control,
@@ -158,7 +163,6 @@
 // Styles
 @import './partials/variables';
 @import './partials/layout';
-@import './partials/mixins';
 
 // Navigation
 @import './partials/navigation';

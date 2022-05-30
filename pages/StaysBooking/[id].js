@@ -220,13 +220,13 @@ function StaysBooking(
           <div className="bookingBoxes-summary">
             <h2>Your Summary</h2>
             <p className="flexCardtitle">Booking Dates</p>
-            <p>NEEDED - DATES HERE</p>
-            <p className="FlexCardtitle">Extras</p>
-            <p>NEEDED - EXTRAS HERE (breakfast included)</p>
-            <p className="FlexCardtitle">Guests</p>
-            <p>NEEDED - GUESTS HERE</p>
-            <p className="FlexCardtitle">Total</p>
-            <p>NEEDED - TOTAL HERE</p>
+            <p>5th June - 11th June 2022</p>
+            <p className="flexCardtitle">Extras</p>
+            <p>Breakfast included pp / day</p>
+            <p className="flexCardtitle">Guests</p>
+            <p>2 Guests</p>
+            <p className="flexCardtitle">Total</p>
+            <p>{Price + 500} kr / night</p>
           </div>
           <div className="bookingBoxes-info">
             <h2>Useful Information</h2>
@@ -456,7 +456,7 @@ function StaysBooking(
                         <span></span>
                         <div className="paymentGroup-invoice-total">
                           <p className="green">Total Price:</p>
-                          <p>**CALC PRICE**</p>
+                          <p>{(Price * 4) + 500} kr</p>
                         </div>
                       </div>
                     </div>

@@ -1,11 +1,5 @@
 // React
 import React, { useState, useRef, useEffect }  from 'react';
-// Next
-import Image from 'next/image';
-// Maetal UI
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-// Weather
-import { WeatherApiURL } from '../Weather/API/WeatherAPI';
 // Axios
 import axios from 'axios';
 // YUP 
@@ -37,7 +31,6 @@ function HeroIndex({heroImages}) {
   }
 
   // Multiple Select
-
   // Accessibility
   const [ariaFocusMessage, setAriaFocusMessage] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,13 +46,6 @@ function HeroIndex({heroImages}) {
   const onMenuOpen = () => setIsMenuOpen(true);
   const onMenuClose = () => setIsMenuOpen(false);
 
-  // Multiple Select Filter
-  const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState('');
-  const ref = useRef(null);
-  const [filters, setFilters] = useState({});
-
-  
   return (
     <>
       <div 

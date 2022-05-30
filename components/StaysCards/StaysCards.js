@@ -170,7 +170,6 @@ function StaysCards(
   
   const newStars = sumObjectsByKey(slicedRatings[0], slicedRatings[1]);
   const ratingAverage = (newStars.Star / 2);
-  // https://stackoverflow.com/questions/42488048/how-can-i-sum-properties-from-two-objects
 
   // About Info 
   const slicedAbout = About.slice(0, 250);
