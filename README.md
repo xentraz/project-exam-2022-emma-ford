@@ -1,5 +1,13 @@
 # project-exam-2022-emma-ford
 
+![Screenshot of the website home page](./public/img/ProjectExam22_3.png)
+
+## Built with
+
+Next.Js
+Tailwind CSS
+SCSS
+
 ## Info
 
 ```
@@ -14,9 +22,11 @@ Password: Password1234
 ```
 
 ```
-npm i
+1. clne the repo
 
-npm run dev
+2. npm i
+
+3. npm run dev
 ```
 
 ## API
@@ -52,3 +62,7 @@ You will need to create an API to store the data for the establishments, enquiri
 - List of messages from contact form
 - The admin can create a new establishment
 - Recommended Process
+
+## Contact Me
+
+LinkedIn: https://www.linkedin.com/in/emmathurmer/
