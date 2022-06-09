@@ -4,9 +4,9 @@
 
 ## Built with
 
-Next.Js
-Tailwind CSS
-SCSS
+- Next.Js
+- Tailwind CSS
+- SCSS
 
 ## Info
 
